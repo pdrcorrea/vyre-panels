@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PontoView • Dicas</title>
+  <link rel="stylesheet" href="./pv.css">
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">PV</div>
+        <div>
+          <h1>Dicas educativas</h1>
+          <p>Conteúdo original • sem direitos autorais</p>
+        </div>
+      </div>
+      <div class="status">
+        <div class="pill"><span class="dot" id="netDot"></span><span id="netText">Online</span></div>
+        <div class="pill"><span id="clockNow">--:--</span></div>
+        <div class="pill">Troca: <span id="rot">20</span>s</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="card">
+        <div class="cardTop">
+          <div class="tag"><span class="icon">💡</span><span>Dica</span></div>
+          <div class="pill">Leitura rápida</div>
+        </div>
+
+        <div class="content fadeIn" id="content">
+          <div class="headline" id="headline">Carregando…</div>
+          <div class="summary" id="summary">Aguarde.</div>
+        </div>
+
+        <div class="footer">
+          <div>PontoView • Vyre</div>
+          <div id="footerRight">Atualizado: —</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const ROTATE_SECONDS = 20;
+document.getElementById("rot").textContent = ROTATE_SECONDS;
+
+const $ = (id)=>document.getElementById(id);
+function updateClock(){ $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); }
+setInterval(updateClock, 1000); updateClock();
+
+function setNetUI(online){
+  $("netDot").classList.toggle("off", !online);
+  $("netText").textContent = online ? "Online" : "Offline";
+}
+setNetUI(navigator.onLine);
+addEventListener("online",()=>setNetUI(true));
+addEventListener("offline",()=>setNetUI(false));
+
+function fmtDateTime(d){
+  try{ return new Date(d).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}); }
+  catch{ return "—"; }
+}
+function clampText(txt,max){
+  if(!txt) return "";
+  const s = String(txt).replace(/\s+/g," ").trim();
+  return s.length>max ? s.slice(0,max-1)+"…" : s;
+}
+
+const STORAGE_LAST = "pv_tips_last_id_v1";
+function getLastId(){ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} }
+function setLastId(id){ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
+
+async function loadTips(){
+  const url = "./data/tips.json?v=" + Date.now();
+  const res = await fetch(url, { cache:"no-store" });
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  const items = await res.json();
+  return { items: Array.isArray(items) ? items : [], updatedAt: new Date().toISOString() };
+}
+
+function pickNext(items){
+  if(!items.length) return null;
+  const last = getLastId();
+  const shuffled = items.slice().sort(()=>Math.random()-0.5);
+  return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
+}
+
+function render(item, updatedAt){
+  const c = $("content");
+  c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
+
+  if(!item){
+    $("headline").textContent = "Sem dicas";
+    $("summary").textContent = "Verifique se data/tips.json existe e é um array.";
+    $("footerRight").textContent = "Atualizado: " + fmtDateTime(updatedAt);
+    return;
+  }
+
+  $("headline").textContent = item.title || "Dica";
+  $("summary").textContent = clampText(item.text || "", 220);
+  $("footerRight").textContent = "Atualizado: " + fmtDateTime(updatedAt);
+  setLastId(item.id || "");
+}
+
+async function start(){
+  try{
+    const pack = await loadTips();
+    render(pickNext(pack.items), pack.updatedAt);
+    setInterval(async ()=>{
+      const p = await loadTips();
+      render(pickNext(p.items), p.updatedAt);
+    }, ROTATE_SECONDS*1000);
+  }catch{
+    render(null, new Date().toISOString());
+  }
+}
+start();
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js").catch(()=>{});
+}
+</script>
+</body>
+</html>
