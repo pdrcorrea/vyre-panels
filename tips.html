@@ -1,127 +1,154 @@
+<!-- ===== tips.html (SUBSTITUA INTEIRO) ===== -->
 <!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PontoView • Dicas</title>
-  <link rel="stylesheet" href="./pv.css">
+  <title>Vyre • Dicas</title>
+  <link rel="stylesheet" href="./vyre-light.css">
 </head>
 <body>
-  <div class="app">
-    <div class="header">
-      <div class="brand">
-        <div class="logo">PV</div>
-        <div>
-          <h1>Dicas educativas</h1>
-          <p>Conteúdo original • sem direitos autorais</p>
+  <div class="page">
+    <div class="card">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brandIcon" aria-hidden="true">💡</div>
+          <div class="brandText">
+            <h1>Dicas</h1>
+            <div class="sub">EDUCATIVAS</div>
+          </div>
+        </div>
+
+        <div class="clockBox">
+          <div class="clockNow" id="clockNow">--:--</div>
+          <div class="clockMeta">ATUALIZADO • <span id="clockUpd">--:--</span></div>
         </div>
       </div>
-      <div class="status">
-        <div class="pill"><span class="dot" id="netDot"></span><span id="netText">Online</span></div>
-        <div class="pill"><span id="clockNow">--:--</span></div>
-        <div class="pill">Troca: <span id="rot">20</span>s</div>
+
+      <div class="strip">
+        <div class="stripLeft">DICA DO MOMENTO</div>
+        <div class="stripRight">CONTEÚDO • LIVRE</div>
       </div>
-    </div>
 
-    <div class="main">
-      <div class="card">
-        <div class="cardTop">
-          <div class="tag"><span class="icon">💡</span><span>Dica</span></div>
-          <div class="pill">Leitura rápida</div>
-        </div>
+      <div class="main">
+        <div class="grid2 fadeIn" id="content">
+          <div class="panel">
+            <div class="media">
+              <div class="mediaEmpty" style="height:100%;">
+                <div class="big">💡</div>
+                <div>Bem-estar • saúde • segurança</div>
+              </div>
+            </div>
+          </div>
 
-        <div class="content fadeIn" id="content">
-          <div class="headline" id="headline">Carregando…</div>
-          <div class="summary" id="summary">Aguarde.</div>
-        </div>
+          <div class="panel">
+            <div class="textBox">
+              <div class="headline" id="headline">Carregando…</div>
+              <div class="bodyText" id="body"></div>
 
-        <div class="footer">
-          <div>PontoView • Vyre</div>
-          <div id="footerRight">Atualizado: —</div>
+              <div class="metaRow">
+                <div class="chip" id="topicChip">Tema: —</div>
+                <div class="chip" id="countChip">Itens: —</div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="footer">
+        <div>PontoView • Vyre</div>
+        <div id="footerRight">Atualizado: —</div>
       </div>
     </div>
   </div>
 
 <script>
-const ROTATE_SECONDS = 20;
-document.getElementById("rot").textContent = ROTATE_SECONDS;
+(() => {
+  const ROTATE_SECONDS = 20;
+  const $ = (id)=>document.getElementById(id);
 
-const $ = (id)=>document.getElementById(id);
-function updateClock(){ $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); }
-setInterval(updateClock, 1000); updateClock();
-
-function setNetUI(online){
-  $("netDot").classList.toggle("off", !online);
-  $("netText").textContent = online ? "Online" : "Offline";
-}
-setNetUI(navigator.onLine);
-addEventListener("online",()=>setNetUI(true));
-addEventListener("offline",()=>setNetUI(false));
-
-function fmtDateTime(d){
-  try{ return new Date(d).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}); }
-  catch{ return "—"; }
-}
-function clampText(txt,max){
-  if(!txt) return "";
-  const s = String(txt).replace(/\s+/g," ").trim();
-  return s.length>max ? s.slice(0,max-1)+"…" : s;
-}
-
-const STORAGE_LAST = "pv_tips_last_id_v1";
-function getLastId(){ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} }
-function setLastId(id){ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
-
-async function loadTips(){
-  const url = "./data/tips.json?v=" + Date.now();
-  const res = await fetch(url, { cache:"no-store" });
-  if(!res.ok) throw new Error("HTTP "+res.status);
-  const items = await res.json();
-  return { items: Array.isArray(items) ? items : [], updatedAt: new Date().toISOString() };
-}
-
-function pickNext(items){
-  if(!items.length) return null;
-  const last = getLastId();
-  const shuffled = items.slice().sort(()=>Math.random()-0.5);
-  return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
-}
-
-function render(item, updatedAt){
-  const c = $("content");
-  c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
-
-  if(!item){
-    $("headline").textContent = "Sem dicas";
-    $("summary").textContent = "Verifique se data/tips.json existe e é um array.";
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(updatedAt);
-    return;
+  function hhmm(d=new Date()){
+    return d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+  }
+  function fmtDateTime(d){
+    try{
+      const dt = new Date(d);
+      return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+    }catch{return "—";}
   }
 
-  $("headline").textContent = item.title || "Dica";
-  $("summary").textContent = clampText(item.text || "", 220);
-  $("footerRight").textContent = "Atualizado: " + fmtDateTime(updatedAt);
-  setLastId(item.id || "");
-}
+  function updateClock(){ $("clockNow").textContent = hhmm(); }
+  setInterval(updateClock, 1000); updateClock();
 
-async function start(){
-  try{
-    const pack = await loadTips();
-    render(pickNext(pack.items), pack.updatedAt);
-    setInterval(async ()=>{
-      const p = await loadTips();
-      render(pickNext(p.items), p.updatedAt);
-    }, ROTATE_SECONDS*1000);
-  }catch{
-    render(null, new Date().toISOString());
+  const STORAGE_LAST = "pv_tips_last_id_light_v1";
+  const getLastId = ()=>{ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} };
+  const setLastId = (id)=>{ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} };
+
+  function pickNext(items){
+    if(!items || !items.length) return null;
+    const last = getLastId();
+    const shuffled = items.slice().sort(()=>Math.random()-0.5);
+    return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
   }
-}
-start();
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js").catch(()=>{});
-}
+  function renderFallback(updatedAt){
+    $("headline").textContent = "Sem dicas no momento";
+    $("body").textContent = "Atualize data/tips.json para exibir conteúdos.";
+    $("topicChip").textContent = "Tema: —";
+    $("countChip").textContent = "Itens: 0";
+    $("clockUpd").textContent = hhmm();
+    $("footerRight").textContent = "Atualizado: " + fmtDateTime(updatedAt || new Date().toISOString());
+  }
+
+  function renderItem(item, pack){
+    const content = $("content");
+    content.classList.remove("fadeIn"); void content.offsetWidth; content.classList.add("fadeIn");
+
+    if(!item){
+      renderFallback(pack.updatedAt);
+      return;
+    }
+
+    $("headline").textContent = item.title || "Dica";
+    $("body").textContent = item.text || item.body || "";
+    $("topicChip").textContent = "Tema: " + (item.topic || item.category || "Bem-estar");
+    $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
+    $("clockUpd").textContent = hhmm();
+    $("footerRight").textContent = "Atualizado: " + fmtDateTime(pack.updatedAt);
+
+    setLastId(item.id || "");
+  }
+
+  async function fetchWithTimeout(url, ms){
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), ms);
+    try{
+      const res = await fetch(url, { cache:"no-store", signal: ctrl.signal });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      return await res.json();
+    } finally { clearTimeout(t); }
+  }
+
+  async function loadTips(){
+    const url = "./data/tips.json?v=" + Date.now();
+    const data = await fetchWithTimeout(url, 12000);
+    const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
+    const updatedAt = data?.updatedAt ? data.updatedAt : new Date().toISOString();
+    return { items, updatedAt };
+  }
+
+  async function cycle(){
+    try{
+      const pack = await loadTips();
+      renderItem(pickNext(pack.items), pack);
+    }catch{
+      renderFallback(new Date().toISOString());
+    }
+  }
+
+  cycle();
+  setInterval(cycle, ROTATE_SECONDS * 1000);
+})();
 </script>
 </body>
 </html>
