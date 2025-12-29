@@ -1,7 +1,10 @@
 const CACHE_NAME = "pontoview-vyre-v9";
 const ASSETS = [
   "./",
-  "./painel.html",
+  "./news.html",
+  "./tips.html",
+  "./campaigns.html",
+  "./pv.css",
   "./sw.js",
   "./data/news.json",
   "./data/tips.json",
