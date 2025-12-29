@@ -1,3 +1,5 @@
+// ===== scripts/build_news.mjs (SUBSTITUA INTEIRO) =====
+// Melhora as imagens: tenta og:image / twitter:image e também imagens do RSS (media:content / media:thumbnail).
 import fs from "fs";
 import path from "path";
 
@@ -7,7 +9,6 @@ const OUT = path.join(ROOT, "data", "news.json");
 /** ✅ TROQUE AQUI */
 const CITY = "Colatina ES";
 
-/** ✅ Queries mais abertas (pra não ficar vazio) */
 const QUERIES = [
   `${CITY}`,
   `${CITY} (obra OR trânsito OR vacinação OR mutirão OR evento OR serviço OR atendimento)`,
@@ -17,11 +18,8 @@ const QUERIES = [
 
 const MAX_ITEMS = 40;
 
-/** ✅ Filtro soft (mais leve pra não zerar) */
-const BLOCK = [
-  "assassin", "homic", "tirote", "estupro"
-  // ⚠️ Repare: tirei “morte/polícia/crime” porque às vezes zera tudo.
-];
+// filtro leve (não zera tudo)
+const BLOCK = ["assassin", "homic", "tirote", "estupro"];
 
 const SOURCE_MAP = {
   "g1.globo.com": "G1",
@@ -38,15 +36,11 @@ function googleNewsRssUrl(q) {
   return `https://news.google.com/rss/search?q=${qp}&hl=pt-BR&gl=BR&ceid=BR:pt-419`;
 }
 
-function strip(s) {
-  return String(s || "").replace(/\s+/g, " ").trim();
-}
-
+function strip(s) { return String(s || "").replace(/\s+/g, " ").trim(); }
 function softBlock(title) {
   const t = String(title || "").toLowerCase();
   return BLOCK.some(w => t.includes(w));
 }
-
 function hashCode(str) {
   let h = 0;
   for (let i = 0; i < str.length; i++) h = (h << 5) - h + str.charCodeAt(i) | 0;
@@ -64,9 +58,7 @@ async function fetchText(url, timeoutMs = 20000) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.text();
-  } finally {
-    clearTimeout(t);
-  }
+  } finally { clearTimeout(t); }
 }
 
 async function resolveFinalUrl(url, timeoutMs = 15000) {
@@ -79,26 +71,7 @@ async function resolveFinalUrl(url, timeoutMs = 15000) {
       signal: ctrl.signal
     });
     return res.url || url;
-  } finally {
-    clearTimeout(t);
-  }
-}
-
-function parseRssItems(xml) {
-  const items = [];
-  const chunks = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
-  for (const c of chunks) {
-    const title =
-      (c.match(/<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>/i)?.[1] ||
-       c.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || "");
-    const link = (c.match(/<link>([\s\S]*?)<\/link>/i)?.[1] || "");
-    const pubDate = (c.match(/<pubDate>([\s\S]*?)<\/pubDate>/i)?.[1] || "");
-
-    const t = strip(title);
-    const l = strip(link);
-    if (t && l) items.push({ title: t, link: l, pubDate: strip(pubDate) });
-  }
-  return items;
+  } finally { clearTimeout(t); }
 }
 
 function pickMeta(html, key) {
@@ -111,9 +84,7 @@ function guessSourceFromUrl(url) {
   try {
     const host = new URL(url).hostname.replace(/^www\./, "");
     return SOURCE_MAP[host] || host;
-  } catch {
-    return "Fonte";
-  }
+  } catch { return "Fonte"; }
 }
 
 function absolutizeImage(img, baseUrl) {
@@ -132,23 +103,41 @@ function absolutizeImage(img, baseUrl) {
   return u;
 }
 
+// RSS: title/link/pubDate + (media:content|media:thumbnail)
+function parseRssItems(xml) {
+  const items = [];
+  const chunks = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
+  for (const c of chunks) {
+    const title =
+      (c.match(/<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>/i)?.[1] ||
+       c.match(/<title>([\s\S]*?)<\/title>/i)?.[1] || "");
+    const link = (c.match(/<link>([\s\S]*?)<\/link>/i)?.[1] || "");
+    const pubDate = (c.match(/<pubDate>([\s\S]*?)<\/pubDate>/i)?.[1] || "");
+
+    // tenta pegar thumbnail do RSS
+    const mediaContentUrl = c.match(/<media:content[^>]+url=["']([^"']+)["']/i)?.[1] || "";
+    const mediaThumbUrl = c.match(/<media:thumbnail[^>]+url=["']([^"']+)["']/i)?.[1] || "";
+    const rssImage = strip(mediaContentUrl || mediaThumbUrl);
+
+    const t = strip(title);
+    const l = strip(link);
+    if (t && l) items.push({ title: t, link: l, pubDate: strip(pubDate), rssImage });
+  }
+  return items;
+}
+
 /**
- * Enriquecimento “melhor esforço”.
- * Se falhar, a notícia ainda vai entrar SEM imagem.
+ * Enriquecimento melhor-esforço:
+ * - tenta sair do Google e pegar og:image/tw:image
+ * - se falhar, usa imagem do RSS (quando existir)
  */
-async function enrich(newsLink) {
+async function enrich(newsLink, rssImage) {
   const finalUrl = await resolveFinalUrl(newsLink);
 
-  // Se ficou no Google, ainda assim aceitamos (mas sem imagem/fonte bonita)
   let html = "";
   try {
-    // só tenta baixar HTML do site real se não for Google
-    if (!finalUrl.includes("google.com")) {
-      html = await fetchText(finalUrl, 15000);
-    }
-  } catch {
-    html = "";
-  }
+    if (!finalUrl.includes("google.com")) html = await fetchText(finalUrl, 15000);
+  } catch { html = ""; }
 
   let title = "";
   let source = "";
@@ -165,33 +154,31 @@ async function enrich(newsLink) {
     const ogImg = strip(pickMeta(html, "og:image"));
     const twImg = strip(pickMeta(html, "twitter:image")) || strip(pickMeta(html, "twitter:image:src"));
     imageUrl = absolutizeImage(ogImg || twImg, finalUrl);
-
-    if (imageUrl.includes("news.google") || imageUrl.includes("gstatic")) imageUrl = "";
   } else {
     source = guessSourceFromUrl(finalUrl);
   }
+
+  // fallback de imagem pelo RSS (muitas vezes vem)
+  if (!imageUrl && rssImage) imageUrl = rssImage;
+
+  // remove imagens genéricas do Google
+  if (imageUrl.includes("news.google") || imageUrl.includes("gstatic")) imageUrl = "";
 
   return { title, source, imageUrl, finalUrl };
 }
 
 async function main() {
   const rssItems = [];
-  const rssFailures = [];
-
   for (const q of QUERIES) {
     const rssUrl = googleNewsRssUrl(q);
     try {
       const xml = await fetchText(rssUrl, 20000);
       rssItems.push(...parseRssItems(xml));
-    } catch (e) {
-      rssFailures.push({ rssUrl, error: String(e?.message || e) });
-    }
+    } catch {}
   }
 
   const uniq = new Map();
-  for (const it of rssItems) {
-    if (!uniq.has(it.link)) uniq.set(it.link, it);
-  }
+  for (const it of rssItems) if (!uniq.has(it.link)) uniq.set(it.link, it);
 
   const out = [];
   let blocked = 0;
@@ -200,41 +187,34 @@ async function main() {
   for (const it of uniq.values()) {
     if (out.length >= MAX_ITEMS) break;
 
-    if (softBlock(it.title)) {
-      blocked++;
-      continue;
-    }
+    if (softBlock(it.title)) { blocked++; continue; }
 
     try {
-      const e = await enrich(it.link);
-
-      // ✅ fallback: se não pegou title do site real, usa title do RSS
+      const e = await enrich(it.link, it.rssImage);
       const finalTitle = strip(e.title || it.title);
       if (!finalTitle) continue;
 
       out.push({
         id: `n:${Math.abs(hashCode(e.finalUrl || it.link))}`,
         title: finalTitle,
-        source: strip(e.source) || "Google Notícias",
+        source: strip(e.source) || "Fonte",
         publishedAt: it.pubDate || "",
         url: e.finalUrl || it.link,
         imageUrl: e.imageUrl || ""
       });
-    } catch (e) {
+    } catch {
       enrichFailed++;
-      // ✅ fallback total: ainda coloca pelo RSS (sem imagem)
       out.push({
         id: `n:${Math.abs(hashCode(it.link))}`,
         title: it.title,
-        source: "Google Notícias",
+        source: "Fonte",
         publishedAt: it.pubDate || "",
         url: it.link,
-        imageUrl: ""
+        imageUrl: it.rssImage || ""
       });
     }
   }
 
-  // ✅ Se mesmo assim não vier nada, cria 1 item “comunicado” pra não ficar vazio
   if (out.length === 0) {
     out.push({
       id: "pv:fallback",
@@ -253,19 +233,13 @@ async function main() {
       discovered: uniq.size,
       produced: out.length,
       blocked_titles: blocked,
-      enrich_failed: enrichFailed,
-      rss_failures: rssFailures.length
+      enrich_failed: enrichFailed
     }
   };
 
   fs.mkdirSync(path.join(ROOT, "data"), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(payload, null, 2), "utf-8");
-
   console.log(`Wrote data/news.json with ${payload.items.length} items`);
-  console.log("Stats:", payload.stats);
 }
 
-main().catch((e) => {
-  console.error("[fatal]", e);
-  process.exit(1);
-});
+main().catch((e) => { console.error(e); process.exit(1); });
