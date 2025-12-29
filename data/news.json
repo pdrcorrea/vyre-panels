@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-29T21:34:46.087Z",
+  "generatedAt": "2025-12-29T22:40:25.393Z",
   "items": [
     {
       "id": "n:2069943800",
@@ -7,6 +7,14 @@
       "source": "news.google.com",
       "publishedAt": "Mon, 29 Dec 2025 18:14:19 GMT",
       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPZk9TeHRRUkZuckNDVjRBNFBRdWNzVUF3NFpybnh2d1o1WjJzYTFJbVVRSkJoV0s2ZXdrdTM4Zjc4TjhFQ0ZKVFFQd2VDUlhNN2VtSjB5S2Q0LUdXdlgyb1lKWkNlZUhpTk9UWkFtM2J5c3J4Q3dzcllfZWYyZWxMdjFkQnJmTWc?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": ""
+    },
+    {
+      "id": "n:1404654278",
+      "title": "Termômetros de rua registram 43 °C em Colatina e Cachoeiro de Itapemirim - A Gazeta",
+      "source": "news.google.com",
+      "publishedAt": "Mon, 29 Dec 2025 22:03:27 GMT",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOU2dDT0phdFhyd21KMk5YeXZkX3ZLQTlETEdhQlhaTXhTUXJMQXNibzdrNDF3TUxVZHQtbUV1M2l1RVA2NEszVThhcHJJTGtPLWJkVlhDZjMyZ2hwdmFpZEc3MTNvTlVHSHpleE5uZTJ3ZFZlZ1pUdHF2aWpKcEtwTk1PRDBSQUFXSGE0NjQtNEhTOU5HUFRVeF9vOFI3eUEzQ3ctdTJmblFkOU52?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     },
     {
@@ -82,14 +90,6 @@
       "imageUrl": ""
     },
     {
-      "id": "n:1851554232",
-      "title": "Associação questiona no STF transposição de cargos para Guarda Municipal de Colatina (ES) - stf noticias",
-      "source": "news.google.com",
-      "publishedAt": "Thu, 17 Jul 2025 07:00:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQQ0E0WWZZTW83SU1vakJ5Vi0yQ1d5ck9sZmd6WV9STExDT2U5cS1KMktPSkl6ekNKUThfVXFTN0w4bXRyZ2hKUGJkVmRTYmNXY0dNblVaeUhPNS1qbUF6bWF3WlktREJ2cEZ5WTF3blZiR295RXhLbXlLR2tzWURqS3hSRGp1SDFNV2NSRzNEYm5Tc0JEVHJDelRCa0VEYXZEYnNSRTdlWHVUUXpNb0Vxd0hQdVBhN1hlU2p2NVhiZXBGdEZldm5tbTBB?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": ""
-    },
-    {
       "id": "n:711350163",
       "title": "Farmácia Cidadã Estadual de Colatina inicia atendimento em novo endereço - Governo ES",
       "source": "news.google.com",
@@ -162,11 +162,11 @@
       "imageUrl": ""
     },
     {
-      "id": "n:42887869",
-      "title": "Projeto “Vozes da Terra” promove literatura negra e indígena em escola de Colatina - Colatina em Ação",
+      "id": "n:1851554232",
+      "title": "Associação questiona no STF transposição de cargos para Guarda Municipal de Colatina (ES) - stf noticias",
       "source": "news.google.com",
-      "publishedAt": "Wed, 24 Dec 2025 14:17:47 GMT",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPa0ozU2VILTg3b2NzUWlsanh2VVMtWEY1bV8wazRINVhxMmN5LTVpXzlDSVVFcjR3aEtmTDVMZ1Y2MEhUbUgwNlRrZFdWMDBCdGt1X2g3aG02ZHoxU0dpZG9CNGtNUWJCcDQ1VUdONUZMdlBOUlg4WjRhVHZMUzdQRko4VkhVMjE5dEV2Z2F1SQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Thu, 17 Jul 2025 07:00:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQQ0E0WWZZTW83SU1vakJ5Vi0yQ1d5ck9sZmd6WV9STExDT2U5cS1KMktPSkl6ekNKUThfVXFTN0w4bXRyZ2hKUGJkVmRTYmNXY0dNblVaeUhPNS1qbUF6bWF3WlktREJ2cEZ5WTF3blZiR295RXhLbXlLR2tzWURqS3hSRGp1SDFNV2NSRzNEYm5Tc0JEVHJDelRCa0VEYXZEYnNSRTdlWHVUUXpNb0Vxd0hQdVBhN1hlU2p2NVhiZXBGdEZldm5tbTBB?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     },
     {
@@ -175,6 +175,14 @@
       "source": "news.google.com",
       "publishedAt": "Tue, 05 Aug 2025 07:00:00 GMT",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPUVZ2SWdtVjJ5XzBwNGRKbFNaTVFaLUhqZ0E5M3Y2LXQ1RUNIQWg1YTZqMzZSMkhBclcxcVk3YUd0VmFRX1hiNlZQcmJVLUpIcDlLY2J0YUEzWVFCNkJ0THRMcHpxSEt6eG4yTWJmY204ejN1dEh6RzUyY3BzdjZORjlkSXozcldQZnA1WWxkNnNLc1UyTFdLcjB1S2swZGYycElhMS0wOTJTZw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": ""
+    },
+    {
+      "id": "n:42887869",
+      "title": "Projeto “Vozes da Terra” promove literatura negra e indígena em escola de Colatina - Colatina em Ação",
+      "source": "news.google.com",
+      "publishedAt": "Wed, 24 Dec 2025 14:17:47 GMT",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPa0ozU2VILTg3b2NzUWlsanh2VVMtWEY1bV8wazRINVhxMmN5LTVpXzlDSVVFcjR3aEtmTDVMZ1Y2MEhUbUgwNlRrZFdWMDBCdGt1X2g3aG02ZHoxU0dpZG9CNGtNUWJCcDQ1VUdONUZMdlBOUlg4WjRhVHZMUzdQRko4VkhVMjE5dEV2Z2F1SQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     },
     {
@@ -306,24 +314,16 @@
       "imageUrl": ""
     },
     {
-      "id": "n:290721436",
-      "title": "Mega da Virada 2025: Saiba como apostar e garantir sua chance - Colatina em Ação",
+      "id": "n:1419110250",
+      "title": "Denarc realiza operação contra o tráfico de drogas em Colatina - PCES",
       "source": "news.google.com",
-      "publishedAt": "Sat, 27 Dec 2025 21:14:23 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQUklod0pLaU94ZFZmdFI3OU93VDl3N2FyYWQzTWFTeUgxU0MtcTRibExpblBTSWxNd0dCLXhIUWNJdFlLRUNERE5lNERLYWJvemJ5Y3FaYnRnOFVZSjFVTVR2R2w2bjFqWVVRQ2VVbjRMb19UakpyNGZNZS1melFwZVY5cVgwM2NaTk5XcjIyS3RSRHBHRU43SVZueVF6eGszN1FCeXJkcmN3OHpZci1QZVVQeXlvSkdkT2NpbXU0Mi1zYWhZek9UZzdLdw?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": ""
-    },
-    {
-      "id": "n:435440152",
-      "title": "Escola de Colatina é campeã no Torneio Brasil de Robótica - Tribuna Online",
-      "source": "news.google.com",
-      "publishedAt": "Mon, 22 Dec 2025 22:55:47 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPenJtVHg2Y0xvc2cxc0wza2JyV1VzZXJ6Wm9xb3BoQVRRTHVUSEpNMXhxQ0llbWM2bWIzWDA1R2t4UTlPVko2SzBXQUk3eVhZbG41emlLQUM0dHFBSjd1VC15R00yOHZUY1lmQ2hVbDR0OUE1TUlsZHR1TXpVbWNYdWo2SHRBd0JVWF9fZUJlR2xVNG5SVXpWOGlscS1wbTY3dldV0gGrAUFVX3lxTFBHUEYtb195d0VVMWlCV0tLRlpMRlVqcnR4dWJ3Ymx4WWZFU2VfaVBtclhrNkRDWWhYdHlfal9WUzZ5SlFyQ19lTGkzMFZtN1dVWHE5RWdfVHk1VG5rT3hMRmJ0X2xpV3NyRVVDSGNhdVp0eVl0TGdIWUdYYThtZTJPTEVrWUNaSUM0cFVLNWpEYlRtWC1NbUNMTTlrZlhWdV9wZXc5bk54Y2huVQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Fri, 28 Nov 2025 08:00:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPY0JMclJkaW1oaERCVXFoV01ZdXA0dGRfbmxqUGxCSWppcTVqRXc0aldvQVRDSnpOclF1dFVTZjk4eHZlVVhEUEFlbFR5el9PS2JkVlhvVDdkOVpkNTdEWEFva3A3UnQ0WlZKci1NakNhNFBYNld0czExc3Q2eXdHUWFfNEthbFlEX0RVMkpFSDJYa05ud0lPREtOaUk?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     }
   ],
   "stats": {
-    "discovered": 351,
+    "discovered": 268,
     "produced": 40,
     "blocked_titles": 1,
     "enrich_failed": 0,
