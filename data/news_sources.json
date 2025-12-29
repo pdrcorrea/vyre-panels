@@ -1,0 +1,7 @@
+{
+  "sources": [
+    { "name": "Prefeitura", "rss": "https://www.google.com.br/alerts/feeds/17001684007017371778/4435463347787536986" },
+    { "name": "Espírito Santo", "rss": "https://www.google.com.br/alerts/feeds/17001684007017371778/7158932213467809564" },
+    { "name": "Jornal Local", "rss": "https://www.google.com.br/alerts/feeds/17001684007017371778/6296431502455092028" }
+  ]
+}
