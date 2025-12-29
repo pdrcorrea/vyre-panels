@@ -1,12 +1,16 @@
 {
   "sources": [
     {
-      "name": "Google Notícias • Cidade",
+      "name": "Google Notícias • Colatina ES",
       "rss": "https://news.google.com/rss/search?q=Colatina%20ES&hl=pt-BR&gl=BR&ceid=BR:pt-419"
     },
     {
       "name": "Google Notícias • Utilidade pública",
       "rss": "https://news.google.com/rss/search?q=Colatina%20(obra%20OR%20tr%C3%A2nsito%20OR%20vacina%C3%A7%C3%A3o%20OR%20mutir%C3%A3o%20OR%20evento%20OR%20servi%C3%A7o)&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+    },
+    {
+      "name": "Prefeitura de Colatina (teste /feed)",
+      "rss": "https://colatina.es.gov.br/feed/"
     }
   ]
 }
