@@ -58,30 +58,23 @@ function softBlock(title) {
 }
 
 async function enrichWithOg(link) {
-  // 1) Abre o link do Google News (isso redireciona)
+  // abre link e segue redirect até o site real
   const res = await fetch(link, {
     headers: { "User-Agent": "Mozilla/5.0 (GitHub Actions) PontoView/1.0" },
-    redirect: "follow"
+    redirect: "follow",
   });
 
-  // 2) URL final = site real da notícia
-  const finalUrl = res.url;
-
-  // 3) Agora sim buscamos o HTML do site real
+  const finalUrl = res.url;            // ✅ URL final após redirects
   const html = await fetchText(finalUrl);
 
   const ogTitle = pickMeta(html, "og:title");
   const ogImage = pickMeta(html, "og:image");
   const siteName = pickMeta(html, "og:site_name");
-
-  const titleTag =
-    html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "";
+  const titleTag = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "";
 
   const finalTitle = strip(ogTitle || titleTag);
 
   let imageUrl = strip(ogImage);
-
-  // Corrige imagem relativa
   try {
     if (imageUrl && imageUrl.startsWith("/")) {
       const u = new URL(finalUrl);
@@ -89,13 +82,9 @@ async function enrichWithOg(link) {
     }
   } catch {}
 
-  return {
-    finalTitle,
-    imageUrl,
-    siteName: strip(siteName),
-    finalUrl
-  };
+  return { finalTitle, imageUrl, siteName: strip(siteName), finalUrl };
 }
+
 
 
 async function main() {
@@ -129,16 +118,16 @@ async function main() {
       console.error("[warn] enrich fail:", it.link, e.message);
     }
 
-    const title = strip(enriched.finalTitle || it.title);
-    if (!title) continue;
+const img = (enriched.imageUrl || "");
+const safeImg = img.includes("news.google") || img.includes("gstatic") ? "" : img;
 
-    items.push({
-  id: `n:${Math.abs(hashCode(final.link || it.link))}`,
+items.push({
+  id: `n:${Math.abs(hashCode(enriched.finalUrl || it.link))}`,
   title,
-  source: enriched.siteName || "Fonte local",
+  source: enriched.siteName || "Google Notícias",
   publishedAt: it.pubDate || "",
   url: enriched.finalUrl || it.link,
-  imageUrl: enriched.imageUrl || ""
+  imageUrl: safeImg
 });
   }
 
