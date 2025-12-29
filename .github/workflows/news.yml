@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Debug Node
+        run: node -v
+
       - name: Build news.json
         run: node scripts/build_news.mjs
 
