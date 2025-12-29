@@ -1,13 +1,9 @@
-if is_blocked(title, summary):
-    continue
-
-- name: Install dependencies
-run: pip install feedparser
+name: Update news.json
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"  # a cada 30 min (UTC)
+    - cron: "*/30 * * * *"
 
 permissions:
   contents: write
@@ -16,19 +12,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: pip install feedparser
+          node-version: "20"
 
       - name: Build news.json
-        run: python scripts/build_news.py
+        run: node scripts/build_news.mjs
 
       - name: Commit if changed
         run: |
