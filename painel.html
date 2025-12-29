@@ -1,1 +1,281 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PontoView • Vyre</title>
+  <style>
+    :root{
+      --bg:#0b1220; --text:#eef2ff; --muted:rgba(238,242,255,.72); --muted2:rgba(238,242,255,.56);
+      --line:rgba(255,255,255,.10); --shadow:0 18px 50px rgba(0,0,0,.35);
+      --radius:18px; --pad:22px; --font:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--font); color:var(--text); overflow:hidden;
+      background:
+        radial-gradient(1200px 800px at 20% 20%, rgba(78,161,255,.18), transparent 55%),
+        radial-gradient(1000px 800px at 80% 60%, rgba(34,197,94,.12), transparent 55%),
+        var(--bg);
+    }
+    .app{height:100%; display:flex; flex-direction:column; padding:22px; gap:16px;}
+    .header{
+      display:flex; align-items:center; justify-content:space-between; padding:18px 20px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:260px;}
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background:linear-gradient(135deg, rgba(78,161,255,.9), rgba(34,197,94,.9));
+      display:grid; place-items:center; color:#07121f; font-weight:900; user-select:none;
+    }
+    .brand h1{margin:0; font-size:20px; line-height:1.1;}
+    .brand p{margin:2px 0 0 0; font-size:13px; color:var(--muted);}
+    .status{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line); background:rgba(255,255,255,.05); color:var(--muted); font-size:13px;
+      white-space:nowrap;
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+    .dot.off{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.18)}
+    .main{flex:1; display:flex; gap:16px; min-height:0;}
+    .card{
+      flex:1; border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:var(--pad); display:flex; flex-direction:column; justify-content:space-between;
+      min-height:0; overflow:hidden;
+    }
+    .cardTop{display:flex; align-items:center; justify-content:space-between; gap:12px;}
+    .tag{
+      display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px;
+      background:rgba(78,161,255,.10); border:1px solid rgba(78,161,255,.25);
+      color:#d7ecff; font-weight:800; font-size:14px; white-space:nowrap;
+    }
+    .icon{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);}
+    .content{margin-top:18px; display:flex; flex-direction:column; gap:14px; min-height:0;}
+    .headline{font-size:40px; line-height:1.06; font-weight:900; letter-spacing:-.4px;}
+    .summary{font-size:20px; line-height:1.45; color:var(--muted); max-width:1100px;}
+    .metaRow{margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; color:var(--muted2); font-size:14px;}
+    .metaChip{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.04);}
+    .footer{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:18px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted2); font-size:13px;}
+    .fadeIn{animation:fadeIn .45s ease-out both;}
+    @keyframes fadeIn{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:translateY(0)}}
+    @media (max-width:1100px){.headline{font-size:34px}.summary{font-size:18px}}
+    @media (max-width:820px){.app{padding:16px}.header{padding:14px}.headline{font-size:28px}.summary{font-size:16px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">PV</div>
+        <div>
+          <h1 id="hdrTitle">Vyre</h1>
+          <p id="hdrSubtitle">Painel leve para sala de espera</p>
+        </div>
+      </div>
+      <div class="status">
+        <div class="pill"><span class="dot" id="netDot"></span><span id="netText">Online</span></div>
+        <div class="pill"><span id="clockNow">--:--</span></div>
+        <div class="pill"><span id="rotateInfo">Troca: 20s</span></div>
+      </div>
+    </div>
 
+    <div class="main">
+      <div class="card">
+        <div class="cardTop">
+          <div class="tag">
+            <span class="icon" id="panelIcon">📰</span>
+            <span id="panelName">Notícias da cidade</span>
+          </div>
+          <div class="pill" id="panelHint">Conteúdo leve</div>
+        </div>
+
+        <div class="content fadeIn" id="content">
+          <div class="headline" id="headline">Carregando…</div>
+          <div class="summary" id="summary">Aguarde.</div>
+
+          <div class="metaRow" id="metaRow">
+            <div class="metaChip" id="sourceChip">Fonte: —</div>
+            <div class="metaChip" id="timeChip">Publicado: —</div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div>PontoView • Vyre</div>
+          <div id="footerRight">Atualizado: —</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const CONFIG = {
+    rotateSeconds: 20,
+    maxSummaryChars: 160,
+    storagePrefix: "pontoview_vyre_module_v1",
+    endpoints: {
+      news: "./data/news.json",
+      tips: "./data/tips.json",
+      campaigns: "./data/campaigns.json"
+    }
+  };
+
+  const $ = (id) => document.getElementById(id);
+
+  function updateClock(){
+    $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit", minute:"2-digit"});
+  }
+  setInterval(updateClock, 1000); updateClock();
+
+  function setNetUI(online){
+    $("netDot").classList.toggle("off", !online);
+    $("netText").textContent = online ? "Online" : "Offline";
+  }
+  setNetUI(navigator.onLine);
+  window.addEventListener("online",()=>setNetUI(true));
+  window.addEventListener("offline",()=>setNetUI(false));
+
+  function fmtDateTime(d){
+    try{
+      const dt = (d instanceof Date) ? d : new Date(d);
+      return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+    }catch{return "—";}
+  }
+  function clampText(txt,max){
+    if(!txt) return "";
+    const s = String(txt).replace(/\s+/g," ").trim();
+    return s.length>max ? s.slice(0,max-1)+"…" : s;
+  }
+
+  function getMode(){
+    const p = new URLSearchParams(location.search);
+    return (p.get("mode") || "news").toLowerCase();
+  }
+  function key(s){ return `${CONFIG.storagePrefix}:${s}`; }
+  function lastId(mode){ try{return localStorage.getItem(key(mode+":last"))||""}catch{return""} }
+  function setLastId(mode,id){ try{localStorage.setItem(key(mode+":last"), id||"")}catch{} }
+
+  async function fetchJson(url){
+    const res = await fetch(url, { cache:"no-store" });
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    return await res.json();
+  }
+
+  async function loadItems(mode){
+    // tenta online
+    try{
+      const data = await fetchJson(CONFIG.endpoints[mode]);
+      const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
+      // cache
+      try{ localStorage.setItem(key(mode+":cache"), JSON.stringify({savedAt:new Date().toISOString(), items})); }catch{}
+      return {items, savedAt:new Date().toISOString()};
+    }catch{
+      // cache fallback
+      try{
+        const raw = localStorage.getItem(key(mode+":cache"));
+        if(raw){
+          const obj = JSON.parse(raw);
+          if(obj && Array.isArray(obj.items)) return {items:obj.items, savedAt:obj.savedAt||new Date().toISOString()};
+        }
+      }catch{}
+      return {items:[], savedAt:new Date().toISOString()};
+    }
+  }
+
+  function pickNext(mode, items){
+    if(!items.length) return null;
+    const last = lastId(mode);
+    const shuffled = items.slice().sort(()=>Math.random()-0.5);
+    const it = shuffled.find(x => (x.id||"") !== last) || shuffled[0];
+    return it || null;
+  }
+
+  function setHeader(mode){
+    $("rotateInfo").textContent = `Troca: ${CONFIG.rotateSeconds}s`;
+
+    if(mode==="news"){
+      $("hdrTitle").textContent="Notícias locais";
+      $("hdrSubtitle").textContent="Manchetes leves e úteis";
+      $("panelIcon").textContent="📰";
+      $("panelName").textContent="Notícias da cidade";
+      $("panelHint").textContent="Mostra a fonte • sem sensacionalismo";
+      $("metaRow").style.display="";
+    }
+    if(mode==="tips"){
+      $("hdrTitle").textContent="Dicas educativas";
+      $("hdrSubtitle").textContent="Saúde • bem-estar • segurança";
+      $("panelIcon").textContent="💡";
+      $("panelName").textContent="Dica rápida";
+      $("panelHint").textContent="1 dica por tela • leitura rápida";
+      $("metaRow").style.display="none";
+    }
+    if(mode==="campaigns"){
+      $("hdrTitle").textContent="Mensagens do local";
+      $("hdrSubtitle").textContent="Acolhimento • respeito • diversidade";
+      $("panelIcon").textContent="🏥";
+      $("panelName").textContent="Campanha institucional";
+      $("panelHint").textContent="Curto • humano • neutro";
+      $("metaRow").style.display="none";
+    }
+  }
+
+  function render(mode, item, savedAt){
+    const c = $("content");
+    c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
+
+    if(!item){
+      $("headline").textContent="Sem conteúdo";
+      $("summary").textContent="Confira se os arquivos em /data existem e estão válidos.";
+      $("sourceChip").textContent="Fonte: —";
+      $("timeChip").textContent="Publicado: —";
+      $("footerRight").textContent="Atualizado: "+fmtDateTime(savedAt);
+      return;
+    }
+
+    if(mode==="news"){
+      $("headline").textContent=clampText(item.title, 90);
+      $("summary").textContent=clampText(item.summary || "", CONFIG.maxSummaryChars);
+      $("sourceChip").textContent="Fonte: "+(item.source || "—");
+      $("timeChip").textContent="Publicado: "+(item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
+    } else {
+      $("headline").textContent=item.title || "Mensagem";
+      $("summary").textContent=clampText(item.text || "", 220);
+    }
+
+    $("footerRight").textContent="Atualizado: "+fmtDateTime(savedAt);
+    setLastId(mode, item.id || "");
+  }
+
+  async function start(){
+    const mode = getMode();
+    setHeader(mode);
+
+    let pack = await loadItems(mode);
+    let items = pack.items;
+    let savedAt = pack.savedAt;
+
+    render(mode, pickNext(mode, items), savedAt);
+
+    setInterval(async ()=>{
+      // recarrega para pegar atualizações (funciona com GH Pages quando o JSON mudar)
+      pack = await loadItems(mode);
+      items = pack.items;
+      savedAt = pack.savedAt;
+      render(mode, pickNext(mode, items), savedAt);
+    }, CONFIG.rotateSeconds*1000);
+  }
+  start();
+
+  // Offline
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js").catch(()=>{});
+  }
+</script>
+</body>
+</html>
