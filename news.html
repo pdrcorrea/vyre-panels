@@ -13,7 +13,7 @@
         <div class="logo">PV</div>
         <div>
           <h1>Notícias locais</h1>
-          <p>Manchetes leves e úteis • mostra a fonte</p>
+          <p>Imagem + manchete + fonte • atualização automática</p>
         </div>
       </div>
       <div class="status">
@@ -27,13 +27,14 @@
       <div class="card">
         <div class="cardTop">
           <div class="tag"><span class="icon">📰</span><span>Notícia</span></div>
-          <div class="pill">Sem tragédia/política pesada</div>
+          <div class="pill" id="hint">Leve • útil • sem sensacionalismo</div>
         </div>
 
         <div class="content fadeIn" id="content">
           <img id="newsImg" alt="" style="width:100%; max-height:48vh; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,.10); display:none;">
           <div class="headline" id="headline">Carregando…</div>
           <div class="summary" id="summary">Aguarde.</div>
+
           <div class="metaRow" id="metaRow">
             <div class="metaChip" id="sourceChip">Fonte: —</div>
             <div class="metaChip" id="timeChip">Publicado: —</div>
@@ -49,113 +50,134 @@
   </div>
 
 <script>
-const ROTATE_SECONDS = 20;
-document.getElementById("rot").textContent = ROTATE_SECONDS;
+(function(){
+  const ROTATE_SECONDS = 20;
+  document.getElementById("rot").textContent = ROTATE_SECONDS;
 
-const $ = (id)=>document.getElementById(id);
-function updateClock(){ $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); }
-setInterval(updateClock, 1000); updateClock();
+  const $ = (id)=>document.getElementById(id);
 
-function setNetUI(online){
-  $("netDot").classList.toggle("off", !online);
-  $("netText").textContent = online ? "Online" : "Offline";
-}
-setNetUI(navigator.onLine);
-addEventListener("online",()=>setNetUI(true));
-addEventListener("offline",()=>setNetUI(false));
+  function updateClock(){
+    $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+  }
+  setInterval(updateClock, 1000); updateClock();
 
-function fmtDateTime(d){
-  try{
-    const dt = (d instanceof Date) ? d : new Date(d);
-    return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
-  }catch{return "—";}
-}
-function clampText(txt,max){
-  if(!txt) return "";
-  const s = String(txt).replace(/\s+/g," ").trim();
-  return s.length>max ? s.slice(0,max-1)+"…" : s;
-}
+  function setNetUI(online){
+    $("netDot").classList.toggle("off", !online);
+    $("netText").textContent = online ? "Online" : "Offline";
+  }
+  setNetUI(navigator.onLine);
+  addEventListener("online",()=>setNetUI(true));
+  addEventListener("offline",()=>setNetUI(false));
 
-const STORAGE_LAST = "pv_news_last_id_v1";
+  function fmtDateTime(d){
+    try{
+      const dt = new Date(d);
+      return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+    }catch{return "—";}
+  }
+  function clampText(txt,max){
+    if(!txt) return "";
+    const s = String(txt).replace(/\s+/g," ").trim();
+    return s.length>max ? s.slice(0,max-1)+"…" : s;
+  }
 
-function getLastId(){ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} }
-function setLastId(id){ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
+  const STORAGE_LAST = "pv_news_last_id_v2";
 
-async function loadNews(){
-  // cache bust para evitar pegar versão antiga do GH Pages / SW
-  const url = "./data/news.json?v=" + Date.now();
-  const res = await fetch(url, { cache:"no-store" });
-  if(!res.ok) throw new Error("HTTP "+res.status);
-  const data = await res.json();
-  const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
-  const generatedAt = data.generatedAt || new Date().toISOString();
-  return { items, generatedAt };
-}
+  function getLastId(){ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} }
+  function setLastId(id){ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
 
-function pickNext(items){
-  if(!items.length) return null;
-  const last = getLastId();
-  const shuffled = items.slice().sort(()=>Math.random()-0.5);
-  return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
-}
+  function renderError(message){
+    const img = $("newsImg");
+    img.style.display = "none";
+    img.removeAttribute("src");
 
-function render(item, generatedAt){
-  const c = $("content");
-  c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
-  const img = document.getElementById("newsImg");
-
-// título sempre
-$("headline").textContent = clampText(item.title, 90);
-
-// imagem opcional
-if (item.imageUrl) {
-  img.src = item.imageUrl;
-  img.style.display = "block";
-} else {
-  img.removeAttribute("src");
-  img.style.display = "none";
-}
-
-// fonte/data
-$("sourceChip").textContent = "Fonte: " + (item.source || "—");
-$("timeChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
-
-
-  if(!item){
     $("headline").textContent = "Sem notícias";
-    $("summary").textContent = "Verifique se data/news.json tem items[].";
+    $("summary").textContent = message || "Não foi possível carregar data/news.json.";
     $("sourceChip").textContent = "Fonte: —";
     $("timeChip").textContent = "Publicado: —";
+    $("footerRight").textContent = "Atualizado: " + fmtDateTime(new Date().toISOString());
+  }
+
+  function pickNext(items){
+    if(!items || !items.length) return null;
+    const last = getLastId();
+    const shuffled = items.slice().sort(()=>Math.random()-0.5);
+    return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
+  }
+
+  function renderItem(item, generatedAt){
+    const c = $("content");
+    c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
+
+    if(!item){
+      renderError("O arquivo data/news.json existe, mas veio vazio (items[]).");
+      $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt);
+      return;
+    }
+
+    const img = $("newsImg");
+    const imgUrl = item.imageUrl || "";
+
+    if(imgUrl){
+      img.src = imgUrl;
+      img.style.display = "block";
+    } else {
+      img.removeAttribute("src");
+      img.style.display = "none";
+    }
+
+    $("headline").textContent = clampText(item.title, 90);
+    $("summary").textContent = clampText(item.summary || "", 170); // se summary não existir, fica só manchete
+    $("sourceChip").textContent = "Fonte: " + (item.source || "—");
+    $("timeChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
     $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt);
-    return;
+
+    setLastId(item.id || "");
   }
 
-  $("headline").textContent = clampText(item.title, 90);
-  $("summary").textContent = clampText(item.summary || "", 160);
-  $("sourceChip").textContent = "Fonte: " + (item.source || "—");
-  $("timeChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
-  $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt);
-
-  setLastId(item.id || "");
-}
-
-async function start(){
-  try{
-    const pack = await loadNews();
-    render(pickNext(pack.items), pack.generatedAt);
-    setInterval(async ()=>{
-      const p = await loadNews();
-      render(pickNext(p.items), p.generatedAt);
-    }, ROTATE_SECONDS*1000);
-  }catch(e){
-    render(null, new Date().toISOString());
+  async function fetchWithTimeout(url, ms){
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), ms);
+    try{
+      const res = await fetch(url, { cache:"no-store", signal: ctrl.signal });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      return await res.json();
+    } finally {
+      clearTimeout(t);
+    }
   }
-}
-start();
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js").catch(()=>{});
-}
+  async function loadNews(){
+    // cache-bust sempre (evita SW/cache preso)
+    const url = "./data/news.json?v=" + Date.now();
+    const data = await fetchWithTimeout(url, 12000);
+
+    const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
+    const generatedAt = (data && data.generatedAt) ? data.generatedAt : new Date().toISOString();
+
+    return { items, generatedAt };
+  }
+
+  async function cycle(){
+    try{
+      const pack = await loadNews();
+      const next = pickNext(pack.items);
+      renderItem(next, pack.generatedAt);
+    } catch(e){
+      renderError("Falha ao carregar notícias. Verifique se data/news.json está válido e publicado.");
+    }
+  }
+
+  // primeira renderização
+  cycle();
+  // rotações
+  setInterval(cycle, ROTATE_SECONDS * 1000);
+
+  // ✅ Importante: registre o SW, mas ele não deve impedir a página de rodar
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js").catch(()=>{});
+  }
+})();
 </script>
 </body>
 </html>
