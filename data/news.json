@@ -1,21 +1,4 @@
 {
-  "generatedAt": "2025-12-28T00:00:00Z",
-  "items": [
-    {
-      "id": "n1",
-      "title": "Aviso: horário de funcionamento atualizado",
-      "summary": "Confira os novos horários e canais de contato para atendimento.",
-      "source": "Comunicado local (exemplo)",
-      "publishedAt": "2025-12-28T09:00:00-03:00",
-      "url": ""
-    },
-    {
-      "id": "n2",
-      "title": "Utilidade pública: orientação sobre vacinação",
-      "summary": "Verifique datas, documentos e público-alvo para manter a vacinação em dia.",
-      "source": "Saúde (exemplo)",
-      "publishedAt": "2025-12-27T16:30:00-03:00",
-      "url": ""
-    }
-  ]
+  "generatedAt": "2025-12-29T02:16:43.105705+00:00",
+  "items": []
 }
