@@ -103,13 +103,23 @@ function render(item, generatedAt){
   const c = $("content");
   c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
   const img = document.getElementById("newsImg");
-if(item && item.imageUrl){
+
+// título sempre
+$("headline").textContent = clampText(item.title, 90);
+
+// imagem opcional
+if (item.imageUrl) {
   img.src = item.imageUrl;
   img.style.display = "block";
 } else {
   img.removeAttribute("src");
   img.style.display = "none";
 }
+
+// fonte/data
+$("sourceChip").textContent = "Fonte: " + (item.source || "—");
+$("timeChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
+
 
   if(!item){
     $("headline").textContent = "Sem notícias";
