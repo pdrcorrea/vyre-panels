@@ -31,6 +31,7 @@
         </div>
 
         <div class="content fadeIn" id="content">
+          <img id="newsImg" alt="" style="width:100%; max-height:48vh; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,.10); display:none;">
           <div class="headline" id="headline">Carregando…</div>
           <div class="summary" id="summary">Aguarde.</div>
           <div class="metaRow" id="metaRow">
@@ -101,6 +102,14 @@ function pickNext(items){
 function render(item, generatedAt){
   const c = $("content");
   c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
+  const img = document.getElementById("newsImg");
+if(item && item.imageUrl){
+  img.src = item.imageUrl;
+  img.style.display = "block";
+} else {
+  img.removeAttribute("src");
+  img.style.display = "none";
+}
 
   if(!item){
     $("headline").textContent = "Sem notícias";
