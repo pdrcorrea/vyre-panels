@@ -4,39 +4,33 @@ import path from "path";
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, "data", "news.json");
 
-/** ✅ TROQUE AQUI (cidade/estado) */
+/** ✅ TROQUE AQUI */
 const CITY = "Colatina ES";
 
-/** ✅ Queries “soft” (pode editar depois) */
+/** ✅ Queries mais abertas (pra não ficar vazio) */
 const QUERIES = [
+  `${CITY}`,
   `${CITY} (obra OR trânsito OR vacinação OR mutirão OR evento OR serviço OR atendimento)`,
-  `${CITY} utilidade pública`,
   `${CITY} prefeitura`,
-  `${CITY} evento`,
+  `${CITY} saúde`,
 ];
 
 const MAX_ITEMS = 40;
 
-// bloqueio leve por título (pra não entrar tragédia/polícia/política pesada)
+/** ✅ Filtro soft (mais leve pra não zerar) */
 const BLOCK = [
-  "morte","assassin","crime","violên","tirote","trag","polícia","homic",
-  "eleição","partido","corrup","escând"
+  "assassin", "homic", "tirote", "estupro"
+  // ⚠️ Repare: tirei “morte/polícia/crime” porque às vezes zera tudo.
 ];
 
-// nomes “bonitos” (domínio -> nome)
 const SOURCE_MAP = {
   "g1.globo.com": "G1",
-  "oglobo.globo.com": "O Globo",
-  "folha.uol.com.br": "Folha",
-  "uol.com.br": "UOL",
   "agazeta.com.br": "A Gazeta",
   "folhavitoria.com.br": "Folha Vitória",
-  "gazetaonline.com.br": "Gazeta Online",
+  "uol.com.br": "UOL",
   "terra.com.br": "Terra",
   "metropoles.com": "Metrópoles",
   "cnnbrasil.com.br": "CNN Brasil",
-  "bbc.com": "BBC",
-  "bbc.co.uk": "BBC"
 };
 
 function googleNewsRssUrl(q) {
@@ -75,7 +69,7 @@ async function fetchText(url, timeoutMs = 20000) {
   }
 }
 
-async function resolveFinalUrl(url, timeoutMs = 20000) {
+async function resolveFinalUrl(url, timeoutMs = 15000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
@@ -90,7 +84,6 @@ async function resolveFinalUrl(url, timeoutMs = 20000) {
   }
 }
 
-// RSS simples: <item><title> <link> <pubDate>
 function parseRssItems(xml) {
   const items = [];
   const chunks = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
@@ -114,18 +107,18 @@ function pickMeta(html, key) {
   return html.match(r1)?.[1] || html.match(r2)?.[1] || "";
 }
 
-function guessSourceFromUrl(finalUrl) {
+function guessSourceFromUrl(url) {
   try {
-    const host = new URL(finalUrl).hostname.replace(/^www\./, "");
+    const host = new URL(url).hostname.replace(/^www\./, "");
     return SOURCE_MAP[host] || host;
   } catch {
     return "Fonte";
   }
 }
 
-function absolutizeImage(url, baseUrl) {
-  if (!url) return "";
-  const u = strip(url);
+function absolutizeImage(img, baseUrl) {
+  if (!img) return "";
+  const u = strip(img);
   try {
     if (u.startsWith("//")) {
       const b = new URL(baseUrl);
@@ -139,63 +132,71 @@ function absolutizeImage(url, baseUrl) {
   return u;
 }
 
+/**
+ * Enriquecimento “melhor esforço”.
+ * Se falhar, a notícia ainda vai entrar SEM imagem.
+ */
 async function enrich(newsLink) {
-  // 1) sai do Google News e chega no site real
   const finalUrl = await resolveFinalUrl(newsLink);
 
-  // se ainda ficou no Google, ignora esse item
-  if (finalUrl.includes("news.google.com") || finalUrl.includes("google.com")) {
-    throw new Error("Final URL still Google");
+  // Se ficou no Google, ainda assim aceitamos (mas sem imagem/fonte bonita)
+  let html = "";
+  try {
+    // só tenta baixar HTML do site real se não for Google
+    if (!finalUrl.includes("google.com")) {
+      html = await fetchText(finalUrl, 15000);
+    }
+  } catch {
+    html = "";
   }
 
-  // 2) baixa HTML do site real
-  const html = await fetchText(finalUrl);
+  let title = "";
+  let source = "";
+  let imageUrl = "";
 
-  // título
-  const ogTitle = strip(pickMeta(html, "og:title"));
-  const titleTag = strip(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "");
-  const title = ogTitle || titleTag;
+  if (html) {
+    const ogTitle = strip(pickMeta(html, "og:title"));
+    const titleTag = strip(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "");
+    title = ogTitle || titleTag;
 
-  // fonte (nome bonito ou domínio)
-  const ogSite = strip(pickMeta(html, "og:site_name"));
-  const source = ogSite || guessSourceFromUrl(finalUrl);
+    const ogSite = strip(pickMeta(html, "og:site_name"));
+    source = ogSite || guessSourceFromUrl(finalUrl);
 
-  // imagem (og + twitter)
-  const ogImg = strip(pickMeta(html, "og:image"));
-  const twImg = strip(pickMeta(html, "twitter:image")) || strip(pickMeta(html, "twitter:image:src"));
-  let imageUrl = absolutizeImage(ogImg || twImg, finalUrl);
+    const ogImg = strip(pickMeta(html, "og:image"));
+    const twImg = strip(pickMeta(html, "twitter:image")) || strip(pickMeta(html, "twitter:image:src"));
+    imageUrl = absolutizeImage(ogImg || twImg, finalUrl);
 
-  // evita imagens genéricas do Google/gstatic
-  if (imageUrl.includes("news.google") || imageUrl.includes("gstatic")) imageUrl = "";
+    if (imageUrl.includes("news.google") || imageUrl.includes("gstatic")) imageUrl = "";
+  } else {
+    source = guessSourceFromUrl(finalUrl);
+  }
 
   return { title, source, imageUrl, finalUrl };
 }
 
 async function main() {
   const rssItems = [];
+  const rssFailures = [];
 
-  // 1) descobre notícias via Google News RSS
   for (const q of QUERIES) {
     const rssUrl = googleNewsRssUrl(q);
     try {
       const xml = await fetchText(rssUrl, 20000);
       rssItems.push(...parseRssItems(xml));
     } catch (e) {
-      console.error("[warn] RSS failed:", rssUrl, e?.message || e);
+      rssFailures.push({ rssUrl, error: String(e?.message || e) });
     }
   }
 
-  // 2) dedup por link
   const uniq = new Map();
   for (const it of rssItems) {
     if (!uniq.has(it.link)) uniq.set(it.link, it);
   }
 
   const out = [];
-  let failed = 0;
   let blocked = 0;
+  let enrichFailed = 0;
 
-  // 3) enriquece (imagem+fonte+url real) — sem quebrar se 1 site falhar
   for (const it of uniq.values()) {
     if (out.length >= MAX_ITEMS) break;
 
@@ -206,21 +207,43 @@ async function main() {
 
     try {
       const e = await enrich(it.link);
-      const title = strip(e.title || it.title);
-      if (!title) continue;
+
+      // ✅ fallback: se não pegou title do site real, usa title do RSS
+      const finalTitle = strip(e.title || it.title);
+      if (!finalTitle) continue;
 
       out.push({
         id: `n:${Math.abs(hashCode(e.finalUrl || it.link))}`,
-        title,
-        source: e.source || "Fonte",
+        title: finalTitle,
+        source: strip(e.source) || "Google Notícias",
         publishedAt: it.pubDate || "",
         url: e.finalUrl || it.link,
         imageUrl: e.imageUrl || ""
       });
     } catch (e) {
-      failed++;
-      // continua sem derrubar o build
+      enrichFailed++;
+      // ✅ fallback total: ainda coloca pelo RSS (sem imagem)
+      out.push({
+        id: `n:${Math.abs(hashCode(it.link))}`,
+        title: it.title,
+        source: "Google Notícias",
+        publishedAt: it.pubDate || "",
+        url: it.link,
+        imageUrl: ""
+      });
     }
+  }
+
+  // ✅ Se mesmo assim não vier nada, cria 1 item “comunicado” pra não ficar vazio
+  if (out.length === 0) {
+    out.push({
+      id: "pv:fallback",
+      title: "Sem notícias no momento",
+      source: "PontoView",
+      publishedAt: new Date().toISOString(),
+      url: "",
+      imageUrl: ""
+    });
   }
 
   const payload = {
@@ -230,7 +253,8 @@ async function main() {
       discovered: uniq.size,
       produced: out.length,
       blocked_titles: blocked,
-      failed_enrich: failed
+      enrich_failed: enrichFailed,
+      rss_failures: rssFailures.length
     }
   };
 
