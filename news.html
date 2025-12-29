@@ -13,7 +13,7 @@
         <div class="logo">PV</div>
         <div>
           <h1>Notícias locais</h1>
-          <p>Manchetes leves e úteis • com imagem quando disponível</p>
+          <p>Layout TV • imagem + manchete + fonte</p>
         </div>
       </div>
 
@@ -25,43 +25,49 @@
     </div>
 
     <div class="main">
-      <div class="card">
-        <div class="cardTop">
-          <div class="tag">
-            <span class="icon">📰</span>
-            <span>Notícia</span>
-          </div>
-          <div class="pill" id="hint">Fonte visível • sem sensacionalismo</div>
+      <div class="card" style="padding:18px;">
+        <div class="cardTop" style="padding:4px 4px 10px 4px;">
+          <div class="tag"><span class="icon">📰</span><span>Notícia</span></div>
+          <div class="pill" id="hint">Leve • útil • sem sensacionalismo</div>
         </div>
 
-        <div class="content fadeIn" id="content">
-          <!-- Imagem opcional -->
-          <img
-            id="newsImg"
-            alt=""
-            style="
-              width:100%;
-              max-height:46vh;
-              object-fit:cover;
-              border-radius:14px;
-              border:1px solid rgba(255,255,255,.10);
-              display:none;
-            "
-          >
+        <div class="newsGrid fadeIn" id="content">
+          <!-- ESQUERDA: IMAGEM -->
+          <div class="newsLeft">
+            <div class="newsMedia">
+              <img id="newsImg" alt="" style="display:none;">
+              <div class="newsMediaEmpty" id="newsImgEmpty">
+                <div>
+                  <div style="font-size:44px; margin-bottom:10px;">🗞️</div>
+                  <div>Sem imagem para esta notícia</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <!-- Manchete (SEM corte) -->
-          <div class="headline" id="headline">Carregando…</div>
+          <!-- DIREITA: TEXTO -->
+          <div class="newsRight">
+            <div>
+              <div class="newsHeadline" id="headline">Carregando…</div>
+            </div>
 
-          <!-- Resumo (se existir no JSON) -->
-          <div class="summary" id="summary" style="display:none;"></div>
-
-          <div class="metaRow" id="metaRow">
-            <div class="metaChip" id="sourceChip">Fonte: —</div>
-            <div class="metaChip" id="timeChip">Publicado: —</div>
+            <div class="newsMeta">
+              <div class="metaChip" id="sourceChip">Fonte: —</div>
+              <div class="metaChip" id="timeChip">Publicado: —</div>
+              <div class="metaChip" id="countChip">Itens: —</div>
+            </div>
           </div>
         </div>
 
-        <div class="footer">
+        <!-- TICKER -->
+        <div class="ticker" aria-label="Ticker de manchetes">
+          <div class="tickerLabel"><span style="font-size:20px;">🟦</span>DESTAQUES</div>
+          <div class="tickerTrack">
+            <div class="tickerText" id="tickerText">Carregando manchetes…</div>
+          </div>
+        </div>
+
+        <div class="footer" style="margin-top:14px;">
           <div>PontoView • Vyre</div>
           <div id="footerRight">Atualizado: —</div>
         </div>
@@ -76,13 +82,11 @@
 
   const $ = (id)=>document.getElementById(id);
 
-  // relógio
   function updateClock(){
     $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
   }
   setInterval(updateClock, 1000); updateClock();
 
-  // status online/offline
   function setNetUI(online){
     $("netDot").classList.toggle("off", !online);
     $("netText").textContent = online ? "Online" : "Offline";
@@ -98,25 +102,9 @@
     }catch{return "—";}
   }
 
-  const STORAGE_LAST = "pv_news_last_id_v3";
-
+  const STORAGE_LAST = "pv_news_last_id_tv_v1";
   function getLastId(){ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} }
   function setLastId(id){ try{return localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
-
-  function renderFallback(message, generatedAt){
-    const img = $("newsImg");
-    img.style.display = "none";
-    img.removeAttribute("src");
-
-    $("headline").textContent = "Sem notícias no momento";
-    const summaryEl = $("summary");
-    summaryEl.style.display = "block";
-    summaryEl.textContent = message || "Confira novamente em instantes.";
-
-    $("sourceChip").textContent = "Fonte: —";
-    $("timeChip").textContent = "Publicado: —";
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt || new Date().toISOString());
-  }
 
   function pickNext(items){
     if(!items || !items.length) return null;
@@ -125,43 +113,64 @@
     return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
   }
 
-  function renderItem(item, generatedAt){
-    const c = $("content");
-    c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
+  function setImage(url){
+    const img = $("newsImg");
+    const empty = $("newsImgEmpty");
+    if(url){
+      img.src = url;
+      img.style.display = "block";
+      empty.style.display = "none";
+    } else {
+      img.removeAttribute("src");
+      img.style.display = "none";
+      empty.style.display = "grid";
+    }
+  }
+
+  function buildTicker(items){
+    if(!items || !items.length) return "Sem manchetes no momento •";
+    // pega até 8 títulos e junta
+    const titles = items.slice(0, 8).map(x => x.title).filter(Boolean);
+    return (titles.join("  •  ") + "  •  ");
+  }
+
+  function restartTicker(text){
+    const el = $("tickerText");
+    el.style.animation = "none";
+    el.textContent = text;
+    // reflow
+    void el.offsetWidth;
+    el.style.animation = "";
+  }
+
+  function renderFallback(generatedAt){
+    setImage("");
+    $("headline").textContent = "Sem notícias no momento";
+    $("sourceChip").textContent = "Fonte: —";
+    $("timeChip").textContent = "Publicado: —";
+    $("countChip").textContent = "Itens: 0";
+    $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt || new Date().toISOString());
+    restartTicker("Sem manchetes no momento •");
+  }
+
+  function renderItem(item, pack){
+    const content = $("content");
+    content.classList.remove("fadeIn"); void content.offsetWidth; content.classList.add("fadeIn");
 
     if(!item){
-      renderFallback("O arquivo data/news.json veio vazio (items[]).", generatedAt);
+      renderFallback(pack.generatedAt);
       return;
     }
 
-    // imagem opcional
-    const img = $("newsImg");
-    if(item.imageUrl){
-      img.src = item.imageUrl;
-      img.style.display = "block";
-    } else {
-      img.style.display = "none";
-      img.removeAttribute("src");
-    }
-
-    // manchete COMPLETA (sem clamp)
+    setImage(item.imageUrl || "");
     $("headline").textContent = item.title || "Notícia";
-
-    // resumo opcional (se você quiser usar no futuro)
-    const summaryEl = $("summary");
-    if(item.summary && String(item.summary).trim()){
-      summaryEl.style.display = "block";
-      summaryEl.textContent = String(item.summary).trim();
-    } else {
-      summaryEl.style.display = "none";
-      summaryEl.textContent = "";
-    }
-
     $("sourceChip").textContent = "Fonte: " + (item.source || "—");
     $("timeChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt);
+    $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
+    $("footerRight").textContent = "Atualizado: " + fmtDateTime(pack.generatedAt);
 
     setLastId(item.id || "");
+    restartTicker(buildTicker(pack.items));
   }
 
   async function fetchWithTimeout(url, ms){
@@ -177,28 +186,26 @@
   }
 
   async function loadNews(){
-    const url = "./data/news.json?v=" + Date.now(); // evita cache preso
+    const url = "./data/news.json?v=" + Date.now();
     const data = await fetchWithTimeout(url, 12000);
-
     const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
     const generatedAt = data?.generatedAt ? data.generatedAt : new Date().toISOString();
-
     return { items, generatedAt };
   }
 
   async function cycle(){
     try{
       const pack = await loadNews();
-      renderItem(pickNext(pack.items), pack.generatedAt);
-    } catch {
-      renderFallback("Falha ao carregar notícias. Verifique se data/news.json está publicado.", new Date().toISOString());
+      const item = pickNext(pack.items);
+      renderItem(item, pack);
+    }catch{
+      renderFallback(new Date().toISOString());
     }
   }
 
   cycle();
   setInterval(cycle, ROTATE_SECONDS * 1000);
 
-  // mantém offline (se você quiser)
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(()=>{});
   }
