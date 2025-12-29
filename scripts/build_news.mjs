@@ -58,26 +58,45 @@ function softBlock(title) {
 }
 
 async function enrichWithOg(link) {
-  // Alguns sites bloqueiam; então falhar aqui não pode matar o build.
-  const html = await fetchText(link);
+  // 1) Abre o link do Google News (isso redireciona)
+  const res = await fetch(link, {
+    headers: { "User-Agent": "Mozilla/5.0 (GitHub Actions) PontoView/1.0" },
+    redirect: "follow"
+  });
+
+  // 2) URL final = site real da notícia
+  const finalUrl = res.url;
+
+  // 3) Agora sim buscamos o HTML do site real
+  const html = await fetchText(finalUrl);
+
   const ogTitle = pickMeta(html, "og:title");
   const ogImage = pickMeta(html, "og:image");
   const siteName = pickMeta(html, "og:site_name");
 
-  const titleTag = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "";
+  const titleTag =
+    html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "";
+
   const finalTitle = strip(ogTitle || titleTag);
 
-  // og:image às vezes vem relativo
   let imageUrl = strip(ogImage);
+
+  // Corrige imagem relativa
   try {
     if (imageUrl && imageUrl.startsWith("/")) {
-      const u = new URL(link);
+      const u = new URL(finalUrl);
       imageUrl = `${u.origin}${imageUrl}`;
     }
   } catch {}
 
-  return { finalTitle, imageUrl, siteName: strip(siteName) };
+  return {
+    finalTitle,
+    imageUrl,
+    siteName: strip(siteName),
+    finalUrl
+  };
 }
+
 
 async function main() {
   const rawItems = [];
@@ -114,13 +133,13 @@ async function main() {
     if (!title) continue;
 
     items.push({
-      id: `n:${Math.abs(hashCode(it.link))}`,
-      title,
-      source: enriched.siteName || "Google Notícias",
-      publishedAt: it.pubDate || "",
-      url: it.link,
-      imageUrl: enriched.imageUrl || ""
-    });
+  id: `n:${Math.abs(hashCode(final.link || it.link))}`,
+  title,
+  source: enriched.siteName || "Fonte local",
+  publishedAt: it.pubDate || "",
+  url: enriched.finalUrl || it.link,
+  imageUrl: enriched.imageUrl || ""
+});
   }
 
   const payload = {
