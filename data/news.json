@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-29T20:44:11.164Z",
+  "generatedAt": "2025-12-29T21:34:46.087Z",
   "items": [
     {
       "id": "n:2069943800",
@@ -7,6 +7,14 @@
       "source": "news.google.com",
       "publishedAt": "Mon, 29 Dec 2025 18:14:19 GMT",
       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPZk9TeHRRUkZuckNDVjRBNFBRdWNzVUF3NFpybnh2d1o1WjJzYTFJbVVRSkJoV0s2ZXdrdTM4Zjc4TjhFQ0ZKVFFQd2VDUlhNN2VtSjB5S2Q0LUdXdlgyb1lKWkNlZUhpTk9UWkFtM2J5c3J4Q3dzcllfZWYyZWxMdjFkQnJmTWc?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": ""
+    },
+    {
+      "id": "n:2057115860",
+      "title": "Consumo no ES supera média nacional no fim de ano - Colatina em Ação",
+      "source": "news.google.com",
+      "publishedAt": "Mon, 29 Dec 2025 20:56:53 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPV0hCTk9vS3hUQy1FSDZwVVc5eWJZQU9MelpReDUzd2MtTnJkRkY5RUFNNDFaQVJveVZZRG5KdC05aGJsa0pWSXFQQzRiTnp6LWNTMDRWTzNkc25tNV8yNFdpMmRQTEEzQ2tUOWh0YWs0blpSLWx0LW16Y1JjOU1EcFRWY0lVUzh5THc?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     },
     {
@@ -74,14 +82,6 @@
       "imageUrl": ""
     },
     {
-      "id": "n:1907437311",
-      "title": "Vídeo | Mensagem de Natal de Dom Lauro, Bispo da Diocese de Colatina - Colatina em Ação",
-      "source": "news.google.com",
-      "publishedAt": "Wed, 24 Dec 2025 23:14:23 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOVXZibHozTTRKRERzZF9mOUJzRWtXRndZWnp6dGM0am80UF9lQXBKS1dWYUF4eDBCVGVKZ2JDWDdOa2VnVDVycU53TFpDaGhLZnh4eFFaekNBM0FENkVpV19nQndhMHF5Vkg3QnFZS0pBeElWaTZlbVFZamZjWWxjQnRndWNaRHJHc1BSMmRhR2M4VUV0djFrTDR0Y3VuUXdSa1pKeF9ZSUZjcTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": ""
-    },
-    {
       "id": "n:1851554232",
       "title": "Associação questiona no STF transposição de cargos para Guarda Municipal de Colatina (ES) - stf noticias",
       "source": "news.google.com",
@@ -106,11 +106,11 @@
       "imageUrl": ""
     },
     {
-      "id": "n:42887869",
-      "title": "Projeto “Vozes da Terra” promove literatura negra e indígena em escola de Colatina - Colatina em Ação",
+      "id": "n:1907437311",
+      "title": "Vídeo | Mensagem de Natal de Dom Lauro, Bispo da Diocese de Colatina - Colatina em Ação",
       "source": "news.google.com",
-      "publishedAt": "Wed, 24 Dec 2025 14:17:47 GMT",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPa0ozU2VILTg3b2NzUWlsanh2VVMtWEY1bV8wazRINVhxMmN5LTVpXzlDSVVFcjR3aEtmTDVMZ1Y2MEhUbUgwNlRrZFdWMDBCdGt1X2g3aG02ZHoxU0dpZG9CNGtNUWJCcDQ1VUdONUZMdlBOUlg4WjRhVHZMUzdQRko4VkhVMjE5dEV2Z2F1SQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Wed, 24 Dec 2025 23:14:23 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOVXZibHozTTRKRERzZF9mOUJzRWtXRndZWnp6dGM0am80UF9lQXBKS1dWYUF4eDBCVGVKZ2JDWDdOa2VnVDVycU53TFpDaGhLZnh4eFFaekNBM0FENkVpV19nQndhMHF5Vkg3QnFZS0pBeElWaTZlbVFZamZjWWxjQnRndWNaRHJHc1BSMmRhR2M4VUV0djFrTDR0Y3VuUXdSa1pKeF9ZSUZjcTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     },
     {
@@ -162,6 +162,14 @@
       "imageUrl": ""
     },
     {
+      "id": "n:42887869",
+      "title": "Projeto “Vozes da Terra” promove literatura negra e indígena em escola de Colatina - Colatina em Ação",
+      "source": "news.google.com",
+      "publishedAt": "Wed, 24 Dec 2025 14:17:47 GMT",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPa0ozU2VILTg3b2NzUWlsanh2VVMtWEY1bV8wazRINVhxMmN5LTVpXzlDSVVFcjR3aEtmTDVMZ1Y2MEhUbUgwNlRrZFdWMDBCdGt1X2g3aG02ZHoxU0dpZG9CNGtNUWJCcDQ1VUdONUZMdlBOUlg4WjRhVHZMUzdQRko4VkhVMjE5dEV2Z2F1SQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": ""
+    },
+    {
       "id": "n:984847556",
       "title": "Farmácia Cidadã Estadual de Colatina será fechada dia 15 para mudança - SESA",
       "source": "news.google.com",
@@ -175,6 +183,14 @@
       "source": "news.google.com",
       "publishedAt": "Sat, 27 Dec 2025 21:23:33 GMT",
       "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxORDhCbWhYNmhscnZETHdmbkFOV0VpWWNLeXlKa1Nyb1loWnJ3bTR2WDdxcW9TVzJndnRHbGV3a09ROUt6ejBGcndDeURsX2paRDItN05Xb2tSaE9vcUxENWRnQWtuUGpHLWQxOXliT0t6YWlhYzZlQi1NWXFiTXZxdFB5dS0xMGFhTFVXLXVGOUJsUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": ""
+    },
+    {
+      "id": "n:1296286736",
+      "title": "Fiscalização em Colatina autua transporte irregular de gêneros alimentícios - Governo ES",
+      "source": "news.google.com",
+      "publishedAt": "Thu, 16 Oct 2025 07:00:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNZWxaMkktYUk2TzlEaWgxUlVnNVZyYkZyQlc5V2t2c3VFQ1NQVzFCUjVEVDJGcERuY2NsTEVGMWlDdkE5VnNTN0x0aWU4MDZFS044U0Zrd1VJZnVCWDk4bGF4Z2E5bzJab05iQVlFYnU3d0VOWkZHcTFmQU1sS3BYUGRpS1pucFlfeWhHUXVPYTg3SGR2NWt4bUg0ajY2ME1QdWJiemMxS24?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     },
     {
@@ -274,27 +290,11 @@
       "imageUrl": ""
     },
     {
-      "id": "n:1504649833",
-      "title": "MobiBrasil, no Grande Recife, e Viação Joana D’arc, em Colatina (ES), são selecionadas para renovar frota de ônibus no novo PAC - Diário do Transporte",
-      "source": "news.google.com",
-      "publishedAt": "Fri, 12 Dec 2025 08:00:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxOSTh5WEozQmpMcndMNkRBRnU2a3ZCMVpGeGpWZUZrX0o2dy1hcTBrdDdyRGViUjY2bXIySmVXR21IRzdzUDBFdEN4ODFPOFJXb2dsV2YyX1ZhbmhDa21TbFRySDFHcDNTNmxlOGcxZXUzY3RZU1lkLWU5bmRHTmhoWGZ0N2xrWDVEZUxBTk9pZGNNVktWNktSd1AybmdYTlNUTGVYWVFVS2h2aVFIYXBsSlQ2eXJ4RGxuWHJGajhpZ0JvNlljSDFpYTJkX21xVjQwM25QdXdBTWE4dzVvVEVRY1NRM3RDQlNmejJ1OVIwSWVxVzByN0FEYmVn0gH_AUFVX3lxTE1udzVDcndPdGhDMHYtZENqWW5mMUU1dk1VY00xSUhtRmpsTVFOeDhnUE9UVXoxYmlTSWNSRFUwUi1XaXludS1vN3ZvR2FfRW9naDJ0MWwxZGZveWhzMXc0cVlDLVowanlQMlpVYWtla1p4WXFyR3hLOHFhcktQV0dnVnZGaWtwLTdReDkwb2taLTdoMVQxMnhFMTYxQWY1MWZsQ0NfM3hxWTBOck9oQnpQWFpoa21VQlYtQ2VQM0xhUG0xVHhkMjFzcTFWZkV6cHJxU3FJdENEdkZKd3FyVzgzXzZVTFVnUmpSdF9KbzlYWWJ0RU5KRzFLUlNnOGR3RQ?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": ""
-    },
-    {
       "id": "n:1816158896",
       "title": "VÍDEO: motociclista é 'engolido' por buraco no ES - G1",
       "source": "news.google.com",
       "publishedAt": "Sat, 25 Oct 2025 07:00:00 GMT",
       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNTXZ3MmJDVTk4LV9vYVYzNXNqenVrV2oxX1FUYmJYRVgyOEJ3dDZiWnQtdWM0TDlQRUh6aDBUbk1WVkwwcV9EWlhXUEsyUmJ2Vmp3WGNWNERIbDlRTUpWV1ljRktFMlgyUThDOU5NaGhCOUgzNnRkWE40aTl5eWpRMllVYklCX0VDT1d2ZUtUODFkd2FmdEFqOG84NWtzN1RnS1h5RGJ4Qk9PMElUXzZ1VEJuQ1hRSlZSZVB2ZTB6cUpnbHhKbmZJ0gHWAUFVX3lxTE5jYkdoSlJYU0t1NG13QmdNMG55WmFFUUN6elg0eGJ0NFNIdmtiYjAya2o4dkxzdVFhWS1Pd2dFV19oQnoyUmRCRjNuOVcyY2VKRklQOEpNcG9HZlFnMzBYUXVieTIxbUFWS3p5LXBFUTYyLWR4NThZMTlaY2xRQTlUbGhudWlRQWEyRnItMHc2M3JmTzZjVFB3ZEprc2RWSU00QVN2SVF6SXRtYm9wU2FmamFqem1uNnlUUXB4bkVaNzlJZEtzRDRKbEl2RlFpaE9LaGRwQmc?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": ""
-    },
-    {
-      "id": "n:435440152",
-      "title": "Escola de Colatina é campeã no Torneio Brasil de Robótica - Tribuna Online",
-      "source": "news.google.com",
-      "publishedAt": "Mon, 22 Dec 2025 22:55:47 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPenJtVHg2Y0xvc2cxc0wza2JyV1VzZXJ6Wm9xb3BoQVRRTHVUSEpNMXhxQ0llbWM2bWIzWDA1R2t4UTlPVko2SzBXQUk3eVhZbG41emlLQUM0dHFBSjd1VC15R00yOHZUY1lmQ2hVbDR0OUE1TUlsZHR1TXpVbWNYdWo2SHRBd0JVWF9fZUJlR2xVNG5SVXpWOGlscS1wbTY3dldV0gGrAUFVX3lxTFBHUEYtb195d0VVMWlCV0tLRlpMRlVqcnR4dWJ3Ymx4WWZFU2VfaVBtclhrNkRDWWhYdHlfal9WUzZ5SlFyQ19lTGkzMFZtN1dVWHE5RWdfVHk1VG5rT3hMRmJ0X2xpV3NyRVVDSGNhdVp0eVl0TGdIWUdYYThtZTJPTEVrWUNaSUM0cFVLNWpEYlRtWC1NbUNMTTlrZlhWdV9wZXc5bk54Y2huVQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     },
     {
@@ -314,16 +314,16 @@
       "imageUrl": ""
     },
     {
-      "id": "n:1419110250",
-      "title": "Denarc realiza operação contra o tráfico de drogas em Colatina - PCES",
+      "id": "n:435440152",
+      "title": "Escola de Colatina é campeã no Torneio Brasil de Robótica - Tribuna Online",
       "source": "news.google.com",
-      "publishedAt": "Fri, 28 Nov 2025 08:00:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPY0JMclJkaW1oaERCVXFoV01ZdXA0dGRfbmxqUGxCSWppcTVqRXc0aldvQVRDSnpOclF1dFVTZjk4eHZlVVhEUEFlbFR5el9PS2JkVlhvVDdkOVpkNTdEWEFva3A3UnQ0WlZKci1NakNhNFBYNld0czExc3Q2eXdHUWFfNEthbFlEX0RVMkpFSDJYa05ud0lPREtOaUk?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Mon, 22 Dec 2025 22:55:47 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPenJtVHg2Y0xvc2cxc0wza2JyV1VzZXJ6Wm9xb3BoQVRRTHVUSEpNMXhxQ0llbWM2bWIzWDA1R2t4UTlPVko2SzBXQUk3eVhZbG41emlLQUM0dHFBSjd1VC15R00yOHZUY1lmQ2hVbDR0OUE1TUlsZHR1TXpVbWNYdWo2SHRBd0JVWF9fZUJlR2xVNG5SVXpWOGlscS1wbTY3dldV0gGrAUFVX3lxTFBHUEYtb195d0VVMWlCV0tLRlpMRlVqcnR4dWJ3Ymx4WWZFU2VfaVBtclhrNkRDWWhYdHlfal9WUzZ5SlFyQ19lTGkzMFZtN1dVWHE5RWdfVHk1VG5rT3hMRmJ0X2xpV3NyRVVDSGNhdVp0eVl0TGdIWUdYYThtZTJPTEVrWUNaSUM0cFVLNWpEYlRtWC1NbUNMTTlrZlhWdV9wZXc5bk54Y2huVQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": ""
     }
   ],
   "stats": {
-    "discovered": 348,
+    "discovered": 351,
     "produced": 40,
     "blocked_titles": 1,
     "enrich_failed": 0,
