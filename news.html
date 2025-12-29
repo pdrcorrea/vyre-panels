@@ -1,76 +1,64 @@
+<!-- ===== news.html (SUBSTITUA INTEIRO) ===== -->
 <!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PontoView • Notícias</title>
-  <link rel="stylesheet" href="./pv.css">
+  <title>Vyre • Notícias</title>
+  <link rel="stylesheet" href="./vyre-light.css">
 </head>
 <body>
-  <div class="app">
-    <div class="header">
-      <div class="brand">
-        <div class="logo">PV</div>
-        <div>
-          <h1>Notícias locais</h1>
-          <p>Layout TV • imagem + manchete + fonte</p>
+  <div class="page">
+    <div class="card">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brandIcon" aria-hidden="true">🗞️</div>
+          <div class="brandText">
+            <h1>Notícias</h1>
+            <div class="sub">COLATINA • ES</div>
+          </div>
+        </div>
+
+        <div class="clockBox">
+          <div class="clockNow" id="clockNow">--:--</div>
+          <div class="clockMeta">ATUALIZADO • <span id="clockUpd">--:--</span></div>
         </div>
       </div>
 
-      <div class="status">
-        <div class="pill"><span class="dot" id="netDot"></span><span id="netText">Online</span></div>
-        <div class="pill"><span id="clockNow">--:--</span></div>
-        <div class="pill">Troca: <span id="rot">20</span>s</div>
+      <div class="strip">
+        <div class="stripLeft">MANCHETE ATUAL</div>
+        <div class="stripRight">FONTE • WEB</div>
       </div>
-    </div>
 
-    <div class="main">
-      <div class="card" style="padding:18px;">
-        <div class="cardTop" style="padding:4px 4px 10px 4px;">
-          <div class="tag"><span class="icon">📰</span><span>Notícia</span></div>
-          <div class="pill" id="hint">Leve • útil • sem sensacionalismo</div>
-        </div>
-
-        <div class="newsGrid fadeIn" id="content">
-          <!-- ESQUERDA: IMAGEM -->
-          <div class="newsLeft">
-            <div class="newsMedia">
+      <div class="main">
+        <div class="grid2 fadeIn" id="content">
+          <div class="panel">
+            <div class="media">
               <img id="newsImg" alt="" style="display:none;">
-              <div class="newsMediaEmpty" id="newsImgEmpty">
-                <div>
-                  <div style="font-size:44px; margin-bottom:10px;">🗞️</div>
-                  <div>Sem imagem para esta notícia</div>
-                </div>
+              <div class="mediaEmpty" id="newsEmpty">
+                <div class="big">🗞️</div>
+                <div>Sem imagem disponível</div>
               </div>
             </div>
           </div>
 
-          <!-- DIREITA: TEXTO -->
-          <div class="newsRight">
-            <div>
-              <div class="newsHeadline" id="headline">Carregando…</div>
-            </div>
+          <div class="panel">
+            <div class="textBox">
+              <div class="headline" id="headline">Carregando…</div>
 
-            <div class="newsMeta">
-              <div class="metaChip" id="sourceChip">Fonte: —</div>
-              <div class="metaChip" id="timeChip">Publicado: —</div>
-              <div class="metaChip" id="countChip">Itens: —</div>
+              <div class="metaRow">
+                <div class="chip" id="sourceChip">Fonte: —</div>
+                <div class="chip" id="dateChip">Publicado: —</div>
+                <div class="chip" id="countChip">Itens: —</div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- TICKER -->
-        <div class="ticker" aria-label="Ticker de manchetes">
-          <div class="tickerLabel"><span style="font-size:20px;">🟦</span>DESTAQUES</div>
-          <div class="tickerTrack">
-            <div class="tickerText" id="tickerText">Carregando manchetes…</div>
-          </div>
-        </div>
-
-        <div class="footer" style="margin-top:14px;">
-          <div>PontoView • Vyre</div>
-          <div id="footerRight">Atualizado: —</div>
-        </div>
+      <div class="footer">
+        <div>PontoView • Vyre</div>
+        <div id="footerRight">Atualizado: —</div>
       </div>
     </div>
   </div>
@@ -78,23 +66,11 @@
 <script>
 (() => {
   const ROTATE_SECONDS = 20;
-  document.getElementById("rot").textContent = ROTATE_SECONDS;
-
   const $ = (id)=>document.getElementById(id);
 
-  function updateClock(){
-    $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+  function hhmm(d=new Date()){
+    return d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
   }
-  setInterval(updateClock, 1000); updateClock();
-
-  function setNetUI(online){
-    $("netDot").classList.toggle("off", !online);
-    $("netText").textContent = online ? "Online" : "Offline";
-  }
-  setNetUI(navigator.onLine);
-  addEventListener("online",()=>setNetUI(true));
-  addEventListener("offline",()=>setNetUI(false));
-
   function fmtDateTime(d){
     try{
       const dt = new Date(d);
@@ -102,9 +78,14 @@
     }catch{return "—";}
   }
 
-  const STORAGE_LAST = "pv_news_last_id_tv_v1";
-  function getLastId(){ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} }
-  function setLastId(id){ try{return localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
+  function updateClock(){
+    $("clockNow").textContent = hhmm();
+  }
+  setInterval(updateClock, 1000); updateClock();
+
+  const STORAGE_LAST = "pv_news_last_id_light_v1";
+  const getLastId = ()=>{ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} };
+  const setLastId = (id)=>{ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} };
 
   function pickNext(items){
     if(!items || !items.length) return null;
@@ -115,42 +96,26 @@
 
   function setImage(url){
     const img = $("newsImg");
-    const empty = $("newsImgEmpty");
+    const empty = $("newsEmpty");
     if(url){
       img.src = url;
       img.style.display = "block";
       empty.style.display = "none";
-    } else {
+    }else{
       img.removeAttribute("src");
       img.style.display = "none";
       empty.style.display = "grid";
     }
   }
 
-  function buildTicker(items){
-    if(!items || !items.length) return "Sem manchetes no momento •";
-    // pega até 8 títulos e junta
-    const titles = items.slice(0, 8).map(x => x.title).filter(Boolean);
-    return (titles.join("  •  ") + "  •  ");
-  }
-
-  function restartTicker(text){
-    const el = $("tickerText");
-    el.style.animation = "none";
-    el.textContent = text;
-    // reflow
-    void el.offsetWidth;
-    el.style.animation = "";
-  }
-
   function renderFallback(generatedAt){
     setImage("");
     $("headline").textContent = "Sem notícias no momento";
     $("sourceChip").textContent = "Fonte: —";
-    $("timeChip").textContent = "Publicado: —";
+    $("dateChip").textContent = "Publicado: —";
     $("countChip").textContent = "Itens: 0";
+    $("clockUpd").textContent = hhmm();
     $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt || new Date().toISOString());
-    restartTicker("Sem manchetes no momento •");
   }
 
   function renderItem(item, pack){
@@ -165,12 +130,12 @@
     setImage(item.imageUrl || "");
     $("headline").textContent = item.title || "Notícia";
     $("sourceChip").textContent = "Fonte: " + (item.source || "—");
-    $("timeChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
+    $("dateChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
     $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
+    $("clockUpd").textContent = hhmm();
     $("footerRight").textContent = "Atualizado: " + fmtDateTime(pack.generatedAt);
 
     setLastId(item.id || "");
-    restartTicker(buildTicker(pack.items));
   }
 
   async function fetchWithTimeout(url, ms){
@@ -180,9 +145,7 @@
       const res = await fetch(url, { cache:"no-store", signal: ctrl.signal });
       if(!res.ok) throw new Error("HTTP " + res.status);
       return await res.json();
-    } finally {
-      clearTimeout(t);
-    }
+    } finally { clearTimeout(t); }
   }
 
   async function loadNews(){
@@ -196,8 +159,7 @@
   async function cycle(){
     try{
       const pack = await loadNews();
-      const item = pickNext(pack.items);
-      renderItem(item, pack);
+      renderItem(pickNext(pack.items), pack);
     }catch{
       renderFallback(new Date().toISOString());
     }
@@ -205,10 +167,6 @@
 
   cycle();
   setInterval(cycle, ROTATE_SECONDS * 1000);
-
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js").catch(()=>{});
-  }
 })();
 </script>
 </body>
