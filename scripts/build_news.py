@@ -11,16 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES_PATH = ROOT / "data" / "news_sources.json"
 OUT_PATH = ROOT / "data" / "news.json"
 
-# Filtro “soft”
 BLOCKLIST = [
     "morte","morto","assassin","homic","crime","violên","tirote","trág","trag",
     "estupro","roubo","furto","sequestro","corpo",
     "política","eleição","partido","corrup","escând",
     "acidente grave","desastre","catástro","explos"
 ]
-
-# Preferência (utilidade pública)
-PREFER = ["evento","aviso","mutirão","vacinação","saúde","trânsito","obra","feira","cultura","educação","serviço","atendimento"]
 
 def now_iso():
     return datetime.now(timezone.utc).isoformat()
@@ -34,50 +30,39 @@ def is_blocked(title: str, summary: str) -> bool:
     hay = (title + " " + summary).lower()
     return any(w in hay for w in BLOCKLIST)
 
-def score_prefer(title: str, summary: str) -> int:
-    hay = (title + " " + summary).lower()
-    return sum(1 for w in PREFER if w in hay)
-
 def fetch(url: str) -> str:
     req = Request(url, headers={"User-Agent": "PontoViewBot/1.0 (GitHub Actions)"})
     with urlopen(req, timeout=30) as r:
         return r.read().decode("utf-8", errors="ignore")
 
 def dt_to_iso(entry) -> str:
-    # feedparser pode retornar published_parsed/updated_parsed (struct_time)
     for k in ("published_parsed", "updated_parsed"):
-        if getattr(entry, k, None):
+        v = getattr(entry, k, None)
+        if v:
             try:
-                return datetime(*getattr(entry, k)[:6], tzinfo=timezone.utc).isoformat()
+                return datetime(*v[:6], tzinfo=timezone.utc).isoformat()
             except Exception:
                 pass
-    # fallback: strings
     for k in ("published", "updated"):
         v = entry.get(k)
         if v:
-            return v
+            return str(v)
     return ""
 
 def parse_feed(content: str, source_name: str):
     fp = feedparser.parse(content)
     items = []
-
     for e in fp.entries:
         title = strip_html(e.get("title", "")).strip()
         link = (e.get("link") or "").strip()
-
-        summary = e.get("summary", "") or e.get("description", "") or ""
-        summary = strip_html(summary)
+        summary = strip_html(e.get("summary", "") or e.get("description", "") or "")
 
         if not title:
             continue
         if is_blocked(title, summary):
             continue
 
-        short = summary[:220].rstrip()
-        if len(summary) > 220:
-            short += "…"
-
+        short = summary[:220].rstrip() + ("…" if len(summary) > 220 else "")
         published_at = dt_to_iso(e)
 
         stable = (link or title).encode("utf-8", errors="ignore")
@@ -91,51 +76,46 @@ def parse_feed(content: str, source_name: str):
             "publishedAt": published_at,
             "url": link
         })
-
     return items
 
 def main():
     if not SOURCES_PATH.exists():
-        print("Missing data/news_sources.json", file=sys.stderr)
-        sys.exit(1)
+        OUT_PATH.write_text(json.dumps({"generatedAt": now_iso(), "items": [], "stats": {"error":"missing data/news_sources.json"}}, ensure_ascii=False, indent=2), encoding="utf-8")
+        sys.exit(0)
 
-    src_cfg = json.loads(SOURCES_PATH.read_text(encoding="utf-8"))
-    sources = src_cfg.get("sources", [])
+    cfg = json.loads(SOURCES_PATH.read_text(encoding="utf-8"))
+    sources = cfg.get("sources", [])
 
     all_items = []
-    failures = 0
+    per_source = []
+    failures = []
 
     for s in sources:
         name = s.get("name", "Fonte")
         rss = s.get("rss")
         if not rss:
+            failures.append({"source": name, "error": "missing rss url"})
             continue
         try:
             content = fetch(rss)
-            all_items.extend(parse_feed(content, name))
+            items = parse_feed(content, name)
+            per_source.append({"source": name, "count": len(items)})
+            all_items.extend(items)
         except Exception as e:
-            failures += 1
-            print(f"[warn] failed {name}: {e}", file=sys.stderr)
-
-    def sort_key(it):
-        score = score_prefer(it.get("title",""), it.get("summary",""))
-        pub = it.get("publishedAt") or ""
-        return (-score, pub)
-
-    all_items.sort(key=sort_key)
+            failures.append({"source": name, "rss": rss, "error": str(e)})
 
     payload = {
         "generatedAt": now_iso(),
         "items": all_items[:80],
         "stats": {
             "sources": len(sources),
-            "failures": failures,
-            "items": len(all_items)
+            "items_before_limit": len(all_items),
+            "per_source": per_source,
+            "failures": failures
         }
     }
-
     OUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Wrote {OUT_PATH} with {len(payload['items'])} items (sources={len(sources)} failures={failures})")
+    print(f"Wrote {OUT_PATH} with {len(payload['items'])} items")
 
 if __name__ == "__main__":
     main()
