@@ -13,9 +13,10 @@
         <div class="logo">PV</div>
         <div>
           <h1>Notícias locais</h1>
-          <p>Imagem + manchete + fonte • atualização automática</p>
+          <p>Manchetes leves e úteis • com imagem quando disponível</p>
         </div>
       </div>
+
       <div class="status">
         <div class="pill"><span class="dot" id="netDot"></span><span id="netText">Online</span></div>
         <div class="pill"><span id="clockNow">--:--</span></div>
@@ -26,14 +27,33 @@
     <div class="main">
       <div class="card">
         <div class="cardTop">
-          <div class="tag"><span class="icon">📰</span><span>Notícia</span></div>
-          <div class="pill" id="hint">Leve • útil • sem sensacionalismo</div>
+          <div class="tag">
+            <span class="icon">📰</span>
+            <span>Notícia</span>
+          </div>
+          <div class="pill" id="hint">Fonte visível • sem sensacionalismo</div>
         </div>
 
         <div class="content fadeIn" id="content">
-          <img id="newsImg" alt="" style="width:100%; max-height:48vh; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,.10); display:none;">
+          <!-- Imagem opcional -->
+          <img
+            id="newsImg"
+            alt=""
+            style="
+              width:100%;
+              max-height:46vh;
+              object-fit:cover;
+              border-radius:14px;
+              border:1px solid rgba(255,255,255,.10);
+              display:none;
+            "
+          >
+
+          <!-- Manchete (SEM corte) -->
           <div class="headline" id="headline">Carregando…</div>
-          <div class="summary" id="summary">Aguarde.</div>
+
+          <!-- Resumo (se existir no JSON) -->
+          <div class="summary" id="summary" style="display:none;"></div>
 
           <div class="metaRow" id="metaRow">
             <div class="metaChip" id="sourceChip">Fonte: —</div>
@@ -50,17 +70,19 @@
   </div>
 
 <script>
-(function(){
+(() => {
   const ROTATE_SECONDS = 20;
   document.getElementById("rot").textContent = ROTATE_SECONDS;
 
   const $ = (id)=>document.getElementById(id);
 
+  // relógio
   function updateClock(){
     $("clockNow").textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
   }
   setInterval(updateClock, 1000); updateClock();
 
+  // status online/offline
   function setNetUI(online){
     $("netDot").classList.toggle("off", !online);
     $("netText").textContent = online ? "Online" : "Offline";
@@ -75,27 +97,25 @@
       return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
     }catch{return "—";}
   }
-  function clampText(txt,max){
-    if(!txt) return "";
-    const s = String(txt).replace(/\s+/g," ").trim();
-    return s.length>max ? s.slice(0,max-1)+"…" : s;
-  }
 
-  const STORAGE_LAST = "pv_news_last_id_v2";
+  const STORAGE_LAST = "pv_news_last_id_v3";
 
   function getLastId(){ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} }
-  function setLastId(id){ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
+  function setLastId(id){ try{return localStorage.setItem(STORAGE_LAST, id||"")}catch{} }
 
-  function renderError(message){
+  function renderFallback(message, generatedAt){
     const img = $("newsImg");
     img.style.display = "none";
     img.removeAttribute("src");
 
-    $("headline").textContent = "Sem notícias";
-    $("summary").textContent = message || "Não foi possível carregar data/news.json.";
+    $("headline").textContent = "Sem notícias no momento";
+    const summaryEl = $("summary");
+    summaryEl.style.display = "block";
+    summaryEl.textContent = message || "Confira novamente em instantes.";
+
     $("sourceChip").textContent = "Fonte: —";
     $("timeChip").textContent = "Publicado: —";
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(new Date().toISOString());
+    $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt || new Date().toISOString());
   }
 
   function pickNext(items){
@@ -110,24 +130,33 @@
     c.classList.remove("fadeIn"); void c.offsetWidth; c.classList.add("fadeIn");
 
     if(!item){
-      renderError("O arquivo data/news.json existe, mas veio vazio (items[]).");
-      $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt);
+      renderFallback("O arquivo data/news.json veio vazio (items[]).", generatedAt);
       return;
     }
 
+    // imagem opcional
     const img = $("newsImg");
-    const imgUrl = item.imageUrl || "";
-
-    if(imgUrl){
-      img.src = imgUrl;
+    if(item.imageUrl){
+      img.src = item.imageUrl;
       img.style.display = "block";
     } else {
-      img.removeAttribute("src");
       img.style.display = "none";
+      img.removeAttribute("src");
     }
 
-    $("headline").textContent = clampText(item.title, 90);
-    $("summary").textContent = clampText(item.summary || "", 170); // se summary não existir, fica só manchete
+    // manchete COMPLETA (sem clamp)
+    $("headline").textContent = item.title || "Notícia";
+
+    // resumo opcional (se você quiser usar no futuro)
+    const summaryEl = $("summary");
+    if(item.summary && String(item.summary).trim()){
+      summaryEl.style.display = "block";
+      summaryEl.textContent = String(item.summary).trim();
+    } else {
+      summaryEl.style.display = "none";
+      summaryEl.textContent = "";
+    }
+
     $("sourceChip").textContent = "Fonte: " + (item.source || "—");
     $("timeChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
     $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt);
@@ -148,12 +177,11 @@
   }
 
   async function loadNews(){
-    // cache-bust sempre (evita SW/cache preso)
-    const url = "./data/news.json?v=" + Date.now();
+    const url = "./data/news.json?v=" + Date.now(); // evita cache preso
     const data = await fetchWithTimeout(url, 12000);
 
     const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
-    const generatedAt = (data && data.generatedAt) ? data.generatedAt : new Date().toISOString();
+    const generatedAt = data?.generatedAt ? data.generatedAt : new Date().toISOString();
 
     return { items, generatedAt };
   }
@@ -161,19 +189,16 @@
   async function cycle(){
     try{
       const pack = await loadNews();
-      const next = pickNext(pack.items);
-      renderItem(next, pack.generatedAt);
-    } catch(e){
-      renderError("Falha ao carregar notícias. Verifique se data/news.json está válido e publicado.");
+      renderItem(pickNext(pack.items), pack.generatedAt);
+    } catch {
+      renderFallback("Falha ao carregar notícias. Verifique se data/news.json está publicado.", new Date().toISOString());
     }
   }
 
-  // primeira renderização
   cycle();
-  // rotações
   setInterval(cycle, ROTATE_SECONDS * 1000);
 
-  // ✅ Importante: registre o SW, mas ele não deve impedir a página de rodar
+  // mantém offline (se você quiser)
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(()=>{});
   }
