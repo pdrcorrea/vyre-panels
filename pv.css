@@ -54,7 +54,7 @@ body{
 }
 .icon{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);}
 .content{margin-top:18px; display:flex; flex-direction:column; gap:14px; min-height:0;}
-.headline{font-size:40px; line-height:1.06; font-weight:900; letter-spacing:-.4px;}
+.headline{font-size: clamp(28px, 4.2vw, 44px); line-height: 1.14; font-weight: 900; letter-spacing: -0.3px; overflow-wrap: break-word;}
 .summary{font-size:20px; line-height:1.45; color:var(--muted); max-width:1100px;}
 .metaRow{margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; color:var(--muted2); font-size:14px;}
 .metaChip{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.04);}
