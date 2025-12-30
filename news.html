@@ -59,7 +59,6 @@
 
         <div class="pvFooter"></div>
         <script src="./pv-footer.js"></script>
-        <div id="footerRight">Atualizado: —</div>
       </div>
     </div>
   </div>
@@ -115,9 +114,7 @@
     $("sourceChip").textContent = "Fonte: —";
     $("dateChip").textContent = "Publicado: —";
     $("scopeChip").textContent = "Tipo: —";
-    $("countChip").textContent = "Itens: 0";
     $("clockUpd").textContent = hhmm();
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt || new Date().toISOString());
   }
 
   function renderItem(item, pack){
