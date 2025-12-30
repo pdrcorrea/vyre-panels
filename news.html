@@ -49,6 +49,7 @@
               <div class="metaRow">
                 <div class="chip" id="sourceChip">Fonte: —</div>
                 <div class="chip" id="dateChip">Publicado: —</div>
+                 <div class="chip" id="scopeChip">Tipo: —</div>
                 <div class="chip" id="countChip">Itens: —</div>
               </div>
             </div>
@@ -113,6 +114,7 @@
     $("headline").textContent = "Sem notícias no momento";
     $("sourceChip").textContent = "Fonte: —";
     $("dateChip").textContent = "Publicado: —";
+    $("scopeChip").textContent = "Tipo: —";
     $("countChip").textContent = "Itens: 0";
     $("clockUpd").textContent = hhmm();
     $("footerRight").textContent = "Atualizado: " + fmtDateTime(generatedAt || new Date().toISOString());
@@ -131,6 +133,7 @@
     $("headline").textContent = item.title || "Notícia";
     $("sourceChip").textContent = "Fonte: " + (item.source || "—");
     $("dateChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
+    $("scopeChip").textContent = "Tipo: " + (item.scope === "local" ? "Local" : item.scope === "state" ? "Estadual" : "Nacional");
     $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
     $("clockUpd").textContent = hhmm();
     $("footerRight").textContent = "Atualizado: " + fmtDateTime(pack.generatedAt);
