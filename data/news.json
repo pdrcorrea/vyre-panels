@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-30T22:41:35.232Z",
+  "generatedAt": "2025-12-30T23:33:48.849Z",
   "items": [
     {
       "title": {
@@ -75,20 +75,38 @@
     },
     {
       "title": {
-        "title": "Marinha emite alerta de ressaca para o litoral do Rio no réveillon | Agência Brasil",
+        "title": "Mais de 71 mil mulheres foram vítimas de violência no RJ em 2025 | Agência Brasil",
         "image": "og:title,twitter:title"
       },
-      "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-12/marinha-emite-alerta-de-ressaca-para-o-litoral-do-rio-no-reveillon",
+      "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2025-12/mais-de-71-mil-mulheres-foram-vitimas-de-violencia-no-rj-em-2025",
       "image": {
-        "title": "Marinha emite alerta de ressaca para o litoral do Rio no réveillon | Agência Brasil",
+        "title": "Mais de 71 mil mulheres foram vítimas de violência no RJ em 2025 | Agência Brasil",
         "image": "og:image,twitter:image,twitter:image:src"
       },
       "source": {
-        "title": "Marinha emite alerta de ressaca para o litoral do Rio no réveillon | Agência Brasil",
+        "title": "Mais de 71 mil mulheres foram vítimas de violência no RJ em 2025 | Agência Brasil",
         "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Governo ES - Setur inicia pesquisa de perfil do turista para a temporada 2026",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/setur-inicia-pesquisa-de-perfil-do-turista-para-a-temporada-2026",
+      "image": {
+        "title": "Governo ES - Setur inicia pesquisa de perfil do turista para a temporada 2026",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Setur inicia pesquisa de perfil do turista para a temporada 2026",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
       "city": null
     },
     {
@@ -103,24 +121,6 @@
       },
       "source": {
         "title": "Governo ES - Ato Conjunto da Receita Federal e Comitê Gestor do IBS define obrigações acessórias para IBS e CBS em 2026",
-        "image": "og:site_name"
-      },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": {
-        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
-        "image": "og:title,twitter:title"
-      },
-      "url": "https://www.es.gov.br/Noticia/editais-da-cultura-2025-inscricoes-abertas",
-      "image": {
-        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
-        "image": "og:image,twitter:image,twitter:image:src"
-      },
-      "source": {
-        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
         "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
@@ -147,6 +147,24 @@
     },
     {
       "title": {
+        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/editais-da-cultura-2025-inscricoes-abertas",
+      "image": {
+        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": {
         "title": "Governo ES - SEDH divulga resultado final do Edital Juventudes",
         "image": "og:title,twitter:title"
       },
@@ -165,6 +183,24 @@
     },
     {
       "title": {
+        "title": "Marinha emite alerta de ressaca para o litoral do Rio no réveillon | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-12/marinha-emite-alerta-de-ressaca-para-o-litoral-do-rio-no-reveillon",
+      "image": {
+        "title": "Marinha emite alerta de ressaca para o litoral do Rio no réveillon | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Marinha emite alerta de ressaca para o litoral do Rio no réveillon | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": {
         "title": "Governo ES - Transcol terá programação especial de ônibus para Réveillon",
         "image": "og:title,twitter:title"
       },
@@ -175,6 +211,24 @@
       },
       "source": {
         "title": "Governo ES - Transcol terá programação especial de ônibus para Réveillon",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/governo-do-estado-segue-investindo-para-tornar-cidades-resistentes-aos-efeitos-do-clima",
+      "image": {
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
         "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
@@ -201,24 +255,6 @@
     },
     {
       "title": {
-        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
-        "image": "og:title,twitter:title"
-      },
-      "url": "https://www.es.gov.br/Noticia/governo-do-estado-segue-investindo-para-tornar-cidades-resistentes-aos-efeitos-do-clima",
-      "image": {
-        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
-        "image": "og:image,twitter:image,twitter:image:src"
-      },
-      "source": {
-        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
-        "image": "og:site_name"
-      },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": {
         "title": "Governo ES - Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
         "image": "og:title,twitter:title"
       },
@@ -237,24 +273,6 @@
     },
     {
       "title": {
-        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
-        "image": "og:title,twitter:title"
-      },
-      "url": "https://agenciabrasil.ebc.com.br/concursos/noticia/2025-12/camara-publica-edital-de-concurso-publico-com-inscricoes-em-janeiro",
-      "image": {
-        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
-        "image": "og:image,twitter:image,twitter:image:src"
-      },
-      "source": {
-        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
-        "image": "og:site_name"
-      },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "national",
-      "city": null
-    },
-    {
-      "title": {
         "title": "Número de homicídios, estupros e latrocínios diminui em São Paulo | Agência Brasil",
         "image": "og:title,twitter:title"
       },
@@ -265,6 +283,24 @@
       },
       "source": {
         "title": "Número de homicídios, estupros e latrocínios diminui em São Paulo | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://agenciabrasil.ebc.com.br/concursos/noticia/2025-12/camara-publica-edital-de-concurso-publico-com-inscricoes-em-janeiro",
+      "image": {
+        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
         "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
@@ -342,31 +378,13 @@
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
-    },
-    {
-      "title": {
-        "title": "São Silvestre 2025 tem número recorde de participação de mulheres | Agência Brasil",
-        "image": "og:title,twitter:title"
-      },
-      "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2025-12/sao-silvestre-2025-tem-numero-recorde-de-participacao-de-mulheres",
-      "image": {
-        "title": "São Silvestre 2025 tem número recorde de participação de mulheres | Agência Brasil",
-        "image": "og:image,twitter:image,twitter:image:src"
-      },
-      "source": {
-        "title": "São Silvestre 2025 tem número recorde de participação de mulheres | Agência Brasil",
-        "image": "og:site_name"
-      },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "national",
-      "city": null
     }
   ],
   "stats": {
     "local": 0,
     "state": 0,
     "national": 0,
-    "final": 20,
+    "final": 21,
     "maxAgeDays": 3
   }
 }
