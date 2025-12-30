@@ -1,5 +1,14 @@
 [
-  { "id":"t1", "title":"Hidratação", "text":"Beba água ao longo do dia. Pequenos goles frequentes ajudam mais do que lembrar tudo de uma vez." },
-  { "id":"t2", "title":"Postura", "text":"Apoie os pés no chão e relaxe os ombros. Uma postura simples reduz tensão no pescoço." },
-  { "id":"t3", "title":"Respiração", "text":"Inspire por 4 segundos e expire por 6. Repita 3 vezes para acalmar o corpo." }
+  { 
+    "id":"t1", 
+    "title":"Hidratação", 
+    "text":"Beba água ao longo do dia.",
+    "imageUrl": "https://images.unsplash.com/photo-1548839140-29a749e1cf3d?w=800"
+  },
+  { 
+    "id":"t2", 
+    "title":"Postura", 
+    "text":"Apoie os pés no chão.",
+    "imageUrl": "https://images.unsplash.com/photo-1552699611-e2c2a4701711?w=800"
+  }
 ]
