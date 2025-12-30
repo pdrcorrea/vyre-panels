@@ -21,31 +21,32 @@ function pickTag(xml, tag){
   return m ? clean(m[1].replace(/<!\\[CDATA\\[|\\]\\]>/g,"").replace(/<[^>]+>/g,"")) : "";
 }
 
-function pickAllItems(xml){
+// No seu build_tips.mjs e build_campaigns.mjs, altere a função pickAllItems:
+function pickAllItems(xml) {
   const items = [];
   const re = /<item[\s\S]*?>[\s\S]*?<\/item>/gi;
   const list = xml.match(re) || [];
-  for(const it of list){
+
+  for (const it of list) {
     const title = pickTag(it, "title");
-    const link  = pickTag(it, "link");
-    const pub   = pickTag(it, "pubDate") || pickTag(it, "dc:date");
-    const desc  = pickTag(it, "description");
-    // tenta imagem
-    let img = "";
-    const m1 = it.match(/<media:content[^>]+url="([^"]+)"/i);
-    const m2 = it.match(/<enclosure[^>]+url="([^"]+)"/i);
-    const m3 = it.match(/<img[^>]+src="([^"]+)"/i);
-    img = (m1?.[1] || m2?.[1] || m3?.[1] || "").trim();
+    const link = pickTag(it, "link");
+    const desc = pickTag(it, "description");
+    const pub = pickTag(it, "pubDate");
+
+    // Tenta encontrar uma imagem dentro da descrição (comum no RSS do governo)
+    const imgInDesc = it.match(/src=["']([^"']+\.(?:jpg|jpeg|png|webp)[^"']*)["']/i);
+    const imgEnclosure = it.match(/<enclosure[^>]+url=["']([^"']+)["']/i);
+    
+    const img = imgEnclosure ? imgEnclosure[1] : (imgInDesc ? imgInDesc[1] : null);
 
     items.push({
-      id: clean(link || title),
+      id: Buffer.from(link || title).toString('base64').substring(0, 16),
       title,
-      summary: desc,
-      link,
+      text: desc.substring(0, 200) + "...", // Garante que o texto vai para o campo 'text' que o seu HTML usa
+      url: link,
       publishedAt: pub ? new Date(pub).toISOString() : null,
-      imageUrl: img || null,
-      source: SOURCE_NAME,
-      sourceLogoUrl: SOURCE_LOGO,
+      imageUrl: img, 
+      source: SOURCE_NAME
     });
   }
   return items;
