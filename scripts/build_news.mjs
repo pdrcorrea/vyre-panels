@@ -1,3 +1,4 @@
+// scripts/build_news.mjs — com fallback remoto
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -7,10 +8,12 @@ const OUT_FILE = path.join(OUT_DIR, "news.json");
 const IMG_DIR = path.join(OUT_DIR, "news-images");
 
 const MAX_AGE_DAYS = 3;
-const MAX_ITEMS_TOTAL = 30;      // total final (com imagem salva)
-const MAX_PER_SOURCE = 12;       // coleta por fonte
-const FETCH_TIMEOUT_MS = 20000;
-const MAX_IMAGE_BYTES = 1_600_000; // ~1.6MB por imagem (seguro p/ Pages)
+const MAX_ITEMS_TOTAL = 30;
+const MAX_PER_SOURCE = 12;
+const FETCH_TIMEOUT_MS = 25000;
+
+// ⬆️ Aumentei o limite. Muitas imagens editoriais passam de 1.6MB.
+const MAX_IMAGE_BYTES = 6_000_000; // 6MB
 
 const SOURCES = {
   local: [
@@ -48,11 +51,9 @@ function domainOf(u) {
   try { return new URL(u).hostname.replace(/^www\./, ""); }
   catch { return ""; }
 }
-
 function faviconUrlForDomain(domain) {
   return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
 }
-
 function hashId(input) {
   return crypto.createHash("sha1").update(input).digest("hex").slice(0, 10);
 }
@@ -63,7 +64,7 @@ async function fetchText(url) {
   try {
     const res = await fetch(url, {
       headers: {
-        "user-agent": "PontoView-VyreBot/2.0 (+github-actions)",
+        "user-agent": "PontoView-VyreBot/2.1 (+github-actions)",
         "accept": "text/html,application/xhtml+xml"
       },
       redirect: "follow",
@@ -79,7 +80,6 @@ function pickMeta(html, keys) {
     const r1 = new RegExp(`<meta[^>]+(?:name|property)=["']${escapeReg(key)}["'][^>]+content=["']([^"']+)["']`, "i");
     const m1 = html.match(r1);
     if (m1?.[1]) return clampStr(decodeHtml(m1[1]));
-
     const r2 = new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+(?:name|property)=["']${escapeReg(key)}["']`, "i");
     const m2 = html.match(r2);
     if (m2?.[1]) return clampStr(decodeHtml(m2[1]));
@@ -88,8 +88,9 @@ function pickMeta(html, keys) {
 }
 
 function parseAnyDate(html) {
-  const iso =
-    pickMeta(html, ["article:published_time", "og:updated_time", "date", "dc.date", "DC.date.issued", "pubdate", "publish-date", "parsely-pub-date"]) || "";
+  const iso = pickMeta(html, [
+    "article:published_time","og:updated_time","date","dc.date","DC.date.issued","pubdate","publish-date","parsely-pub-date"
+  ]) || "";
   const ts = iso ? Date.parse(iso) : NaN;
   if (!Number.isNaN(ts)) return new Date(ts);
 
@@ -107,7 +108,6 @@ function parseAnyDate(html) {
     const [hh, min] = m3[2].split(":").map(Number);
     return new Date(Date.UTC(yyyy, mm - 1, dd, hh, min, 0));
   }
-
   return null;
 }
 
@@ -127,7 +127,6 @@ function looksLikeArticle(url) {
   if (/\.(pdf|jpg|jpeg|png|webp|svg|css|js)(\?|$)/i.test(url)) return false;
   return true;
 }
-
 function scoreCandidate(url) {
   let s = 0;
   if (/noticia|noticias|imprensa|agencia|conteudo|\/Noticia\/|\/Noticias\/|\/noticia\//i.test(url)) s += 3;
@@ -135,38 +134,23 @@ function scoreCandidate(url) {
   if (url.length > 40) s += 1;
   return s;
 }
-
 function pickTopCandidates(listUrl, html) {
   const all = extractLinks(html, listUrl).filter(looksLikeArticle);
   const d = domainOf(listUrl);
   const same = all.filter((u) => domainOf(u) === d);
 
-  const ranked = same
-    .map((u) => ({ u, s: scoreCandidate(u) }))
-    .sort((a, b) => b.s - a.s)
-    .map((x) => x.u);
+  const ranked = same.map(u => ({u, s: scoreCandidate(u)}))
+    .sort((a,b)=>b.s-a.s).map(x=>x.u);
 
-  const cleaned = ranked.filter((u) => u !== listUrl && !/page\/\d+\/?$|\/pagina\/\d+\/?$/i.test(u));
-  return cleaned.slice(0, MAX_PER_SOURCE);
+  return ranked.filter(u => u !== listUrl).slice(0, MAX_PER_SOURCE);
 }
 
 function normalizeImageUrl(img, articleUrl) {
   if (!img) return "";
   let u = img.trim();
-
-  // //cdn...
-  if (u.startsWith("//")) {
-    u = "https:" + u;
-  }
-
-  // relativo
-  try {
-    u = new URL(u, articleUrl).toString();
-  } catch {}
-
-  // evita mixed content no Pages
-  if (u.startsWith("http://")) u = u.replace("http://", "https://");
-
+  if (u.startsWith("//")) u = "https:" + u;
+  try { u = new URL(u, articleUrl).toString(); } catch {}
+  if (u.startsWith("http://")) u = u.replace("http://","https://");
   return u;
 }
 
@@ -178,17 +162,26 @@ function extFromContentType(ct) {
   if (s.includes("image/gif")) return "gif";
   return "";
 }
+function guessExtFromUrl(u) {
+  try {
+    const p = new URL(u).pathname.toLowerCase();
+    if (p.endsWith(".jpg") || p.endsWith(".jpeg")) return "jpg";
+    if (p.endsWith(".png")) return "png";
+    if (p.endsWith(".webp")) return "webp";
+    if (p.endsWith(".gif")) return "gif";
+  } catch {}
+  return "";
+}
 
 async function downloadImageToLocal(imageUrl, id, refererUrl) {
   if (!imageUrl) return "";
 
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS);
-
   try {
     const res = await fetch(imageUrl, {
       headers: {
-        "user-agent": "PontoView-VyreBot/2.0 (+github-actions)",
+        "user-agent": "PontoView-VyreBot/2.1 (+github-actions)",
         "accept": "image/avif,image/webp,image/*,*/*",
         "referer": refererUrl || "",
       },
@@ -199,11 +192,10 @@ async function downloadImageToLocal(imageUrl, id, refererUrl) {
     if (!res.ok) return "";
 
     const ct = res.headers.get("content-type") || "";
-    if (!ct.toLowerCase().startsWith("image/")) return "";
-
     const buf = Buffer.from(await res.arrayBuffer());
     if (!buf.length || buf.length > MAX_IMAGE_BYTES) return "";
 
+    // alguns servidores vêm sem content-type correto, então aceitamos por extensão também
     const ext = extFromContentType(ct) || guessExtFromUrl(imageUrl) || "jpg";
     const file = `n_${id}.${ext}`;
     const outPath = path.join(IMG_DIR, file);
@@ -217,17 +209,6 @@ async function downloadImageToLocal(imageUrl, id, refererUrl) {
   }
 }
 
-function guessExtFromUrl(u) {
-  try {
-    const p = new URL(u).pathname.toLowerCase();
-    if (p.endsWith(".jpg") || p.endsWith(".jpeg")) return "jpg";
-    if (p.endsWith(".png")) return "png";
-    if (p.endsWith(".webp")) return "webp";
-    if (p.endsWith(".gif")) return "gif";
-  } catch {}
-  return "";
-}
-
 async function parseArticle(url, scope, meta = {}) {
   const html = await fetchText(url);
 
@@ -239,32 +220,28 @@ async function parseArticle(url, scope, meta = {}) {
   if (!withinMaxAge(published)) return null;
   if (!title || title.length < 12) return null;
 
-  const vague = /(veja|entenda|saiba|confira)\s+/i;
-  if (vague.test(title) && scope !== "local") return null;
-
-  const rawImg =
-    pickMeta(html, ["og:image", "og:image:url", "twitter:image", "twitter:image:src"]) || "";
-
-  const normalizedImg = normalizeImageUrl(rawImg, url);
+  const rawImg = pickMeta(html, ["og:image","og:image:url","twitter:image","twitter:image:src"]) || "";
+  const imageRemote = normalizeImageUrl(rawImg, url);
 
   const id = hashId(url);
-  const sourceDomain = domainOf(url);
-  const sourceLogoUrl = sourceDomain ? faviconUrlForDomain(sourceDomain) : "";
+  const imageLocal = await downloadImageToLocal(imageRemote, id, url);
 
-  // ✅ baixa imagem local (se existir)
-  const localImageUrl = await downloadImageToLocal(normalizedImg, id, url);
+  const sourceDomain = domainOf(url);
 
   return {
     id: `n:${id}`,
     title,
     url,
-    imageUrl: localImageUrl || "",       // ← AGORA É LOCAL
+    // ✅ prioridade: local → remoto → vazio
+    imageUrl: imageLocal || imageRemote || "",
+    imageLocal,
+    imageRemote,
     publishedAt: published.toISOString(),
-    scope, // local | state | national
+    scope,
     city: meta.city || "",
     source: meta.name || sourceDomain || "Fonte",
     sourceDomain,
-    sourceLogoUrl,
+    sourceLogoUrl: sourceDomain ? faviconUrlForDomain(sourceDomain) : "",
   };
 }
 
@@ -284,7 +261,7 @@ async function collectFromSource(src, scope) {
 
 function interleaveBuckets(buckets, pattern, maxTotal) {
   for (const k of Object.keys(buckets)) {
-    buckets[k].sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+    buckets[k].sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
   }
 
   const out = [];
@@ -305,14 +282,13 @@ function interleaveBuckets(buckets, pattern, maxTotal) {
       }
     }
 
-    const remaining = Object.values(buckets).reduce((n, a) => n + a.length, 0);
+    const remaining = Object.values(buckets).reduce((n,a)=>n+a.length,0);
     if (remaining === 0) break;
   }
   return out;
 }
 
 async function main() {
-  // limpa imagens antigas para não crescer indefinidamente
   await fs.mkdir(OUT_DIR, { recursive: true });
   await fs.rm(IMG_DIR, { recursive: true, force: true });
   await fs.mkdir(IMG_DIR, { recursive: true });
@@ -320,13 +296,13 @@ async function main() {
   const buckets = { local: [], state: [], national: [] };
 
   const tasks = [];
-  for (const src of SOURCES.local)   tasks.push(collectFromSource(src, "local").then(r => buckets.local.push(...r)));
-  for (const src of SOURCES.state)   tasks.push(collectFromSource(src, "state").then(r => buckets.state.push(...r)));
-  for (const src of SOURCES.national)tasks.push(collectFromSource(src, "national").then(r => buckets.national.push(...r)));
+  for (const s of SOURCES.local) tasks.push(collectFromSource(s,"local").then(r=>buckets.local.push(...r)));
+  for (const s of SOURCES.state) tasks.push(collectFromSource(s,"state").then(r=>buckets.state.push(...r)));
+  for (const s of SOURCES.national) tasks.push(collectFromSource(s,"national").then(r=>buckets.national.push(...r)));
 
   await Promise.allSettled(tasks);
 
-  const pattern = ["local", "local", "state", "local", "national", "state"];
+  const pattern = ["local","local","state","local","national","state"];
   const items = interleaveBuckets(buckets, pattern, MAX_ITEMS_TOTAL);
 
   const payload = {
@@ -334,11 +310,7 @@ async function main() {
     items,
     stats: {
       maxAgeDays: MAX_AGE_DAYS,
-      collected: {
-        local: buckets.local.length,
-        state: buckets.state.length,
-        national: buckets.national.length
-      },
+      collected: { local: buckets.local.length, state: buckets.state.length, national: buckets.national.length },
       final: items.length
     }
   };
@@ -347,7 +319,4 @@ async function main() {
   console.log(`OK: ${OUT_FILE} (${items.length} itens)`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+main().catch((e)=>{ console.error(e); process.exit(1); });
