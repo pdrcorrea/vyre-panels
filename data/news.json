@@ -1,255 +1,363 @@
 {
-  "generatedAt": "2025-12-30T19:44:08.389Z",
+  "generatedAt": "2025-12-30T20:43:09.083Z",
   "items": [
     {
-      "title": "Réveillon: Linhares terá shows pirotécnicos em Pontal do Ipiranga, Regência, Povoação e Degredo &#8211; Prefeitura Municipal de Linhares",
+      "title": {
+        "title": "Pesquisa do Procon Vitória aponta queda de preços em itens essenciais e alívio no orçamento em 2025 &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "url": "https://www.vitoria.es.gov.br/noticia/pesquisa-do-procon-vitoria-aponta-queda-de-precos-em-itens-essenciais-e-alivio-no-orcamento-em-2025-55363",
+      "image": {
+        "title": "Pesquisa do Procon Vitória aponta queda de preços em itens essenciais e alívio no orçamento em 2025 &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "source": {
+        "title": "Pesquisa do Procon Vitória aponta queda de preços em itens essenciais e alívio no orçamento em 2025 &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "publishedAt": "9151-03-05T12:00:00.000Z",
+      "scope": "local",
+      "city": "Vitória"
+    },
+    {
+      "title": {
+        "title": "Réveillon 2026: confira o funcionamento dos serviços da PMV nos dias 30 e 31 de dezembro &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "url": "https://www.vitoria.es.gov.br/noticia/reveillon-2026-confira-o-funcionamento-dos-servicos-da-pmv-nos-dias-30-e-31-de-dezembro-55368",
+      "image": {
+        "title": "Réveillon 2026: confira o funcionamento dos serviços da PMV nos dias 30 e 31 de dezembro &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "source": {
+        "title": "Réveillon 2026: confira o funcionamento dos serviços da PMV nos dias 30 e 31 de dezembro &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "publishedAt": "9088-12-03T12:00:00.000Z",
+      "scope": "local",
+      "city": "Vitória"
+    },
+    {
+      "title": {
+        "title": "Governo ES - Caminhos do Campo amplia infraestrutura rural e entrega quase 290 quilômetros de estradas em 2025",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/caminhos-do-campo-amplia-infraestrutura-rural-e-entrega-quase-290-quilometros-de-estradas-em-2025",
+      "image": {
+        "title": "Governo ES - Caminhos do Campo amplia infraestrutura rural e entrega quase 290 quilômetros de estradas em 2025",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Caminhos do Campo amplia infraestrutura rural e entrega quase 290 quilômetros de estradas em 2025",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Emissão de nota fiscal eletrônica será feita pelo Sistema Nacional a partir desta quinta-feira (1º) &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "url": "https://www.vitoria.es.gov.br/noticia/emissao-de-nota-fiscal-eletronica-sera-feita-pelo-sistema-nacional-a-partir-desta-quinta-feira-1o-55371",
+      "image": {
+        "title": "Emissão de nota fiscal eletrônica será feita pelo Sistema Nacional a partir desta quinta-feira (1º) &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "source": {
+        "title": "Emissão de nota fiscal eletrônica será feita pelo Sistema Nacional a partir desta quinta-feira (1º) &ndash; Prefeitura de Vitória",
+        "image": null
+      },
+      "publishedAt": "5811-02-09T12:00:00.000Z",
+      "scope": "local",
+      "city": "Vitória"
+    },
+    {
+      "title": {
+        "title": "Zelensky discute com Trump presença de tropas dos EUA na Ucrânia | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2025-12/zelensky-discute-presenca-de-tropas-dos-eua-na-ucrania-com-trump",
+      "image": {
+        "title": "Zelensky discute com Trump presença de tropas dos EUA na Ucrânia | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Zelensky discute com Trump presença de tropas dos EUA na Ucrânia | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Governo ES - Setur inicia pesquisa de perfil do turista para a temporada 2026",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/setur-inicia-pesquisa-de-perfil-do-turista-para-a-temporada-2026",
+      "image": {
+        "title": "Governo ES - Setur inicia pesquisa de perfil do turista para a temporada 2026",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Setur inicia pesquisa de perfil do turista para a temporada 2026",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Réveillon: Linhares terá shows pirotécnicos em Pontal do Ipiranga, Regência, Povoação e Degredo – Prefeitura Municipal de Linhares",
+        "image": null
+      },
       "url": "https://linhares.es.gov.br/2025/12/30/reveillon-linhares-tera-shows-pirotecnicos-em-pontal-do-ipiranga-regencia-povoacao-e-degredo/",
-      "image": null,
-      "source": "Prefeitura de Linhares",
+      "image": {
+        "title": "Réveillon: Linhares terá shows pirotécnicos em Pontal do Ipiranga, Regência, Povoação e Degredo – Prefeitura Municipal de Linhares",
+        "image": null
+      },
+      "source": {
+        "title": "Réveillon: Linhares terá shows pirotécnicos em Pontal do Ipiranga, Regência, Povoação e Degredo – Prefeitura Municipal de Linhares",
+        "image": null
+      },
       "publishedAt": "2025-12-31T12:00:00.000Z",
       "scope": "local",
       "city": "Linhares"
     },
     {
-      "title": "Réveillon inclusivo: Prefeitura de Vitória distribui abafadores para pessoas sensíveis a ruídos",
-      "url": "https://www.vitoria.es.gov.br/noticia/reveillon-inclusivo-prefeitura-de-vitoria-distribui-abafadores-para-pessoas-sensiveis-a-ruidos-55373",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/12/30/144322/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-30T17:50:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Setur inicia pesquisa de perfil do turista para a temporada 2026",
-      "url": "https://www.es.gov.br/Noticia/setur-inicia-pesquisa-de-perfil-do-turista-para-a-temporada-2026",
-      "image": "https://www.es.gov.br/Media/PortalES/Noticias/hipster-style-tourist-writing-clipboard.jpg",
-      "source": "Portal ES",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": "Trânsito na capital: confira as intervenções nas ruas durante as festas de Réveillon",
-      "url": "https://www.vitoria.es.gov.br/noticia/transito-na-capital-confira-as-intervencoes-nas-ruas-durante-as-festas-de-reveillon-55366",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2023/09/12/118825/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-30T17:40:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Protestos se espalham por universidades do Irã; governo propõe diálogo",
-      "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2025-12/governo-do-ira-propoe-dialogo-protestos-se-espalham-por-universidades",
-      "image": "https://imagens.ebc.com.br/J5N6aoXdzmvv3_gQ6lRM-i-Wppo=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/30/2025-12-30t175827z_1_lynxmpelbt0qw_rtroptp_4_iran-economy-protests.jpg?itok=uBNQ7IAm",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T21:52:00.000Z",
-      "scope": "national",
-      "city": null
-    },
-    {
-      "title": "Editais da Cultura 2025: inscrições abertas!",
+      "title": {
+        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://www.es.gov.br/Noticia/editais-da-cultura-2025-inscricoes-abertas",
-      "image": "https://www.es.gov.br/Media/PortalES/Noticias/SITE-Editais2025-Inscricao.png",
-      "source": "Portal ES",
+      "image": {
+        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Editais da Cultura 2025: inscrições abertas!",
+        "image": "og:site_name"
+      },
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
       "city": null
     },
     {
-      "title": "Escadaria Maria Ortiz: patrimônio histórico e símbolo da resistência capixaba",
-      "url": "https://www.vitoria.es.gov.br/noticia/escadaria-maria-ortiz-patrimonio-historico-e-simbolo-da-resistencia-capixaba-55354",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/12/23/144306/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-30T17:40:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
+      "title": {
+        "title": "São Silvestre 2025 tem número recorde de participação de mulheres | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2025-12/sao-silvestre-2025-tem-numero-recorde-de-participacao-de-mulheres",
+      "image": {
+        "title": "São Silvestre 2025 tem número recorde de participação de mulheres | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "São Silvestre 2025 tem número recorde de participação de mulheres | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "national",
+      "city": null
     },
     {
-      "title": "Arena de Verão 2026: Praia de Camburi terá mais de 300 horas de atividades com 50 modalidades",
-      "url": "https://www.vitoria.es.gov.br/noticia/arena-de-verao-2026-praia-de-camburi-tera-mais-de-300-horas-de-atividades-com-50-modalidades-55367",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/01/13/135802/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-30T17:20:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Governo ES - Not&#237;cias",
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=2",
-      "image": null,
-      "source": "Governo do ES (ES.GOV)",
+      "title": {
+        "title": "Governo ES - SEDH divulga resultado final do Edital Juventudes",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/sedh-divulga-resultado-final-do-edital-juventudes",
+      "image": {
+        "title": "Governo ES - SEDH divulga resultado final do Edital Juventudes",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - SEDH divulga resultado final do Edital Juventudes",
+        "image": "og:site_name"
+      },
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
       "city": null
     },
     {
-      "title": "Emissão de nota fiscal eletrônica será feita pelo Sistema Nacional a partir desta quinta-feira (1º)",
-      "url": "https://www.vitoria.es.gov.br/noticia/emissao-de-nota-fiscal-eletronica-sera-feita-pelo-sistema-nacional-a-partir-desta-quinta-feira-1o-55371",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2017/09/26/58091/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-30T17:10:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
+      "title": {
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/governo-do-estado-segue-investindo-para-tornar-cidades-resistentes-aos-efeitos-do-clima",
+      "image": {
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
     },
     {
-      "title": "Estoque da dívida pública federal chega a R$ 8,48 trilhões em novembro",
+      "title": {
+        "title": "Protestos se espalham por universidades do Irã; governo propõe diálogo | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2025-12/governo-do-ira-propoe-dialogo-protestos-se-espalham-por-universidades",
+      "image": {
+        "title": "Protestos se espalham por universidades do Irã; governo propõe diálogo | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Protestos se espalham por universidades do Irã; governo propõe diálogo | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Governo ES - Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/governo-do-estado-lanca-edital-para-implantacao-do-aeroporto-das-montanhas-capixabas",
+      "image": {
+        "title": "Governo ES - Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Estoque da dívida pública federal chega a R$ 8,48 trilhões em novembro | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/estoque-da-divida-publica-federal-chega-r-848-trilhoes-em-novembro",
-      "image": "https://imagens.ebc.com.br/-lCoC2bWpdDMd02ehSinVt9rH0g=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/economia_1609210425_0.jpg?itok=vtLe5WmZ",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T21:49:00.000Z",
+      "image": {
+        "title": "Estoque da dívida pública federal chega a R$ 8,48 trilhões em novembro | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Estoque da dívida pública federal chega a R$ 8,48 trilhões em novembro | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
     },
     {
-      "title": "Governo ES - Not&#237;cias",
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=3",
-      "image": null,
-      "source": "Governo do ES (ES.GOV)",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": "Réveillon 2026: confira o funcionamento dos serviços da PMV nos dias 30 e 31 de dezembro",
-      "url": "https://www.vitoria.es.gov.br/noticia/reveillon-2026-confira-o-funcionamento-dos-servicos-da-pmv-nos-dias-30-e-31-de-dezembro-55368",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2021/03/24/90873/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-30T14:40:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Pesquisa do Procon Vitória aponta queda de preços em itens essenciais e alívio no orçamento em 2025",
-      "url": "https://www.vitoria.es.gov.br/noticia/pesquisa-do-procon-vitoria-aponta-queda-de-precos-em-itens-essenciais-e-alivio-no-orcamento-em-2025-55363",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2021/05/03/91511/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-29T21:45:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Governo ES - Not&#237;cias",
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=4",
-      "image": null,
-      "source": "Governo do ES (ES.GOV)",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": "Réveillon da inclusão: PMV distribuirá mil abafadores para público sensível a ruídos",
-      "url": "https://www.vitoria.es.gov.br/noticia/reveillon-da-inclusao-pmv-distribuira-mil-abafadores-para-publico-sensivel-a-ruidos-55364",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/12/29/144319/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-29T20:05:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Brasil cria 85,8 mil vagas de trabalho em novembro",
+      "title": {
+        "title": "Brasil cria 85,8 mil vagas de trabalho em novembro | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/brasil-registra-saldo-positivo-de-858-mil-vagas-de-trabalho-em-novemb",
-      "image": "https://imagens.ebc.com.br/n7cD-6DZGPPUTC6QodT4eQqTxqc=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/fachada-ministerio_mcamgo_abr_100420231818-11.jpg?itok=GOXwsUfk",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T20:52:00.000Z",
+      "image": {
+        "title": "Brasil cria 85,8 mil vagas de trabalho em novembro | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Brasil cria 85,8 mil vagas de trabalho em novembro | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
     },
     {
-      "title": "Governo ES - Not&#237;cias",
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=3500",
-      "image": null,
-      "source": "Governo do ES (ES.GOV)",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": "Verão: saiba seus direitos ao consumir em bares, restaurantes e quiosques na capital",
-      "url": "https://www.vitoria.es.gov.br/noticia/verao-saiba-seus-direitos-ao-consumir-em-bares-restaurantes-e-quiosques-na-capital-55361",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2024/06/13/130214/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-29T18:55:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Réveillon 2026: Vitória terá 30 toneladas de fogos de baixo ruído em três pontos da cidade",
-      "url": "https://www.vitoria.es.gov.br/noticia/reveillon-2026-vitoria-tera-30-toneladas-de-fogos-de-baixo-ruido-em-tres-pontos-da-cidade-55362",
-      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/01/02/135461/normal@2x.jpg",
-      "source": "Prefeitura de Vitória",
-      "publishedAt": "2025-12-29T18:50:00.000Z",
-      "scope": "local",
-      "city": "Vitória"
-    },
-    {
-      "title": "Governo do Estado divulga expediente no período de Ano Novo",
-      "url": "https://www.es.gov.br/Noticia/governo-do-estado-divulga-expediente-no-periodo-de-ano-novo",
-      "image": "https://www.es.gov.br/Media/PortalES/Noticias/WhatsApp%20Image%202019-08-21%20at%2017.13.59%20(1)%20(4).jpeg",
-      "source": "Portal ES",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": "Bahia registra sete casos suspeitos de intoxicação por metanol",
+      "title": {
+        "title": "Bahia registra sete casos suspeitos de intoxicação por metanol | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://agenciabrasil.ebc.com.br/saude/noticia/2025-12/bahia-registra-sete-casos-suspeitos-de-intoxicacao-por-metanol",
-      "image": "https://imagens.ebc.com.br/VMkBNJgADsVuzLg_2GHD9DKc_xY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/10/13/bebidas-na-lupa.jpg?itok=n85vgZ8M",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T20:50:00.000Z",
+      "image": {
+        "title": "Bahia registra sete casos suspeitos de intoxicação por metanol | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Bahia registra sete casos suspeitos de intoxicação por metanol | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
     },
     {
-      "title": "Petroleiros do Norte Fluminense suspendem greve após 16 dias",
+      "title": {
+        "title": "Petroleiros do Norte Fluminense suspendem greve após 16 dias | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/petroleiros-do-norte-fluminense-suspendem-greve-apos-16-dias",
-      "image": "https://imagens.ebc.com.br/qxx9fSSC7bPNeQ8299510rTEYZQ=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/30/whatsapp_image_2025-12-30_at_13.56.22.jpeg?itok=QljXJWQp",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T20:41:00.000Z",
+      "image": {
+        "title": "Petroleiros do Norte Fluminense suspendem greve após 16 dias | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Petroleiros do Norte Fluminense suspendem greve após 16 dias | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
     },
     {
-      "title": "Ampliação do número de carteiras assinadas é sustentada, diz IBGE",
+      "title": {
+        "title": "Aumento de carteira assinada no Brasil é sustentado, diz IBGE | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/aumento-de-carteira-assinada-no-brasil-e-sustentado-diz-ibge",
-      "image": "https://imagens.ebc.com.br/LJri3GhTJ72Wf7fM-fz7eZavuAc=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/01_carteira_de_trabalho2.jpg?itok=GzY9W8yM",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T19:56:00.000Z",
+      "image": {
+        "title": "Aumento de carteira assinada no Brasil é sustentado, diz IBGE | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Aumento de carteira assinada no Brasil é sustentado, diz IBGE | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
     },
     {
-      "title": "Dono do Banco Master e ex-presidente do BRB depõem à PF nesta terça",
+      "title": {
+        "title": "Dono do Banco Master e ex-presidente do BRB depõem à PF nesta terça | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2025-12/dono-do-banco-master-e-ex-presidente-do-brb-depoem-pf-nesta-terca",
-      "image": "https://imagens.ebc.com.br/OICud4_kbIDfKW4X2QVvuL-kv2U=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/19/0g0a6420.jpg?itok=vq86oLf7",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T19:55:00.000Z",
+      "image": {
+        "title": "Dono do Banco Master e ex-presidente do BRB depõem à PF nesta terça | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Dono do Banco Master e ex-presidente do BRB depõem à PF nesta terça | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
     },
     {
-      "title": "Governo devolve R$ 2,8 bilhões a aposentados por descontos indevidos",
+      "title": {
+        "title": "Governo devolve R$ 2,8 bilhões a aposentados com descontos indevidos | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/governo-devolve-r-28-bilhoes-aposentados-com-descontos-indevidos",
-      "image": "https://imagens.ebc.com.br/v7EQe1AYn2Z70tMdATUIwBbjb3E=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/idosos_ocupacao.jpg?itok=zjKXkg75",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T19:40:00.000Z",
-      "scope": "national",
-      "city": null
-    },
-    {
-      "title": "Ministério homologa tombamento definitivo do prédio do Dops, no Rio",
-      "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2025-12/ministerio-homologa-tombamento-definitivo-do-predio-do-dops-no-rio",
-      "image": "https://imagens.ebc.com.br/_xFtBcGCp7h_UlqmYLF2oKgOp2w=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/11/_tng1986.jpg?itok=v34C87dS",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T19:31:00.000Z",
-      "scope": "national",
-      "city": null
-    },
-    {
-      "title": "Operação prende 233 agressores de mulheres no estado de São Paulo",
-      "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2025-12/operacao-prende-233-agressores-de-mulheres-no-estado-de-sao-paulo",
-      "image": "https://imagens.ebc.com.br/nG1e6-6fOi6pz5qpigdq9Na7mNo=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/02/11/_mg_6438.jpg?itok=uJdk8w_p",
-      "source": "Agência Brasil",
-      "publishedAt": "2025-12-30T18:53:00.000Z",
+      "image": {
+        "title": "Governo devolve R$ 2,8 bilhões a aposentados com descontos indevidos | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo devolve R$ 2,8 bilhões a aposentados com descontos indevidos | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
       "city": null
     }
@@ -258,7 +366,7 @@
     "local": 0,
     "state": 0,
     "national": 0,
-    "final": 28,
+    "final": 20,
     "maxAgeDays": 3
   }
 }
