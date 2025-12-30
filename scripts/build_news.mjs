@@ -69,21 +69,19 @@ async function fetchText(url) {
   }
 }
 
+// Substitua a função pickMeta no seu build_news.mjs por esta:
 function pickMeta(html, url) {
   const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
   const title = titleMatch ? titleMatch[1].trim() : "";
 
-  // Busca imagem em: 1. og:image | 2. twitter:image | 3. link rel="image_src"
-  const imgRegex = /<(meta|link)[^>]*(property|name|rel)=["'](og:image|twitter:image|image_src)["'][^>]*content=["']([^"']+)["'][^>]*>/i;
-  const imgRegexAlt = /<(meta|link)[^>]*content=["']([^"']+)["'][^>]*(property|name|rel)=["'](og:image|twitter:image|image_src)["'][^>]*>/i;
-  
-  let imgMatch = html.match(imgRegex) || html.match(imgRegexAlt);
-  let image = null;
+  // Regex robusto para capturar imagens de meta tags ou links de imagem
+  const imgMatch = 
+    html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
+    html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i) ||
+    html.match(/<link[^>]+rel=["']image_src["'][^>]+href=["']([^"']+)["']/i) ||
+    html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i);
 
-  if (imgMatch) {
-    // Pega o grupo que contém a URL (geralmente o 4 ou o 2 dependendo da ordem dos atributos)
-    image = imgMatch[4] || imgMatch[2];
-  }
+  let image = imgMatch ? imgMatch[1] : null;
 
   return {
     title: decodeHtml(title),
