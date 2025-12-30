@@ -1,379 +1,318 @@
-// ===== scripts/build_news.mjs (SUBSTITUA INTEIRO) =====
-// Local + Estadual + Nacional (intercalado) + somente recentes (até 3 dias)
-// Observação importante: sem “servidor”, a localização automática por dispositivo (IP/GPS)
-// não dá para usar no GitHub Actions (ele roda fora do Brasil). Então aqui você define CITY/STATE.
-// Se você tiver TVs em cidades diferentes, pode duplicar este repo por cidade ou usar branches.
+// scripts/build_news.mjs
+// Gera ./data/news.json com notícias (Local/Estadual/Nacional) intercaladas
+// Fonte: sites oficiais (prefeituras + governo) + Agência Brasil + Ministério da Saúde
+// Filtro: no máximo 3 dias
 
-import fs from "fs";
-import path from "path";
+import fs from "node:fs/promises";
+import path from "node:path";
 
-const ROOT = process.cwd();
-const OUT = path.join(ROOT, "data", "news.json");
+const OUT_DIR = "data";
+const OUT_FILE = path.join(OUT_DIR, "news.json");
 
-/** ✅ DEFINA AQUI (fixo para o seu painel) */
-const CITY = "Colatina";
-const STATE_NAME = "Espírito Santo";
-const COUNTRY = "Brasil";
-
-/** ✅ Somente até 3 dias atrás */
 const MAX_AGE_DAYS = 3;
+const MAX_ITEMS_TOTAL = 36;      // total no JSON
+const MAX_PER_SOURCE = 10;       // coleta bruta por fonte (antes de filtrar)
+const FETCH_TIMEOUT_MS = 20000;
 
-/** ✅ Quantidade total final */
-const MAX_ITEMS = 40;
-
-/** ✅ Filtro leve (evita temas pesados sem zerar tudo) */
-const BLOCK = ["assassin", "homic", "tirote", "estupro"];
-
-/** ✅ Nomes “bonitos” (domínio -> nome) */
-const SOURCE_MAP = {
-  "g1.globo.com": "G1",
-  "agazeta.com.br": "A Gazeta",
-  "folhavitoria.com.br": "Folha Vitória",
-  "uol.com.br": "UOL",
-  "terra.com.br": "Terra",
-  "metropoles.com": "Metrópoles",
-  "cnnbrasil.com.br": "CNN Brasil",
+const SOURCES = {
+  local: [
+    { name: "Prefeitura de Vitória", city: "Vitória", url: "https://www.vitoria.es.gov.br/imprensa/todas_noticias" },
+    { name: "Prefeitura de Linhares", city: "Linhares", url: "https://linhares.es.gov.br/category/noticias/" },
+    { name: "Prefeitura de Colatina", city: "Colatina", url: "https://colatina.es.gov.br/agencia-de-noticias/" },
+    { name: "Prefeitura de Cachoeiro", city: "Cachoeiro de Itapemirim", url: "https://www.cachoeiro.es.gov.br/noticias/" },
+  ],
+  state: [
+    { name: "Governo do ES (ES.GOV)", url: "https://www.es.gov.br/Noticias" },
+    { name: "Portal ES.GOV (catálogo)", url: "https://portal.es.gov.br/app/catalog/noticias" },
+  ],
+  national: [
+    { name: "Agência Brasil", url: "https://agenciabrasil.ebc.com.br/ultimas" },
+    { name: "Ministério da Saúde", url: "https://www.gov.br/saude/pt-br/assuntos/noticias" },
+  ],
 };
 
-/**
- * ✅ GOOGLE NEWS: usamos "when:3d" para priorizar recentes
- * (além do filtro por pubDate em até 3 dias).
- */
-const FEEDS = [
-  {
-    scope: "local",
-    label: "Local",
-    queries: [
-      `${CITY} when:3d`,
-      `${CITY} (${STATE_NAME}) (obra OR trânsito OR vacinação OR mutirão OR evento OR serviço OR atendimento) when:3d`,
-      `${CITY} prefeitura when:3d`,
-    ],
-  },
-  {
-    scope: "state",
-    label: "Estadual",
-    queries: [
-      `${STATE_NAME} when:3d`,
-      `${STATE_NAME} (obra OR trânsito OR vacinação OR mutirão OR evento OR serviço OR saúde) when:3d`,
-      `${STATE_NAME} governo when:3d`,
-    ],
-  },
-  {
-    scope: "national",
-    label: "Nacional",
-    queries: [
-      `${COUNTRY} when:3d`,
-      `${COUNTRY} (serviço OR saúde OR educação OR tecnologia OR economia) when:3d`,
-      `${COUNTRY} utilidade pública when:3d`,
-    ],
-  },
-];
-
-function googleNewsRssUrl(q) {
-  const qp = encodeURIComponent(q);
-  return `https://news.google.com/rss/search?q=${qp}&hl=pt-BR&gl=BR&ceid=BR:pt-419`;
+function now() {
+  return new Date();
 }
-
-function strip(s) {
-  return String(s || "").replace(/\s+/g, " ").trim();
+function daysAgo(d) {
+  return new Date(now().getTime() - d * 24 * 60 * 60 * 1000);
 }
-
-function softBlock(title) {
-  const t = String(title || "").toLowerCase();
-  return BLOCK.some((w) => t.includes(w));
+function clampStr(s) {
+  return (s ?? "").toString().replace(/\s+/g, " ").trim();
 }
-
-function hashCode(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) h = (h << 5) - h + str.charCodeAt(i) | 0;
-  return h;
-}
-
-function daysAgo(dateStr) {
+function absUrl(base, href) {
   try {
-    const d = new Date(dateStr);
-    if (isNaN(d.getTime())) return 999;
-    const diffMs = Date.now() - d.getTime();
-    return diffMs / (1000 * 60 * 60 * 24);
+    return new URL(href, base).toString();
   } catch {
-    return 999;
+    return null;
   }
 }
+function uniq(arr) {
+  return [...new Set(arr)];
+}
 
-async function fetchText(url, timeoutMs = 20000) {
+async function fetchText(url) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS);
   try {
     const res = await fetch(url, {
-      headers: { "User-Agent": "Mozilla/5.0 (GitHub Actions) PontoView/1.0" },
-      redirect: "follow",
+      headers: {
+        "user-agent": "PontoView-VyreBot/1.0 (+github-actions)",
+        "accept": "text/html,application/xhtml+xml",
+      },
       signal: ctrl.signal,
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     return await res.text();
   } finally {
     clearTimeout(t);
   }
 }
 
-async function resolveFinalUrl(url, timeoutMs = 15000) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, {
-      headers: { "User-Agent": "Mozilla/5.0 (GitHub Actions) PontoView/1.0" },
-      redirect: "follow",
-      signal: ctrl.signal,
-    });
-    return res.url || url;
-  } finally {
-    clearTimeout(t);
+function pickMeta(html, namesOrProps) {
+  // procura meta name=... ou property=...
+  for (const key of namesOrProps) {
+    // content="..."
+    const r1 = new RegExp(`<meta[^>]+(?:name|property)=["']${escapeReg(key)}["'][^>]+content=["']([^"']+)["'][^>]*>`, "i");
+    const m1 = html.match(r1);
+    if (m1?.[1]) return clampStr(decodeHtml(m1[1]));
+    // content='...'
+    const r2 = new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+(?:name|property)=["']${escapeReg(key)}["'][^>]*>`, "i");
+    const m2 = html.match(r2);
+    if (m2?.[1]) return clampStr(decodeHtml(m2[1]));
   }
+  return "";
 }
 
-function pickMeta(html, key) {
-  const r1 = new RegExp(
-    `<meta[^>]+property=["']${key}["'][^>]+content=["']([^"']+)["']`,
-    "i"
-  );
-  const r2 = new RegExp(
-    `<meta[^>]+name=["']${key}["'][^>]+content=["']([^"']+)["']`,
-    "i"
-  );
-  return html.match(r1)?.[1] || html.match(r2)?.[1] || "";
+function decodeHtml(s) {
+  // decodificação mínima (o suficiente para títulos)
+  return s
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(parseInt(n, 10)));
+}
+function escapeReg(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function guessSourceFromUrl(url) {
+function parseAnyDate(html) {
+  // 1) metas comuns
+  const iso =
+    pickMeta(html, ["article:published_time", "og:updated_time", "date", "dc.date", "DC.date.issued", "pubdate", "publish-date", "parsely-pub-date"]) ||
+    "";
+
+  const iso2 = iso ? Date.parse(iso) : NaN;
+  if (!Number.isNaN(iso2)) return new Date(iso2);
+
+  // 2) padrões pt-BR: "Publicado em 30/12/2025" / "30/12/2025"
+  const m1 = html.match(/Publicado\s+em\s+(\d{2}\/\d{2}\/\d{4})/i);
+  const m2 = html.match(/(\d{2}\/\d{2}\/\d{4})/);
+  const dmy = (m1?.[1] || m2?.[1] || "").trim();
+  if (dmy) {
+    const [dd, mm, yyyy] = dmy.split("/").map(Number);
+    if (dd && mm && yyyy) return new Date(Date.UTC(yyyy, mm - 1, dd, 12, 0, 0));
+  }
+
+  // 3) Agência Brasil usa "ter, 30/12/2025 - 07:36" na listagem e no artigo
+  const m3 = html.match(/(\d{2}\/\d{2}\/\d{4})\s*-\s*(\d{2}:\d{2})/);
+  if (m3) {
+    const [dd, mm, yyyy] = m3[1].split("/").map(Number);
+    const [hh, min] = m3[2].split(":").map(Number);
+    return new Date(Date.UTC(yyyy, mm - 1, dd, hh, min, 0));
+  }
+
+  return null;
+}
+
+function extractLinks(html, baseUrl) {
+  // captura href="..."
+  const hrefs = [];
+  const re = /<a\s+[^>]*href=["']([^"']+)["'][^>]*>/gi;
+  let m;
+  while ((m = re.exec(html))) {
+    const u = absUrl(baseUrl, m[1]);
+    if (u) hrefs.push(u);
+  }
+  return uniq(hrefs);
+}
+
+function domainOf(u) {
   try {
-    const host = new URL(url).hostname.replace(/^www\./, "");
-    return SOURCE_MAP[host] || host;
+    return new URL(u).hostname.replace(/^www\./, "");
   } catch {
-    return "Fonte";
+    return "";
   }
 }
 
-function absolutizeImage(img, baseUrl) {
-  if (!img) return "";
-  const u = strip(img);
-  try {
-    if (u.startsWith("//")) {
-      const b = new URL(baseUrl);
-      return `${b.protocol}${u}`;
-    }
-    if (u.startsWith("/")) {
-      const b = new URL(baseUrl);
-      return `${b.origin}${u}`;
-    }
-  } catch {}
-  return u;
+function looksLikeArticle(url) {
+  // heurística simples: evita PDFs, anchors, etc.
+  if (!url || url.includes("#")) return false;
+  if (/\.(pdf|jpg|jpeg|png|webp|svg)(\?|$)/i.test(url)) return false;
+  return true;
 }
 
-// RSS: title/link/pubDate + (media:content|media:thumbnail)
-function parseRssItems(xml, scope) {
+function filterToSameDomain(listUrl, links) {
+  const d = domainOf(listUrl);
+  return links.filter((u) => domainOf(u) === d);
+}
+
+function scoreCandidate(url) {
+  // preferir URLs que "parecem" notícia
+  let s = 0;
+  if (/noticia|noticias|imprensa|agencia|conteudo|\/Noticia\/|\/Noticia\//i.test(url)) s += 2;
+  if (/\d{4}/.test(url)) s += 1;
+  if (url.length > 40) s += 1;
+  return s;
+}
+
+function pickTopCandidates(listUrl, html) {
+  const all = extractLinks(html, listUrl)
+    .filter(looksLikeArticle);
+
+  const same = filterToSameDomain(listUrl, all);
+  const ranked = same
+    .map((u) => ({ u, s: scoreCandidate(u) }))
+    .sort((a, b) => b.s - a.s)
+    .map((x) => x.u);
+
+  // remove listUrl itself e páginas de navegação comuns
+  const cleaned = ranked.filter((u) => u !== listUrl && !/page\/\d+\/?$|\/pagina\/\d+\/?$/i.test(u));
+  return cleaned.slice(0, MAX_PER_SOURCE);
+}
+
+function withinMaxAge(dateObj) {
+  if (!dateObj) return false;
+  return dateObj >= daysAgo(MAX_AGE_DAYS);
+}
+
+async function parseArticle(url, scope, meta = {}) {
+  const html = await fetchText(url);
+
+  const title =
+    pickMeta(html, ["og:title", "twitter:title"]) ||
+    clampStr((html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || ""));
+
+  const image =
+    pickMeta(html, ["og:image", "twitter:image", "twitter:image:src"]) ||
+    "";
+
+  const site =
+    pickMeta(html, ["og:site_name"]) ||
+    meta.sourceName ||
+    domainOf(url);
+
+  const published = parseAnyDate(html);
+
+  // filtro de até 3 dias
+  if (!withinMaxAge(published)) return null;
+
+  // título mínimo
+  if (!title || title.length < 12) return null;
+
+  // evita manchetes muito vagas (opcional: pode ajustar)
+  const bad = /(veja|entenda|saiba|confira)\s+o?\s*(que|como)/i;
+  if (bad.test(title) && scope !== "local") {
+    // mantém mais rigor em estadual/nacional
+    return null;
+  }
+
+  return {
+    title,
+    url,
+    image: image || null,
+    source: site,
+    publishedAt: published.toISOString(),
+    scope,                    // local | state | national
+    city: meta.city || null,  // só local
+  };
+}
+
+async function collectFromSource(src, scope) {
+  const listHtml = await fetchText(src.url);
+  const candidates = pickTopCandidates(src.url, listHtml);
+
   const items = [];
-  const chunks = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
-  for (const c of chunks) {
-    const title =
-      c.match(/<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>/i)?.[1] ||
-      c.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ||
-      "";
-    const link = c.match(/<link>([\s\S]*?)<\/link>/i)?.[1] || "";
-    const pubDate = c.match(/<pubDate>([\s\S]*?)<\/pubDate>/i)?.[1] || "";
-
-    const mediaContentUrl = c.match(/<media:content[^>]+url=["']([^"']+)["']/i)?.[1] || "";
-    const mediaThumbUrl = c.match(/<media:thumbnail[^>]+url=["']([^"']+)["']/i)?.[1] || "";
-    const rssImage = strip(mediaContentUrl || mediaThumbUrl);
-
-    const t = strip(title);
-    const l = strip(link);
-    const p = strip(pubDate);
-
-    if (t && l) items.push({ title: t, link: l, pubDate: p, rssImage, scope });
+  for (const u of candidates) {
+    try {
+      const it = await parseArticle(u, scope, { sourceName: src.name, city: src.city });
+      if (it) items.push(it);
+    } catch {
+      // ignora item quebrado
+    }
   }
   return items;
 }
 
-/**
- * Enriquecimento melhor-esforço:
- * - tenta sair do Google e pegar og:image/tw:image + site_name
- * - se falhar, usa imagem do RSS (quando existir)
- */
-async function enrich(newsLink, rssImage) {
-  const finalUrl = await resolveFinalUrl(newsLink);
-
-  let html = "";
-  try {
-    if (!finalUrl.includes("google.com")) html = await fetchText(finalUrl, 15000);
-  } catch {
-    html = "";
-  }
-
-  let title = "";
-  let source = "";
-  let imageUrl = "";
-
-  if (html) {
-    const ogTitle = strip(pickMeta(html, "og:title"));
-    const titleTag = strip(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "");
-    title = ogTitle || titleTag;
-
-    const ogSite = strip(pickMeta(html, "og:site_name"));
-    source = ogSite || guessSourceFromUrl(finalUrl);
-
-    const ogImg = strip(pickMeta(html, "og:image"));
-    const twImg =
-      strip(pickMeta(html, "twitter:image")) || strip(pickMeta(html, "twitter:image:src"));
-    imageUrl = absolutizeImage(ogImg || twImg, finalUrl);
-  } else {
-    source = guessSourceFromUrl(finalUrl);
-  }
-
-  if (!imageUrl && rssImage) imageUrl = rssImage;
-  if (imageUrl.includes("news.google") || imageUrl.includes("gstatic")) imageUrl = "";
-
-  // Se ainda estiver no Google, pelo menos use fonte pelo domínio do link original
-  const finalSource = strip(source) || guessSourceFromUrl(finalUrl);
-
-  return { title, source: finalSource, imageUrl, finalUrl };
-}
-
-// Intercala: local -> state -> national (quando houver)
-function interleaveBuckets(buckets, maxOut) {
-  const order = ["local", "state", "national"];
+function interleaveBuckets(buckets, pattern, maxTotal) {
+  // pattern exemplo: ["local","local","state","local","national","state"]
   const out = [];
-  let i = 0;
+  const seen = new Set();
 
-  while (out.length < maxOut) {
-    const key = order[i % order.length];
-    const b = buckets[key];
-    if (b && b.length) out.push(b.shift());
-    i++;
-
-    // para quando todos vazios
-    if (order.every((k) => !buckets[k] || buckets[k].length === 0)) break;
+  // normaliza por data (mais novo primeiro) dentro de cada bucket
+  for (const k of Object.keys(buckets)) {
+    buckets[k].sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
   }
+
+  let idx = 0;
+  while (out.length < maxTotal) {
+    const key = pattern[idx % pattern.length];
+    idx++;
+
+    const arr = buckets[key] || [];
+    while (arr.length) {
+      const it = arr.shift();
+      const sig = it.url;
+      if (!seen.has(sig)) {
+        seen.add(sig);
+        out.push(it);
+        break;
+      }
+    }
+
+    // se todos esvaziaram, para
+    const remaining = Object.values(buckets).reduce((n, a) => n + a.length, 0);
+    if (remaining === 0) break;
+  }
+
   return out;
 }
 
 async function main() {
-  const all = [];
-  const stats = {
-    discovered: 0,
-    produced: 0,
-    blocked_titles: 0,
-    dropped_old: 0,
-    enrich_failed: 0,
-  };
-
-  // 1) coleta por escopo (local/estadual/nacional)
-  for (const feed of FEEDS) {
-    for (const q of feed.queries) {
-      const rssUrl = googleNewsRssUrl(q);
-      try {
-        const xml = await fetchText(rssUrl, 20000);
-        all.push(...parseRssItems(xml, feed.scope));
-      } catch {
-        // ignora falhas de um feed específico
-      }
-    }
-  }
-
-  // 2) dedup por link
-  const uniq = new Map();
-  for (const it of all) {
-    const key = it.link;
-    if (!uniq.has(key)) uniq.set(key, it);
-  }
-  stats.discovered = uniq.size;
-
-  // 3) filtra: título pesado + máximo 3 dias
-  const filtered = [];
-  for (const it of uniq.values()) {
-    if (softBlock(it.title)) {
-      stats.blocked_titles++;
-      continue;
-    }
-    // pubDate ausente: mantém (para não zerar), mas preferimos recentes
-    if (it.pubDate) {
-      if (daysAgo(it.pubDate) > MAX_AGE_DAYS) {
-        stats.dropped_old++;
-        continue;
-      }
-    }
-    filtered.push(it);
-  }
-
-  // 4) separa em baldes e ordena por mais recente primeiro
   const buckets = { local: [], state: [], national: [] };
-  for (const it of filtered) buckets[it.scope]?.push(it);
 
-  const sortByDateDesc = (a, b) => {
-    const da = a.pubDate ? new Date(a.pubDate).getTime() : 0;
-    const db = b.pubDate ? new Date(b.pubDate).getTime() : 0;
-    return db - da;
-  };
-  buckets.local.sort(sortByDateDesc);
-  buckets.state.sort(sortByDateDesc);
-  buckets.national.sort(sortByDateDesc);
+  // Coleta em paralelo por categoria (com moderação)
+  const tasks = [];
 
-  // 5) intercala local/estadual/nacional
-  const selected = interleaveBuckets(buckets, MAX_ITEMS);
+  for (const src of SOURCES.local) tasks.push(collectFromSource(src, "local").then((r) => buckets.local.push(...r)));
+  for (const src of SOURCES.state) tasks.push(collectFromSource(src, "state").then((r) => buckets.state.push(...r)));
+  for (const src of SOURCES.national) tasks.push(collectFromSource(src, "national").then((r) => buckets.national.push(...r)));
 
-  // 6) enriquece e monta saída
-  const out = [];
-  for (const it of selected) {
-    try {
-      const e = await enrich(it.link, it.rssImage);
-      const finalTitle = strip(e.title || it.title);
-      if (!finalTitle) continue;
+  await Promise.allSettled(tasks);
 
-      out.push({
-        id: `n:${Math.abs(hashCode(e.finalUrl || it.link))}`,
-        title: finalTitle,
-        source: strip(e.source) || "Fonte",
-        publishedAt: it.pubDate || "",
-        url: e.finalUrl || it.link,
-        imageUrl: e.imageUrl || "",
-        scope: it.scope, // local | state | national
-      });
-    } catch {
-      stats.enrich_failed++;
-      out.push({
-        id: `n:${Math.abs(hashCode(it.link))}`,
-        title: it.title,
-        source: guessSourceFromUrl(it.link),
-        publishedAt: it.pubDate || "",
-        url: it.link,
-        imageUrl: it.rssImage || "",
-        scope: it.scope,
-      });
-    }
-  }
-
-  if (out.length === 0) {
-    out.push({
-      id: "pv:fallback",
-      title: "Sem notícias recentes no momento",
-      source: "PontoView",
-      publishedAt: new Date().toISOString(),
-      url: "",
-      imageUrl: "",
-      scope: "local",
-    });
-  }
-
-  stats.produced = out.length;
+  // Intercala: Local forte, ES médio, Brasil leve
+  const pattern = ["local", "local", "state", "local", "national", "state"];
+  const items = interleaveBuckets(buckets, pattern, MAX_ITEMS_TOTAL);
 
   const payload = {
     generatedAt: new Date().toISOString(),
-    config: { CITY, STATE_NAME, COUNTRY, MAX_AGE_DAYS },
-    items: out,
-    stats,
+    items,
+    stats: {
+      local: buckets.local.length,
+      state: buckets.state.length,
+      national: buckets.national.length,
+      final: items.length,
+      maxAgeDays: MAX_AGE_DAYS,
+    },
   };
 
-  fs.mkdirSync(path.join(ROOT, "data"), { recursive: true });
-  fs.writeFileSync(OUT, JSON.stringify(payload, null, 2), "utf-8");
-  console.log(`Wrote data/news.json with ${payload.items.length} items`);
+  await fs.mkdir(OUT_DIR, { recursive: true });
+  await fs.writeFile(OUT_FILE, JSON.stringify(payload, null, 2), "utf-8");
+
+  console.log(`OK: ${OUT_FILE} (${items.length} itens)`);
+  console.log(payload.stats);
 }
 
 main().catch((e) => {
