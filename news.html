@@ -74,24 +74,48 @@
     .brandTitle .h1{ font-weight: 1000; letter-spacing:.02em; font-size: 28px; line-height:1; margin:0; }
     .brandTitle .sub{ font-weight: 900; opacity:.92; font-size: 12px; letter-spacing: .16em; }
 
-    .topRight{ display:flex; align-items:center; gap:12px; }
-    .status{
+    .topRight{ display:flex; align-items:flex-start; gap:12px; }
+    .clockWrap{ text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+    .clock{ font-size: 34px; font-weight: 1000; line-height:1; letter-spacing:.02em; padding: 4px 6px; }
+
+    /* Badge glass abaixo do relógio */
+    .statusGlass{
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
       padding: 10px 12px;
       border-radius: 999px;
       background: rgba(255,255,255,.14);
       border: 1px solid rgba(255,255,255,.22);
-      font-weight: 900;
-      letter-spacing:.02em;
+      font-weight: 950;
+      letter-spacing:.03em;
       white-space:nowrap;
+      backdrop-filter: blur(6px);
     }
-    .dot{ width:9px;height:9px;border-radius:999px; background:#38d16a; box-shadow: 0 0 0 4px rgba(56,209,106,.20); }
 
-    .clockWrap{ text-align:right; }
-    .clock{ font-size: 34px; font-weight: 1000; line-height:1; letter-spacing:.02em; padding: 4px 6px; }
-    .clockSub{ font-size: 12px; font-weight: 900; opacity:.92; letter-spacing:.12em; margin-top:2px; }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      position:relative;
+      background:#38d16a;
+      box-shadow: 0 0 0 0 rgba(56,209,106,.55);
+      animation: pulse 1.6s ease-out infinite;
+      flex:none;
+    }
+    .dot.offline{
+      background:#ff4b4b;
+      box-shadow: 0 0 0 0 rgba(255,75,75,.55);
+      animation: pulseRed 1.6s ease-out infinite;
+    }
+    @keyframes pulse{
+      0%{ box-shadow: 0 0 0 0 rgba(56,209,106,.55); }
+      70%{ box-shadow: 0 0 0 10px rgba(56,209,106,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(56,209,106,0); }
+    }
+    @keyframes pulseRed{
+      0%{ box-shadow: 0 0 0 0 rgba(255,75,75,.55); }
+      70%{ box-shadow: 0 0 0 10px rgba(255,75,75,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(255,75,75,0); }
+    }
 
     /* strip */
     .strip{
@@ -134,18 +158,6 @@
         linear-gradient(180deg, rgba(0,0,0,.00), rgba(0,0,0,.55) 70%, rgba(0,0,0,.70));
       pointer-events:none;
     }
-
-    .noImage{
-      position:absolute;
-      inset:0;
-      display:none;
-      place-items:center;
-      text-align:center;
-      color: rgba(15,27,45,.70);
-      background: linear-gradient(135deg, rgba(11,92,255,.10), rgba(90,163,255,.06));
-    }
-    .noImage .icon{ font-size: 28px; opacity:.85; margin-bottom: 8px; }
-    .noImage .txt{ font-weight: 900; font-size: 14px; }
 
     .heroText{
       position:absolute;
@@ -230,9 +242,12 @@
         <div class="topRight">
           <div class="clockWrap">
             <div class="clock" id="clockNow">--:--</div>
-            <div class="clockSub" id="clockSub">Online</div>
+
+            <div class="statusGlass" id="statusBadge">
+              <span class="dot" id="statusDot"></span>
+              <span id="statusText">Online</span>
+            </div>
           </div>
-          <div class="status" aria-hidden="true"><span class="dot"></span>Online</div>
         </div>
       </div>
 
@@ -244,17 +259,11 @@
       <div class="main">
         <div class="hero fadeIn" id="hero">
           <img class="heroImg" id="heroImg" alt="" />
-          <div class="noImage" id="noImage">
-            <div>
-              <div class="icon">🗞️</div>
-              <div class="txt">Sem imagem disponível</div>
-            </div>
-          </div>
-
           <div class="heroShade"></div>
 
           <div class="heroText">
             <h2 class="headline" id="headline">Carregando…</h2>
+
             <div class="metaRow">
               <div class="chip chipSource" id="chipSource">
                 <img id="sourceLogo" alt="">
@@ -269,7 +278,6 @@
         </div>
       </div>
 
-      <!-- Footer unificado (logo PontoView) -->
       <div class="pvFooter"></div>
     </div>
   </div>
@@ -296,7 +304,26 @@
     function updateClock(){ $("clockNow").textContent = hhmm(); }
     setInterval(updateClock, 1000); updateClock();
 
+    // ===== ONLINE/OFFLINE =====
+    function setOnlineUI(isOnline){
+      const dot = $("statusDot");
+      const txt = $("statusText");
+      if(isOnline){
+        dot.classList.remove("offline");
+        txt.textContent = "Online";
+      }else{
+        dot.classList.add("offline");
+        txt.textContent = "Offline";
+      }
+    }
+
+    // navegador / TV
+    window.addEventListener("online",  () => setOnlineUI(true));
+    window.addEventListener("offline", () => setOnlineUI(false));
+    setOnlineUI(navigator.onLine);
+
     async function loadNews(){
+      // se falhar fetch, consideramos offline (pra demo fica coerente)
       const res = await fetch(DATA_URL + "?v=" + Date.now(), { cache:"no-store" });
       if(!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
@@ -304,9 +331,8 @@
       return { items, generatedAt: data.generatedAt || new Date().toISOString() };
     }
 
-    // ✅ Próxima notícia só muda ao recarregar a página.
-    // Para não repetir sempre a mesma, salvamos o último ID no navegador.
-    const STORAGE_LAST = "pv_news_last_id_single_v1";
+    // Próxima notícia só muda ao recarregar
+    const STORAGE_LAST = "pv_news_last_id_single_v2";
     const getLastId = ()=>{ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} };
     const setLastId = (id)=>{ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} };
 
@@ -317,28 +343,118 @@
       return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
     }
 
+    // ===== CAPA GERADA (GARANTE IMAGEM SEMPRE) =====
+    function fitLines(ctx, text, maxWidth){
+      const words = (text || "").split(/\s+/).filter(Boolean);
+      const lines = [];
+      let line = "";
+      for(const w of words){
+        const test = line ? (line + " " + w) : w;
+        if(ctx.measureText(test).width <= maxWidth){
+          line = test;
+        }else{
+          if(line) lines.push(line);
+          line = w;
+        }
+      }
+      if(line) lines.push(line);
+      return lines;
+    }
+
+    function makeCoverDataUrl(item){
+      const W = 1600, H = 900;
+      const c = document.createElement("canvas");
+      c.width = W; c.height = H;
+      const ctx = c.getContext("2d");
+
+      // fundo degradê (padrão PontoView)
+      const g = ctx.createLinearGradient(0,0,W,H);
+      g.addColorStop(0, "#0b5cff");
+      g.addColorStop(1, "#5aa3ff");
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,W,H);
+
+      // brilho suave
+      const rg = ctx.createRadialGradient(W*0.25, H*0.20, 50, W*0.25, H*0.20, H*0.9);
+      rg.addColorStop(0, "rgba(255,255,255,.22)");
+      rg.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = rg;
+      ctx.fillRect(0,0,W,H);
+
+      // faixa escura embaixo para o texto
+      const shade = ctx.createLinearGradient(0,H*0.45,0,H);
+      shade.addColorStop(0, "rgba(0,0,0,0)");
+      shade.addColorStop(1, "rgba(0,0,0,.65)");
+      ctx.fillStyle = shade;
+      ctx.fillRect(0,0,W,H);
+
+      // título
+      const padding = 70;
+      const maxW = W - padding*2;
+      ctx.fillStyle = "rgba(255,255,255,.98)";
+      ctx.textBaseline = "top";
+
+      let fontSize = 74;
+      ctx.font = `900 ${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+      let lines = fitLines(ctx, item?.title || "Notícia", maxW);
+
+      // ajusta fonte para caber (até 4 linhas)
+      while((lines.length > 4) && fontSize > 44){
+        fontSize -= 6;
+        ctx.font = `900 ${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+        lines = fitLines(ctx, item?.title || "Notícia", maxW);
+      }
+
+      const startY = H - padding - (lines.length * (fontSize * 1.12)) - 70;
+      let y = Math.max(H*0.50, startY);
+
+      for(let i=0;i<Math.min(lines.length, 4);i++){
+        ctx.fillText(lines[i], padding, y);
+        y += fontSize * 1.12;
+      }
+
+      // fonte (pequena)
+      ctx.fillStyle = "rgba(255,255,255,.85)";
+      ctx.font = `700 30px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+      const src = (item?.source || item?.sourceDomain || "Fonte");
+      ctx.fillText(src, padding, H - padding + 8);
+
+      return c.toDataURL("image/jpeg", 0.92);
+    }
+
+    // tenta carregar imagem real; se falhar, gera capa (sempre)
     function setHeroImage(item){
       const img = $("heroImg");
-      const no = $("noImage");
-
       img.onerror = null;
 
       const url = item?.imageUrl || item?.imageLocal || item?.imageRemote || "";
+      const fallback = makeCoverDataUrl(item);
+
       if(!url){
-        img.style.display = "none";
-        no.style.display = "grid";
+        img.src = fallback;
         return;
       }
 
-      img.style.display = "block";
-      no.style.display = "none";
+      // 1) tenta a imagem da notícia
       img.src = url;
 
+      // 2) se falhar, usa a capa gerada (garante demo)
       img.onerror = () => {
-        img.removeAttribute("src");
-        img.style.display = "none";
-        no.style.display = "grid";
+        img.onerror = null;
+        img.src = fallback;
       };
+
+      // 3) se demorar demais (TV / rede), também cai no fallback
+      const timeoutMs = 3500;
+      const t = setTimeout(() => {
+        // se ainda está tentando carregar (complete false), troca pro fallback
+        if(!img.complete || img.naturalWidth === 0){
+          img.onerror = null;
+          img.src = fallback;
+        }
+      }, timeoutMs);
+
+      img.onload = () => clearTimeout(t);
     }
 
     function setSource(item){
@@ -369,10 +485,10 @@
         $("dateChip").textContent = "Publicado: —";
         $("scopeChip").textContent = "Tipo: —";
         $("cityChip").style.display = "none";
-        $("heroImg").style.display="none";
-        $("noImage").style.display="grid";
-        $("sourceLogo").style.display="none";
+        $("sourceLogo").style.display = "none";
         $("sourceName").textContent = "Fonte";
+        // garante uma capa mesmo no vazio
+        $("heroImg").src = makeCoverDataUrl({ title: "Sem notícias recentes", source: "PontoView" });
         return;
       }
 
@@ -387,17 +503,19 @@
         $("cityChip").style.display = "none";
       }
 
-      setHeroImage(item);
       setSource(item);
+      setHeroImage(item);
       setLastId(item.id || "");
     }
 
     async function start(){
       try{
         const pack = await loadNews();
+        setOnlineUI(true);
         const item = pickNext(pack.items || []);
         render(item);
       }catch{
+        setOnlineUI(false);
         render(null);
       }
     }
