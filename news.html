@@ -6,197 +6,84 @@
 <title>PontoView • Notícias</title>
 
 <style>
-:root{
-  --blue1:#2f6fed;
-  --blue2:#5a8cff;
-  --bg:#0b1220;
-}
-
+:root{--b1:#2f6fed;--b2:#5a8cff;--bg:#0b1220;--line:rgba(15,27,45,.10)}
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
   background:radial-gradient(1200px 600px at 20% 10%,#1c3c8a55,transparent),
              linear-gradient(180deg,#0b1220,#070d18);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;padding:18px;
 }
-
 .panel{
-  width:96%;
-  height:92%;
-  background:#fff;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-  display:flex;
-  flex-direction:column;
+  width:96%;height:92%;background:#fff;border-radius:18px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;
 }
-
-/* HEADER */
 .header{
-  background:linear-gradient(135deg,var(--blue1),var(--blue2));
-  color:#fff;
-  padding:18px 22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  background:linear-gradient(135deg,var(--b1),var(--b2));color:#fff;padding:18px 22px;
+  display:flex;justify-content:space-between;align-items:center;
 }
-.header-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.icon{
-  width:44px;height:44px;
-  border-radius:12px;
-  background:rgba(255,255,255,.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;
-}
-.title{
-  font-size:26px;
-  font-weight:900;
-}
-.subtitle{
-  font-size:12px;
-  letter-spacing:.2em;
-  font-weight:800;
-  opacity:.9;
-}
-
-.header-right{
-  text-align:right;
-}
-.clock{
-  font-size:34px;
-  font-weight:900;
-}
+.left{display:flex;align-items:center;gap:14px}
+.icon{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;font-size:20px}
+.title{font-size:26px;font-weight:900}
+.sub{font-size:12px;letter-spacing:.2em;font-weight:800;opacity:.9}
+.right{text-align:right}
+.clock{font-size:34px;font-weight:900;line-height:1}
 .status{
-  margin-top:6px;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:6px 12px;
-  border-radius:999px;
-  background:rgba(255,255,255,.2);
-  font-weight:800;
+  margin-top:8px;display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.22);font-weight:900;letter-spacing:.03em;
+  backdrop-filter: blur(6px);
 }
-.dot{
-  width:10px;height:10px;border-radius:50%;
-  background:#32d16d;
-  animation:pulse 1.5s infinite;
-}
+.dot{width:10px;height:10px;border-radius:50%;background:#32d16d;animation:pulse 1.5s infinite}
 .offline .dot{background:#ff4b4b}
-
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(50,209,109,.6)}
   70%{box-shadow:0 0 0 10px rgba(50,209,109,0)}
   100%{box-shadow:0 0 0 0 rgba(50,209,109,0)}
 }
 
-/* SUBSTRIP */
 .substrip{
-  background:#f1f3f7;
-  padding:10px 18px;
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:.18em;
-  display:flex;
-  justify-content:space-between;
+  background:#f1f3f7;padding:10px 18px;font-size:13px;font-weight:900;
+  letter-spacing:.18em;display:flex;justify-content:space-between;border-bottom:1px solid var(--line);
 }
 
-/* CONTENT */
-.content{
-  flex:1;
-  position:relative;
-  overflow:hidden;
-}
-
-.hero-img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.75));
-}
-
-.text{
-  position:absolute;
-  bottom:24px;
-  left:24px;
-  right:24px;
-  color:#fff;
-}
-.headline{
-  font-size:46px;
-  font-weight:900;
-  line-height:1.08;
-  margin-bottom:14px;
-}
-
-.meta{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
+.content{flex:1;position:relative;overflow:hidden}
+.hero{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.78))}
+.text{position:absolute;bottom:24px;left:24px;right:24px;color:#fff}
+.headline{font-size:46px;font-weight:900;line-height:1.08;margin:0 0 14px 0;text-shadow:0 10px 26px rgba(0,0,0,.45)}
+.meta{display:flex;gap:10px;flex-wrap:wrap}
 .badge{
-  background:rgba(255,255,255,.9);
-  color:#000;
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  display:flex;
-  align-items:center;
-  gap:8px;
+  background:rgba(255,255,255,.92);color:#0b1220;padding:8px 12px;border-radius:999px;
+  font-size:12px;font-weight:900;display:flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);
 }
-.badge img{
-  width:18px;height:18px;border-radius:4px;
-}
+.badge img{width:18px;height:18px;border-radius:4px;object-fit:contain;background:rgba(255,255,255,.8);border:1px solid rgba(15,27,45,.10)}
+.footer{padding:10px 16px;display:flex;justify-content:flex-end;border-top:1px solid rgba(15,27,45,.08)}
+.footer img{height:22px;opacity:.75}
 
-/* FOOTER */
-.footer{
-  padding:10px 16px;
-  display:flex;
-  justify-content:flex-end;
-}
-.footer img{
-  height:22px;
-  opacity:.75;
-}
+.fade{animation:fade .38s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ANIMATION */
-.fade{animation:fade .4s ease}
-@keyframes fade{
-  from{opacity:0;transform:translateY(6px)}
-  to{opacity:1;transform:none}
-}
+@media (max-width:1100px){.headline{font-size:38px}}
+@media (max-width:780px){.headline{font-size:30px}}
 </style>
 </head>
 
 <body>
 <div class="panel fade">
-
   <div class="header">
-    <div class="header-left">
+    <div class="left">
       <div class="icon">🗞️</div>
       <div>
         <div class="title">NOTÍCIAS</div>
-        <div class="subtitle">ESPÍRITO SANTO</div>
+        <div class="sub">ESPÍRITO SANTO</div>
       </div>
     </div>
-    <div class="header-right">
+    <div class="right">
       <div class="clock" id="clock">00:00</div>
-      <div class="status" id="status"><span class="dot"></span><span>Online</span></div>
+      <div class="status" id="status"><span class="dot"></span><span id="statusText">Online</span></div>
     </div>
   </div>
 
@@ -206,18 +93,19 @@ body{
   </div>
 
   <div class="content">
-    <img id="image" class="hero-img"/>
+    <img id="image" class="hero" alt=""/>
     <div class="overlay"></div>
 
     <div class="text">
-      <div class="headline" id="headline">Carregando notícia…</div>
+      <div class="headline" id="headline">Carregando…</div>
       <div class="meta">
         <div class="badge" id="sourceBadge">
-          <img id="sourceLogo"/>
+          <img id="sourceLogo" alt=""/>
           <span id="sourceName">Fonte</span>
         </div>
         <div class="badge" id="date">—</div>
         <div class="badge" id="scope">—</div>
+        <div class="badge" id="city" style="display:none">—</div>
       </div>
     </div>
   </div>
@@ -225,55 +113,164 @@ body{
   <div class="footer">
     <img src="./assets/logo-pontoview.png" alt="PontoView"/>
   </div>
-
 </div>
 
 <script>
-const clock = document.getElementById("clock");
-setInterval(()=>clock.textContent=new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),1000);
+/* ===== relógio ===== */
+const clockEl=document.getElementById("clock");
+setInterval(()=>clockEl.textContent=new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),1000);
 
-const img = document.getElementById("image");
-const headline = document.getElementById("headline");
+/* ===== online/offline ===== */
+const statusEl=document.getElementById("status");
+const statusText=document.getElementById("statusText");
+function setOnline(isOnline){
+  statusEl.classList.toggle("offline", !isOnline);
+  statusText.textContent = isOnline ? "Online" : "Offline";
+}
+window.addEventListener("online", ()=>setOnline(true));
+window.addEventListener("offline", ()=>setOnline(false));
+setOnline(navigator.onLine);
 
-/* ===== IMAGEM GARANTIDA ===== */
-function generateCover(title){
+/* ===== helpers ===== */
+function fmtDT(iso){
+  try{return new Date(iso).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})}
+  catch{return "—"}
+}
+function scopeLabel(s){
+  return s==="local"?"Local":s==="state"?"Estadual":s==="national"?"Nacional":"—";
+}
+
+/* ===== capa fallback (se proxy falhar) ===== */
+function generateCover(title, source){
   const c=document.createElement("canvas");
   c.width=1600;c.height=900;
   const x=c.getContext("2d");
+
   const g=x.createLinearGradient(0,0,1600,900);
   g.addColorStop(0,"#2f6fed");g.addColorStop(1,"#5a8cff");
   x.fillStyle=g;x.fillRect(0,0,1600,900);
-  x.fillStyle="rgba(0,0,0,.55)";
-  x.fillRect(0,500,1600,400);
+
+  const rg=x.createRadialGradient(350,180,10,350,180,900);
+  rg.addColorStop(0,"rgba(255,255,255,.20)");
+  rg.addColorStop(1,"rgba(255,255,255,0)");
+  x.fillStyle=rg;x.fillRect(0,0,1600,900);
+
+  const shade=x.createLinearGradient(0,420,0,900);
+  shade.addColorStop(0,"rgba(0,0,0,0)");
+  shade.addColorStop(1,"rgba(0,0,0,.70)");
+  x.fillStyle=shade;x.fillRect(0,0,1600,900);
+
   x.fillStyle="#fff";
-  x.font="900 72px system-ui";
+  x.textBaseline="top";
+
+  let size=72;
+  x.font=`900 ${size}px system-ui`;
+  const maxW=1400;
+  const words=(title||"Notícia").split(/\s+/).filter(Boolean);
+
+  function linesFor(fontSize){
+    x.font=`900 ${fontSize}px system-ui`;
+    const lines=[]; let line="";
+    for(const w of words){
+      const t=line?line+" "+w:w;
+      if(x.measureText(t).width<=maxW){ line=t; }
+      else{ if(line) lines.push(line); line=w; }
+    }
+    if(line) lines.push(line);
+    return lines;
+  }
+
+  let lines=linesFor(size);
+  while(lines.length>4 && size>44){ size-=6; lines=linesFor(size); }
+
   let y=560;
-  title.split(" ").reduce((l,w)=>{
-    const t=l?l+" "+w:w;
-    if(x.measureText(t).width>1400){x.fillText(l,100,y);y+=84;return w}
-    return t
-  },"");
-  x.fillText(title,100,y);
+  for(let i=0;i<Math.min(lines.length,4);i++){
+    x.fillText(lines[i],100,y); y+=size*1.12;
+  }
+
+  x.fillStyle="rgba(255,255,255,.85)";
+  x.font="800 30px system-ui";
+  x.fillText(source||"PontoView",100, 820);
+
   return c.toDataURL("image/jpeg",.92);
 }
 
-/* ===== LOAD ===== */
-fetch("./data/news.json")
-.then(r=>r.json())
-.then(d=>{
-  const n=d.items[Math.floor(Math.random()*d.items.length)];
-  headline.textContent=n.title;
-  document.getElementById("date").textContent=new Date(n.publishedAt).toLocaleString("pt-BR");
-  document.getElementById("scope").textContent=n.scope.toUpperCase();
-  document.getElementById("sourceName").textContent=n.source;
-  document.getElementById("sourceLogo").src=n.sourceLogoUrl||"";
-  img.onerror=()=>img.src=generateCover(n.title);
-  img.src=n.imageUrl||generateCover(n.title);
-})
-.catch(()=>{
-  document.getElementById("status").classList.add("offline");
-  img.src=generateCover("Sem notícias disponíveis no momento");
-});
+/* ===== imagem externa via PROXY (resolve bloqueios) =====
+   wsrv.nl aceita URL sem protocolo ou com protocolo.
+   A gente remove http(s):// pra ficar estável.
+*/
+function proxiedImage(url){
+  if(!url) return "";
+  const clean = url.replace(/^https?:\/\//i,"");
+  // fit=cover + tamanho TV (evita estourar e acelera)
+  return "https://wsrv.nl/?url=" + encodeURIComponent(clean) + "&w=1920&h=1080&fit=cover&output=jpg&q=85";
+}
+
+/* ===== escolher notícia só ao recarregar ===== */
+const KEY="pv_news_last_id_reload_only_v1";
+function getLast(){ try{return localStorage.getItem(KEY)||""}catch{return""} }
+function setLast(v){ try{localStorage.setItem(KEY,v||"")}catch{} }
+function pickNext(items){
+  if(!items?.length) return null;
+  const last=getLast();
+  const shuffled=items.slice().sort(()=>Math.random()-0.5);
+  return shuffled.find(x=>(x.id||"")!==last) || shuffled[0];
+}
+
+/* ===== render ===== */
+const imgEl=document.getElementById("image");
+const hEl=document.getElementById("headline");
+
+async function start(){
+  try{
+    const r=await fetch("./data/news.json?v="+Date.now(), {cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const data=await r.json();
+    const items = Array.isArray(data.items) ? data.items : (Array.isArray(data) ? data : []);
+    const item = pickNext(items);
+
+    if(!item){
+      setOnline(false);
+      const cover=generateCover("Sem notícias disponíveis no momento","PontoView");
+      imgEl.src=cover;
+      hEl.textContent="Sem notícias disponíveis no momento";
+      return;
+    }
+
+    setOnline(true);
+
+    document.getElementById("headline").textContent = item.title || "Notícia";
+    document.getElementById("date").textContent = fmtDT(item.publishedAt);
+    document.getElementById("scope").textContent = scopeLabel(item.scope);
+
+    const cityEl=document.getElementById("city");
+    if(item.city){ cityEl.style.display="flex"; cityEl.textContent=item.city; }
+    else{ cityEl.style.display="none"; }
+
+    document.getElementById("sourceName").textContent = item.source || item.sourceDomain || "Fonte";
+    const logo=document.getElementById("sourceLogo");
+    logo.src = item.sourceLogoUrl || "";
+    logo.onerror=()=>logo.style.display="none";
+    logo.onload=()=>logo.style.display="inline-block";
+
+    // imagem externa (proxy) com fallback
+    const cover = generateCover(item.title, item.source || item.sourceDomain || "Fonte");
+    const remote = item.imageRemote || item.imageUrl || "";
+    const proxy = proxiedImage(remote);
+
+    imgEl.onerror = () => { imgEl.onerror=null; imgEl.src = cover; };
+    imgEl.src = proxy || cover;
+
+    setLast(item.id||"");
+  } catch(e){
+    setOnline(false);
+    const cover=generateCover("Sem internet ou feed indisponível","PontoView");
+    imgEl.src=cover;
+    hEl.textContent="Sem internet ou feed indisponível";
+  }
+}
+
+start();
 </script>
 </body>
 </html>
