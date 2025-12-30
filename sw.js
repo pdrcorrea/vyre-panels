@@ -1,4 +1,4 @@
-const CACHE_NAME = "pontoview-vyre-v9";
+const CACHE_NAME = "pontoview-vyre-v10";
 const ASSETS = [
   "./",
   "./news.html",
