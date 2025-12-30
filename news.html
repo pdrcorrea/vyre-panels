@@ -5,8 +5,48 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Vyre • Notícias</title>
   <link rel="stylesheet" href="./vyre-light.css">
+
   <style>
-    /* logo dentro da pílula */
+    /* ===== BACKGROUND (padrão ônibus) ===== */
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      background: radial-gradient(1200px 700px at 18% 10%, rgba(90,163,255,.18), rgba(0,0,0,0) 55%),
+                  radial-gradient(1000px 800px at 82% 25%, rgba(11,92,255,.16), rgba(0,0,0,0) 60%),
+                  linear-gradient(180deg, #0b1220, #0a1324 55%, #08101f);
+      background-attachment: fixed;
+    }
+
+    /* garante que o card branco continue igual */
+    .page{ min-height:100%; }
+
+    /* ===== IMAGEM: sempre se ajusta ao espaço (nem menor, nem maior) ===== */
+    .media{
+      position:relative;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      border-radius: inherit;
+    }
+    #newsImg{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;          /* preenche sem distorcer */
+      object-position:center;    /* centraliza */
+      transform: translateZ(0);  /* melhora render em TVs */
+    }
+
+    /* fallback centralizado e consistente */
+    #newsEmpty{
+      width:100%;
+      height:100%;
+      display:grid;
+      place-items:center;
+      text-align:center;
+    }
+
+    /* ===== Fonte com LOGO (favicon) ===== */
     .chipLogo{
       display:inline-flex;
       align-items:center;
@@ -22,14 +62,12 @@
       background: rgba(255,255,255,.75);
       border: 1px solid rgba(15,27,45,.10);
     }
-    .chipLogo span{
-      display:none; /* só aparece no fallback */
-      font-weight:900;
-    }
+    .chipLogo span{ display:none; font-weight:900; }
     .chipLogo.fallback span{ display:inline; }
     .chipLogo.fallback img{ display:none; }
   </style>
 </head>
+
 <body>
   <div class="page">
     <div class="card">
@@ -37,7 +75,7 @@
         <div class="brand">
           <div class="brandIcon" aria-hidden="true">🗞️</div>
           <div class="brandText">
-            <h1>Notícias</h1>
+            <h1>NOTÍCIAS</h1>
             <div class="sub">ESPÍRITO SANTO</div>
           </div>
         </div>
@@ -59,8 +97,10 @@
             <div class="media">
               <img id="newsImg" alt="" style="display:none;">
               <div class="mediaEmpty" id="newsEmpty">
-                <div class="big">🗞️</div>
-                <div>Sem imagem disponível</div>
+                <div>
+                  <div class="big">🗞️</div>
+                  <div>Sem imagem disponível</div>
+                </div>
               </div>
             </div>
           </div>
@@ -92,141 +132,153 @@
   </div>
 
   <script src="./pv-footer.js"></script>
-<script>
-(() => {
-  const ROTATE_SECONDS = 20;
-  const $ = (id)=>document.getElementById(id);
+  <script>
+  (() => {
+    const ROTATE_SECONDS = 20;
+    const $ = (id)=>document.getElementById(id);
 
-  function hhmm(d=new Date()){
-    return d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
-  }
-  function fmtDateTime(d){
-    try{
-      const dt = new Date(d);
-      return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
-    }catch{return "—";}
-  }
-  function scopeLabel(s){
-    return s === "local" ? "Local" : s === "state" ? "Estadual" : "Nacional";
-  }
-
-  function updateClock(){ $("clockNow").textContent = hhmm(); }
-  setInterval(updateClock, 1000); updateClock();
-
-  const STORAGE_LAST = "pv_news_last_id_light_v2";
-  const getLastId = ()=>{ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} };
-  const setLastId = (id)=>{ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} };
-
-  function pickNext(items){
-    if(!items || !items.length) return null;
-    const last = getLastId();
-    const shuffled = items.slice().sort(()=>Math.random()-0.5);
-    return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
-  }
-
-  function setImage(url){
-    const img = $("newsImg");
-    const empty = $("newsEmpty");
-    if(url){
-      img.src = url;
-      img.style.display = "block";
-      empty.style.display = "none";
-    } else {
-      img.removeAttribute("src");
-      img.style.display = "none";
-      empty.style.display = "grid";
+    function hhmm(d=new Date()){
+      return d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
     }
-  }
+    function fmtDateTime(d){
+      try{
+        const dt = new Date(d);
+        return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+      }catch{return "—";}
+    }
+    function scopeLabel(s){
+      return s === "local" ? "Local" : s === "state" ? "Estadual" : "Nacional";
+    }
 
-  function setSourceLogo(item){
-    const chip = $("sourceChip");
-    const logo = $("sourceLogo");
-    const text = $("sourceText");
+    function updateClock(){ $("clockNow").textContent = hhmm(); }
+    setInterval(updateClock, 1000); updateClock();
 
-    const label = item.source || item.sourceDomain || "Fonte";
-    text.textContent = label;
+    const STORAGE_LAST = "pv_news_last_id_light_v3";
+    const getLastId = ()=>{ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} };
+    const setLastId = (id)=>{ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} };
 
-    if (item.sourceLogoUrl) {
+    function pickNext(items){
+      if(!items || !items.length) return null;
+      const last = getLastId();
+      const shuffled = items.slice().sort(()=>Math.random()-0.5);
+      return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
+    }
+
+    function setImage(url){
+      const img = $("newsImg");
+      const empty = $("newsEmpty");
+
+      // limpa listeners antigos
+      img.onerror = null;
+
+      if(url){
+        img.src = url;
+        img.style.display = "block";
+        empty.style.display = "none";
+
+        // se a imagem falhar (CORS/404), cai pro fallback
+        img.onerror = () => {
+          img.removeAttribute("src");
+          img.style.display = "none";
+          empty.style.display = "grid";
+        };
+      } else {
+        img.removeAttribute("src");
+        img.style.display = "none";
+        empty.style.display = "grid";
+      }
+    }
+
+    function setSourceLogo(item){
+      const chip = $("sourceChip");
+      const logo = $("sourceLogo");
+      const text = $("sourceText");
+
+      const label = item.source || item.sourceDomain || "Fonte";
+      text.textContent = label;
+
       chip.classList.remove("fallback");
-      logo.src = item.sourceLogoUrl;
-      logo.alt = label;
-      logo.onerror = () => chip.classList.add("fallback"); // fallback automático
-    } else {
-      chip.classList.add("fallback");
-      logo.removeAttribute("src");
-    }
-  }
+      logo.onerror = null;
 
-  function renderFallback(generatedAt){
-    setImage("");
-    $("headline").textContent = "Sem notícias recentes no momento";
-    $("dateChip").textContent = "Publicado: —";
-    $("scopeChip").textContent = "Tipo: —";
-    $("cityChip").style.display = "none";
-    $("countChip").textContent = "Itens: 0";
-
-    // fonte fallback (texto)
-    $("sourceChip").classList.add("fallback");
-    $("sourceText").textContent = "Fonte";
-    $("sourceLogo").removeAttribute("src");
-  }
-
-  function renderItem(item, pack){
-    const content = $("content");
-    content.classList.remove("fadeIn"); void content.offsetWidth; content.classList.add("fadeIn");
-
-    if(!item){
-      renderFallback(pack.generatedAt);
-      return;
+      if (item.sourceLogoUrl) {
+        logo.src = item.sourceLogoUrl;
+        logo.alt = label;
+        logo.onerror = () => chip.classList.add("fallback");
+      } else {
+        chip.classList.add("fallback");
+        logo.removeAttribute("src");
+      }
     }
 
-    setImage(item.imageUrl || "");
-    $("headline").textContent = item.title || "Notícia";
-    $("dateChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
-    $("scopeChip").textContent = "Tipo: " + scopeLabel(item.scope);
-    $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
-
-    if (item.city) {
-      $("cityChip").style.display = "inline-flex";
-      $("cityChip").textContent = "Cidade: " + item.city;
-    } else {
+    function renderFallback(pack){
+      setImage("");
+      $("headline").textContent = "Sem notícias recentes no momento";
+      $("dateChip").textContent = "Publicado: —";
+      $("scopeChip").textContent = "Tipo: —";
       $("cityChip").style.display = "none";
+      $("countChip").textContent = "Itens: 0";
+
+      $("sourceChip").classList.add("fallback");
+      $("sourceText").textContent = "Fonte";
+      $("sourceLogo").removeAttribute("src");
     }
 
-    setSourceLogo(item);
-    setLastId(item.id || "");
-  }
+    function renderItem(item, pack){
+      const content = $("content");
+      content.classList.remove("fadeIn"); void content.offsetWidth; content.classList.add("fadeIn");
 
-  async function fetchWithTimeout(url, ms){
-    const ctrl = new AbortController();
-    const t = setTimeout(()=>ctrl.abort(), ms);
-    try{
-      const res = await fetch(url, { cache:"no-store", signal: ctrl.signal });
-      if(!res.ok) throw new Error("HTTP " + res.status);
-      return await res.json();
-    } finally { clearTimeout(t); }
-  }
+      if(!item){
+        renderFallback(pack);
+        return;
+      }
 
-  async function loadNews(){
-    const url = "./data/news.json?v=" + Date.now();
-    const data = await fetchWithTimeout(url, 12000);
-    const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
-    const generatedAt = data?.generatedAt ? data.generatedAt : new Date().toISOString();
-    return { items, generatedAt };
-  }
+      setImage(item.imageUrl || "");
+      $("headline").textContent = item.title || "Notícia";
+      $("dateChip").textContent = "Publicado: " + (item.publishedAt ? fmtDateTime(item.publishedAt) : "—");
+      $("scopeChip").textContent = "Tipo: " + scopeLabel(item.scope);
+      $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
 
-  async function cycle(){
-    try{
-      const pack = await loadNews();
-      renderItem(pickNext(pack.items), pack);
-    }catch{
-      renderFallback(new Date().toISOString());
+      if (item.city) {
+        $("cityChip").style.display = "inline-flex";
+        $("cityChip").textContent = "Cidade: " + item.city;
+      } else {
+        $("cityChip").style.display = "none";
+      }
+
+      setSourceLogo(item);
+      setLastId(item.id || "");
     }
-  }
 
-  cycle();
-  setInterval(cycle, ROTATE_SECONDS * 1000);
-})();
-</script>
+    async function fetchWithTimeout(url, ms){
+      const ctrl = new AbortController();
+      const t = setTimeout(()=>ctrl.abort(), ms);
+      try{
+        const res = await fetch(url, { cache:"no-store", signal: ctrl.signal });
+        if(!res.ok) throw new Error("HTTP " + res.status);
+        return await res.json();
+      } finally { clearTimeout(t); }
+    }
+
+    async function loadNews(){
+      const url = "./data/news.json?v=" + Date.now();
+      const data = await fetchWithTimeout(url, 12000);
+      const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
+      const generatedAt = data?.generatedAt ? data.generatedAt : new Date().toISOString();
+      return { items, generatedAt };
+    }
+
+    async function cycle(){
+      try{
+        const pack = await loadNews();
+        renderItem(pickNext(pack.items), pack);
+      }catch{
+        renderFallback({ generatedAt: new Date().toISOString(), items: [] });
+      }
+    }
+
+    cycle();
+    setInterval(cycle, ROTATE_SECONDS * 1000);
+  })();
+  </script>
 </body>
 </html>
