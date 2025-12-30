@@ -58,8 +58,7 @@
       <!-- ===== tips.html (MESMA ALTERAÇÃO) ===== -->
 <div class="pvFooter"></div>
 <script src="./pv-footer.js"></script>
-
-        <div id="footerRight">Atualizado: —</div>
+       
       </div>
     </div>
   </div>
@@ -99,7 +98,6 @@
     $("topicChip").textContent = "Tema: —";
     $("countChip").textContent = "Itens: 0";
     $("clockUpd").textContent = hhmm();
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(updatedAt || new Date().toISOString());
   }
 
   function renderItem(item, pack){
@@ -114,9 +112,7 @@
     $("headline").textContent = item.title || "Dica";
     $("body").textContent = item.text || item.body || "";
     $("topicChip").textContent = "Tema: " + (item.topic || item.category || "Bem-estar");
-    $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
     $("clockUpd").textContent = hhmm();
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(pack.updatedAt);
 
     setLastId(item.id || "");
   }
