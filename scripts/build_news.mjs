@@ -69,19 +69,26 @@ async function fetchText(url) {
   }
 }
 
-function pickMeta(html, namesOrProps) {
-  // procura meta name=... ou property=...
-  for (const key of namesOrProps) {
-    // content="..."
-    const r1 = new RegExp(`<meta[^>]+(?:name|property)=["']${escapeReg(key)}["'][^>]+content=["']([^"']+)["'][^>]*>`, "i");
-    const m1 = html.match(r1);
-    if (m1?.[1]) return clampStr(decodeHtml(m1[1]));
-    // content='...'
-    const r2 = new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+(?:name|property)=["']${escapeReg(key)}["'][^>]*>`, "i");
-    const m2 = html.match(r2);
-    if (m2?.[1]) return clampStr(decodeHtml(m2[1]));
+function pickMeta(html, url) {
+  const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
+  const title = titleMatch ? titleMatch[1].trim() : "";
+
+  // Busca imagem em: 1. og:image | 2. twitter:image | 3. link rel="image_src"
+  const imgRegex = /<(meta|link)[^>]*(property|name|rel)=["'](og:image|twitter:image|image_src)["'][^>]*content=["']([^"']+)["'][^>]*>/i;
+  const imgRegexAlt = /<(meta|link)[^>]*content=["']([^"']+)["'][^>]*(property|name|rel)=["'](og:image|twitter:image|image_src)["'][^>]*>/i;
+  
+  let imgMatch = html.match(imgRegex) || html.match(imgRegexAlt);
+  let image = null;
+
+  if (imgMatch) {
+    // Pega o grupo que contém a URL (geralmente o 4 ou o 2 dependendo da ordem dos atributos)
+    image = imgMatch[4] || imgMatch[2];
   }
-  return "";
+
+  return {
+    title: decodeHtml(title),
+    image: image ? absUrl(image, url) : null
+  };
 }
 
 function decodeHtml(s) {
