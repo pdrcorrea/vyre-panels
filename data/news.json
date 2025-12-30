@@ -1,374 +1,264 @@
 {
-  "generatedAt": "2025-12-30T16:57:01.675Z",
+  "generatedAt": "2025-12-30T17:43:27.652Z",
   "items": [
     {
-      "id": "n:da1deeddb0",
+      "title": "Escadaria Maria Ortiz: patrimônio histórico e símbolo da resistência capixaba",
+      "url": "https://www.vitoria.es.gov.br/noticia/escadaria-maria-ortiz-patrimonio-historico-e-simbolo-da-resistencia-capixaba-55354",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/12/23/144306/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
+      "publishedAt": "2025-12-30T17:40:00.000Z",
+      "scope": "local",
+      "city": "Vitória"
+    },
+    {
+      "title": "Arena de Verão 2026: Praia de Camburi terá mais de 300 horas de atividades com 50 modalidades",
+      "url": "https://www.vitoria.es.gov.br/noticia/arena-de-verao-2026-praia-de-camburi-tera-mais-de-300-horas-de-atividades-com-50-modalidades-55367",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/01/13/135802/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
+      "publishedAt": "2025-12-30T17:20:00.000Z",
+      "scope": "local",
+      "city": "Vitória"
+    },
+    {
+      "title": "Editais da Cultura 2025: inscrições abertas!",
+      "url": "https://www.es.gov.br/Noticia/editais-da-cultura-2025-inscricoes-abertas",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/SITE-Editais2025-Inscricao.png",
+      "source": "Portal ES",
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": "Emissão de nota fiscal eletrônica será feita pelo Sistema Nacional",
+      "url": "https://www.vitoria.es.gov.br/noticia/emissao-de-nota-fiscal-eletronica-sera-feita-pelo-sistema-nacional-55371",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2017/09/26/58091/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
+      "publishedAt": "2025-12-30T17:10:00.000Z",
+      "scope": "local",
+      "city": "Vitória"
+    },
+    {
+      "title": "Ampliação do número de carteiras assinadas é sustentado, diz IBGE",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/aumento-de-carteira-assinada-no-brasil-e-sustentado-diz-ibge",
+      "image": "https://imagens.ebc.com.br/LJri3GhTJ72Wf7fM-fz7eZavuAc=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/01_carteira_de_trabalho2.jpg?itok=GzY9W8yM",
+      "source": "Agência Brasil",
+      "publishedAt": "2025-12-30T19:56:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": "Transcol terá programação especial de ônibus para Réveillon",
+      "url": "https://www.es.gov.br/Noticia/transcol-tera-programacao-especial-de-onibus-para-reveillon",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/IMG_0034%20(2).jpg",
+      "source": "Portal ES",
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
       "title": "Réveillon 2026: confira o funcionamento dos serviços da PMV nos dias 30 e 31 de dezembro",
       "url": "https://www.vitoria.es.gov.br/noticia/reveillon-2026-confira-o-funcionamento-dos-servicos-da-pmv-nos-dias-30-e-31-de-dezembro-55368",
-      "imageUrl": "./data/news-images/n_da1deeddb0.jpg",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2021/03/24/90873/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
       "publishedAt": "2025-12-30T14:40:00.000Z",
       "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
+      "city": "Vitória"
     },
     {
-      "id": "n:5d31b0ef41",
       "title": "Pesquisa do Procon Vitória aponta queda de preços em itens essenciais e alívio no orçamento em 2025",
       "url": "https://www.vitoria.es.gov.br/noticia/pesquisa-do-procon-vitoria-aponta-queda-de-precos-em-itens-essenciais-e-alivio-no-orcamento-em-2025-55363",
-      "imageUrl": "./data/news-images/n_5d31b0ef41.jpg",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2021/05/03/91511/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
       "publishedAt": "2025-12-29T21:45:00.000Z",
       "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
+      "city": "Vitória"
     },
     {
-      "id": "n:1e12797543",
       "title": "Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
       "url": "https://www.es.gov.br/Noticia/governo-do-estado-segue-investindo-para-tornar-cidades-resistentes-aos-efeitos-do-clima",
-      "imageUrl": "./data/news-images/n_1e12797543.jpg",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/Encosta%20-%20São%20Domingos%20do%20Norte.jpeg",
+      "source": "Portal ES",
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:8088fda1e9",
-      "title": "Arena de Verão 2026: Camburi terá mais de 300 horas de atividades com 50 modalidades esportivas",
-      "url": "https://www.vitoria.es.gov.br/noticia/arena-de-verao-2026-camburi-tera-mais-de-300-horas-de-atividades-com-50-modalidades-esportivas-55365",
-      "imageUrl": "./data/news-images/n_8088fda1e9.jpg",
-      "publishedAt": "2025-12-29T20:25:00.000Z",
-      "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
-    },
-    {
-      "id": "n:e97ba06212",
-      "title": "Governo devolve R$ 2,8 bilhões a aposentados com descontos indevidos",
-      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/governo-devolve-r-28-bilhoes-aposentados-com-descontos-indevidos",
-      "imageUrl": "./data/news-images/n_e97ba06212.jpg",
-      "publishedAt": "2025-12-30T19:40:00.000Z",
-      "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
-    },
-    {
-      "id": "n:2d9f79b4ff",
-      "title": "Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
-      "url": "https://www.es.gov.br/Noticia/governo-do-estado-lanca-edital-para-implantacao-do-aeroporto-das-montanhas-capixabas",
-      "imageUrl": "",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
-    },
-    {
-      "id": "n:57873a9d8a",
       "title": "Réveillon da inclusão: PMV distribuirá mil abafadores para público sensível a ruídos",
       "url": "https://www.vitoria.es.gov.br/noticia/reveillon-da-inclusao-pmv-distribuira-mil-abafadores-para-publico-sensivel-a-ruidos-55364",
-      "imageUrl": "./data/news-images/n_57873a9d8a.jpg",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/12/29/144319/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
       "publishedAt": "2025-12-29T20:05:00.000Z",
       "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
+      "city": "Vitória"
     },
     {
-      "id": "n:3eb85c53dd",
+      "title": "Dono do Banco Master e ex-presidente do BRB depõem à PF nesta terça",
+      "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2025-12/dono-do-banco-master-e-ex-presidente-do-brb-depoem-pf-nesta-terca",
+      "image": "https://imagens.ebc.com.br/OICud4_kbIDfKW4X2QVvuL-kv2U=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/19/0g0a6420.jpg?itok=vq86oLf7",
+      "source": "Agência Brasil",
+      "publishedAt": "2025-12-30T19:55:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": "Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
+      "url": "https://www.es.gov.br/Noticia/governo-do-estado-lanca-edital-para-implantacao-do-aeroporto-das-montanhas-capixabas",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/HQF_5943.JPG",
+      "source": "Portal ES",
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
       "title": "Verão: saiba seus direitos ao consumir em bares, restaurantes e quiosques na capital",
       "url": "https://www.vitoria.es.gov.br/noticia/verao-saiba-seus-direitos-ao-consumir-em-bares-restaurantes-e-quiosques-na-capital-55361",
-      "imageUrl": "./data/news-images/n_3eb85c53dd.jpg",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2024/06/13/130214/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
       "publishedAt": "2025-12-29T18:55:00.000Z",
       "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
+      "city": "Vitória"
     },
     {
-      "id": "n:d7602b1d4d",
-      "title": "Estudantes da Serra se destacam em Olimpíada Brasileira de Foguetes",
-      "url": "https://www.es.gov.br/Noticia/estudantes-da-serra-se-destacam-em-olimpiada-brasileira-de-foguetes",
-      "imageUrl": "./data/news-images/n_d7602b1d4d.jpg",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
-    },
-    {
-      "id": "n:423cd2c20f",
       "title": "Réveillon 2026: Vitória terá 30 toneladas de fogos de baixo ruído em três pontos da cidade",
       "url": "https://www.vitoria.es.gov.br/noticia/reveillon-2026-vitoria-tera-30-toneladas-de-fogos-de-baixo-ruido-em-tres-pontos-da-cidade-55362",
-      "imageUrl": "./data/news-images/n_423cd2c20f.jpg",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/01/02/135461/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
       "publishedAt": "2025-12-29T18:50:00.000Z",
       "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
+      "city": "Vitória"
     },
     {
-      "id": "n:e429d84855",
-      "title": "Ministério homologa tombamento definitivo do prédio do DOPS, no Rio",
-      "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2025-12/ministerio-homologa-tombamento-definitivo-do-predio-do-dops-no-rio",
-      "imageUrl": "./data/news-images/n_e429d84855.jpg",
-      "publishedAt": "2025-12-30T19:31:00.000Z",
-      "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
-    },
-    {
-      "id": "n:57d0a194c0",
-      "title": "Decreto regulamenta restituição e complementação do ICMS-ST no Espírito Santo",
-      "url": "https://www.es.gov.br/Noticia/decreto-regulamenta-restituicao-e-complementacao-do-icms-st-no-espirito-santo",
-      "imageUrl": "./data/news-images/n_57d0a194c0.jpg",
+      "title": "Estudantes da Serra se destacam em Olimpíada Brasileira de Foguetes",
+      "url": "https://www.es.gov.br/Noticia/estudantes-da-serra-se-destacam-em-olimpiada-brasileira-de-foguetes",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/OBAFOG%203.jpg",
+      "source": "Portal ES",
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:9db26e3878",
       "title": "Réveillon 2026: Vitória ajusta últimos detalhes para a hora da virada na capital",
       "url": "https://www.vitoria.es.gov.br/noticia/reveillon-2026-vitoria-ajusta-ultimos-detalhes-para-a-hora-da-virada-na-capital-55360",
-      "imageUrl": "./data/news-images/n_9db26e3878.jpg",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2025/12/22/144294/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
       "publishedAt": "2025-12-29T18:35:00.000Z",
       "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
+      "city": "Vitória"
     },
     {
-      "id": "n:57194170c1",
+      "title": "Governo devolve R$ 2,8 bilhões a aposentados por descontos indevidos",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/governo-devolve-r-28-bilhoes-aposentados-com-descontos-indevidos",
+      "image": "https://imagens.ebc.com.br/v7EQe1AYn2Z70tMdATUIwBbjb3E=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/idosos_ocupacao.jpg?itok=zjKXkg75",
+      "source": "Agência Brasil",
+      "publishedAt": "2025-12-30T19:40:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": "Decreto regulamenta restituição e complementação do ICMS-ST no Espírito Santo",
+      "url": "https://www.es.gov.br/Noticia/decreto-regulamenta-restituicao-e-complementacao-do-icms-st-no-espirito-santo",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/empresario-trabalhando-com-documentacao-na-mesa.jpg",
+      "source": "Portal ES",
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
       "title": "Reforço na segurança: novos guardas de Vitória iniciam patrulhamento às vésperas do Réveillon",
       "url": "https://www.vitoria.es.gov.br/noticia/reforco-na-seguranca-novos-guardas-de-vitoria-iniciam-patrulhamento-as-vesperas-do-reveillon-55358",
-      "imageUrl": "./data/news-images/n_57194170c1.jpg",
+      "image": "https://www.vitoria.es.gov.br/recursos/imagens/banco/2024/03/20/126672/normal@2x.jpg",
+      "source": "Prefeitura de Vitória",
       "publishedAt": "2025-12-29T18:25:00.000Z",
       "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
+      "city": "Vitória"
     },
     {
-      "id": "n:05ea4432aa",
+      "title": "Veja quais serviços da saúde que funcionam durante feriado de Ano Novo",
+      "url": "https://www.es.gov.br/Noticia/veja-quais-servicos-da-saude-que-funcionam-durante-feriado-de-ano-novo",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/Nova%20Foto%20Matéria%20%20feriado%20ano%20novo.jpg",
+      "source": "Portal ES",
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": "Ministério homologa tombamento definitivo do prédio do DOPS, no Rio",
+      "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2025-12/ministerio-homologa-tombamento-definitivo-do-predio-do-dops-no-rio",
+      "image": "https://imagens.ebc.com.br/_xFtBcGCp7h_UlqmYLF2oKgOp2w=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/11/_tng1986.jpg?itok=v34C87dS",
+      "source": "Agência Brasil",
+      "publishedAt": "2025-12-30T19:31:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
       "title": "Hospital Estadual Central realiza cirurgia intracraniana em gestante de 23 semanas",
       "url": "https://www.es.gov.br/Noticia/hospital-estadual-central-realiza-cirurgia-intracraniana-em-gestante-de-23-semanas",
-      "imageUrl": "./data/news-images/n_05ea4432aa.jpg",
+      "image": "https://www.es.gov.br/Media/PortalES/Noticias/foto-aerea%20HEC-1-1.jpg",
+      "source": "Portal ES",
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:b3f59be6a1",
-      "title": "Tradição e nostalgia: Feira de Antiguidades da Rua da Lama será neste sábado (3)",
-      "url": "https://www.vitoria.es.gov.br/noticia/tradicao-e-nostalgia-feira-de-antiguidades-da-rua-da-lama-sera-neste-sabado-3-55359",
-      "imageUrl": "./data/news-images/n_b3f59be6a1.jpg",
-      "publishedAt": "2025-12-29T18:00:00.000Z",
-      "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
-    },
-    {
-      "id": "n:c2e7c35812",
       "title": "Operação prende 233 agressores de mulheres no estado de São Paulo",
       "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2025-12/operacao-prende-233-agressores-de-mulheres-no-estado-de-sao-paulo",
-      "imageUrl": "./data/news-images/n_c2e7c35812.jpg",
+      "image": "https://imagens.ebc.com.br/nG1e6-6fOi6pz5qpigdq9Na7mNo=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/02/11/_mg_6438.jpg?itok=uJdk8w_p",
+      "source": "Agência Brasil",
       "publishedAt": "2025-12-30T18:53:00.000Z",
       "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:eaab106e7f",
-      "title": "Médicos orientam cuidados com a saúde das crianças no mês de janeiro",
-      "url": "https://www.es.gov.br/Noticia/medicos-orientam-cuidados-com-a-saude-das-criancas-no-mes-de-janeiro",
-      "imageUrl": "./data/news-images/n_eaab106e7f.jpg",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
-    },
-    {
-      "id": "n:c24d1bc51c",
-      "title": "Indivíduo com mandado em aberto é detido pela Guarda Municipal de Vitória",
-      "url": "https://www.vitoria.es.gov.br/noticia/individuo-com-mandado-em-aberto-e-detido-pela-guarda-municipal-de-vitoria-55357",
-      "imageUrl": "./data/news-images/n_c24d1bc51c.jpg",
-      "publishedAt": "2025-12-28T09:00:00.000Z",
-      "scope": "local",
-      "city": "Vitória",
-      "source": "Prefeitura de Vitória",
-      "sourceDomain": "vitoria.es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=vitoria.es.gov.br&sz=64"
-    },
-    {
-      "id": "n:1f80bdee49",
-      "title": "Iema intensifica fiscalização e educação ambiental no Arquipélago das Três Ilhas e na Reserva de Desenvolvimento Sustentável Concha D’Ostra",
-      "url": "https://www.es.gov.br/Noticia/iema-intensifica-fiscalizacao-e-educacao-ambiental-no-arquipelago-das-tres-ilhas-e-na-reserva-de-desenvolvimento-sustentavel-concha-d-ostra",
-      "imageUrl": "./data/news-images/n_1f80bdee49.jpg",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
-    },
-    {
-      "id": "n:a16ee76ed0",
       "title": "Receita paga lote residual de restituição do IRPF de dezembro de 2025",
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/receita-paga-lote-residual-de-restituicao-do-irpf-de-dezembro-de-2025",
-      "imageUrl": "./data/news-images/n_a16ee76ed0.jpg",
+      "image": "https://imagens.ebc.com.br/WRnVcYCNOq2toW-jdJSroPChpH0=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/mcam20022020-6.jpg?itok=w0uxFYzp",
+      "source": "Agência Brasil",
       "publishedAt": "2025-12-30T18:28:00.000Z",
       "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:5bae360bac",
-      "title": "PIB cresce acima da média estadual em municípios com base agrícola forte no Espírito Santo",
-      "url": "https://www.es.gov.br/Noticia/pib-cresce-acima-da-media-estadual-em-municipios-com-base-agricola-forte-no-espirito-santo",
-      "imageUrl": "./data/news-images/n_5bae360bac.png",
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
-    },
-    {
-      "id": "n:824720e8e7",
-      "title": "Secult abre inscrições para a 4ª Teia Estadual de Pontos de Cultura e Memória do Espírito Santo",
-      "url": "https://www.es.gov.br/Noticia/secult-abre-inscricoes-para-a-4a-teia-estadual-de-pontos-de-cultura-e-memoria-do-espirito-santo",
-      "imageUrl": "./data/news-images/n_824720e8e7.png",
-      "publishedAt": "2025-12-29T12:00:00.000Z",
-      "scope": "state",
-      "city": "",
-      "source": "Governo do ES",
-      "sourceDomain": "es.gov.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=es.gov.br&sz=64"
-    },
-    {
-      "id": "n:1c7a497294",
       "title": "Dívida do Governo Geral sobe para 79% do PIB em novembro",
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/divida-do-governo-geral-sobe-para-79-do-pib-em-novembro",
-      "imageUrl": "./data/news-images/n_1c7a497294.jpg",
+      "image": "https://imagens.ebc.com.br/IuiHBafzvIOBtXEJd-vQ2WkR460=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/atoms/image/economia_ilustracao-5.jpg?itok=TSiQOBb-",
+      "source": "Agência Brasil",
       "publishedAt": "2025-12-30T18:17:00.000Z",
       "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:8ffe6ba495",
       "title": "Contas públicas têm déficit de R$ 14,4 bilhões em novembro",
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/contas-publicas-tem-deficit-de-r-144-bilhoes-em-novembro",
-      "imageUrl": "./data/news-images/n_8ffe6ba495.jpg",
+      "image": "https://imagens.ebc.com.br/ArbrUsPPeNR0-6LyC5GvA9j9yYQ=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/real_moedadinheiro_jfcrz_abr_1701220049_1.jpg?itok=ZRCuUtTo",
+      "source": "Agência Brasil",
       "publishedAt": "2025-12-30T17:49:00.000Z",
       "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:7ad87a5324",
       "title": "Operação cumpre mandados de prisão contra agressores de mulheres em SP",
       "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2025-12/operacao-cumpre-mandados-de-prisao-contra-agressores-de-mulheres-em-sp",
-      "imageUrl": "./data/news-images/n_7ad87a5324.jpg",
+      "image": "https://imagens.ebc.com.br/rYaqDkqf1EZQh39ae8TsEP-VkGc=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/07/31/policia-civil-sao-paulo.jpg?itok=hghzcIEI",
+      "source": "Agência Brasil",
       "publishedAt": "2025-12-30T16:54:00.000Z",
       "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
+      "city": null
     },
     {
-      "id": "n:16b99dcf65",
-      "title": "PGR descarta ilicitude e arquiva pedido para investigar Moraes",
-      "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2025-12/pgr-descarta-ilicitude-e-arquiva-pedido-para-investigar-moraes",
-      "imageUrl": "./data/news-images/n_16b99dcf65.jpg",
-      "publishedAt": "2025-12-30T16:30:00.000Z",
-      "scope": "national",
-      "city": "",
+      "title": "Confira os feriados nacionais e pontos facultativos de 2026",
+      "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-12/confira-os-feriados-nacionais-e-pontos-facultativos-de-2026",
+      "image": "https://imagens.ebc.com.br/YcSD2SuzLlhjmMWeXZXtsHxPiyE=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/_ja_1086.jpg?itok=vDoqhmDh",
       "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
-    },
-    {
-      "id": "n:9b21f637ea",
-      "title": "Taxa de desemprego chega a 5,2%, a menor desde 2012",
-      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/taxa-de-desemprego-chega-52-menor-desde-2012",
-      "imageUrl": "./data/news-images/n_9b21f637ea.jpg",
-      "publishedAt": "2025-12-30T15:35:00.000Z",
+      "publishedAt": "2025-12-30T16:43:00.000Z",
       "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
-    },
-    {
-      "id": "n:5afc280e30",
-      "title": "Copacabana promete drones e queima de fogos mais longa na virada",
-      "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-12/copacabana-promete-drones-e-queima-de-fogos-mais-longa-na-virada",
-      "imageUrl": "./data/news-images/n_5afc280e30.jpg",
-      "publishedAt": "2025-12-30T15:09:00.000Z",
-      "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
-    },
-    {
-      "id": "n:92f59d467f",
-      "title": "Anac faz operação em aeroportos com maior fluxo em 15 estados",
-      "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-12/anac-faz-operacao-em-aeroportos-com-maior-fluxo-em-15-estados",
-      "imageUrl": "./data/news-images/n_92f59d467f.jpg",
-      "publishedAt": "2025-12-30T14:25:00.000Z",
-      "scope": "national",
-      "city": "",
-      "source": "Agência Brasil",
-      "sourceDomain": "agenciabrasil.ebc.com.br",
-      "sourceLogoUrl": "https://www.google.com/s2/favicons?domain=agenciabrasil.ebc.com.br&sz=64"
+      "city": null
     }
   ],
   "stats": {
-    "maxAgeDays": 3,
-    "collected": {
-      "local": 0,
-      "state": 0,
-      "national": 0
-    },
-    "final": 30
+    "local": 0,
+    "state": 0,
+    "national": 0,
+    "final": 28,
+    "maxAgeDays": 3
   }
 }
