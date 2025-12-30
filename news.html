@@ -57,8 +57,8 @@
         </div>
       </div>
 
-      <div class="pvFooter"></div>
-<script src="./pv-footer.js"></script>
+        <div class="pvFooter"></div>
+        <script src="./pv-footer.js"></script>
         <div id="footerRight">Atualizado: —</div>
       </div>
     </div>
@@ -136,8 +136,8 @@
     $("scopeChip").textContent = "Tipo: " + (item.scope === "local" ? "Local" : item.scope === "state" ? "Estadual" : "Nacional");
     $("countChip").textContent = "Itens: " + (pack.items?.length || 0);
     $("clockUpd").textContent = hhmm();
-    $("footerRight").textContent = "Atualizado: " + fmtDateTime(pack.generatedAt);
-    if (window.PVFooterSet) window.PVFooterSet(new Date().toLocaleString("pt-BR"));
+    
+    
 
     setLastId(item.id || "");
   }
