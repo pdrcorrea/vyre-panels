@@ -169,23 +169,32 @@ function setImage(url){
   const empty = document.getElementById("newsEmpty");
   img.onerror = null;
 
-  if(url){
-    // garante que ./data/... funcione mesmo com cache
-    img.src = url;
+function setImage(item){
+  const img = document.getElementById("newsImg");
+  const empty = document.getElementById("newsEmpty");
+
+  img.onerror = null;
+
+  const tryUrl = (u, onFail) => {
+    if (!u) return onFail?.();
+    img.src = u;
     img.style.display = "block";
     empty.style.display = "none";
-    img.onerror = () => {
+    img.onerror = () => onFail?.();
+  };
+
+  // 1) tenta imageLocal (se existir)
+  // 2) depois tenta imageRemote (se existir)
+  // 3) senão cai no “Sem imagem disponível”
+  tryUrl(item.imageLocal || "", () => {
+    tryUrl(item.imageRemote || item.imageUrl || "", () => {
       img.removeAttribute("src");
       img.style.display = "none";
       empty.style.display = "grid";
-    };
-  } else {
-    img.removeAttribute("src");
-    img.style.display = "none";
-    empty.style.display = "grid";
-  }
+    });
+  });
 }
-
+  
     function setSourceLogo(item){
       const chip = $("sourceChip");
       const logo = $("sourceLogo");
@@ -208,7 +217,7 @@ function setImage(url){
     }
 
     function renderFallback(pack){
-      setImage("");
+      setImage(item);
       $("headline").textContent = "Sem notícias recentes no momento";
       $("dateChip").textContent = "Publicado: —";
       $("scopeChip").textContent = "Tipo: —";
