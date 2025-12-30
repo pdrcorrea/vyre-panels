@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-30T05:52:33.116Z",
+  "generatedAt": "2025-12-30T07:00:31.174Z",
   "config": {
     "CITY": "Colatina",
     "STATE_NAME": "Espírito Santo",
@@ -7,6 +7,33 @@
     "MAX_AGE_DAYS": 3
   },
   "items": [
+    {
+      "id": "n:2069943800",
+      "title": "nota fiscal eletronica colatina es - UFRPE",
+      "source": "news.google.com",
+      "publishedAt": "Tue, 30 Dec 2025 06:14:19 GMT",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPZk9TeHRRUkZuckNDVjRBNFBRdWNzVUF3NFpybnh2d1o1WjJzYTFJbVVRSkJoV0s2ZXdrdTM4Zjc4TjhFQ0ZKVFFQd2VDUlhNN2VtSjB5S2Q0LUdXdlgyb1lKWkNlZUhpTk9UWkFtM2J5c3J4Q3dzcllfZWYyZWxMdjFkQnJmTWc?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": "",
+      "scope": "local"
+    },
+    {
+      "id": "n:874787815",
+      "title": "ES tem 5 casos por dia de furto e roubo de celular no transporte coletivo - A Gazeta",
+      "source": "news.google.com",
+      "publishedAt": "Tue, 30 Dec 2025 06:30:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPeTVLNDlTaEFUUGEzd0Y0dEZ1RE1tZWt2cl9BakZXTHFfdkZ5SjRJRmt6TXZPUVEzVzNybWx5dDMzWVh0NDNpTGxBNWxuV3Fxa0dQVFhxRjdPSFVZcldhSXNVNVFNT0VIYlp2bnA1RmNnQzU1ZEdpZk5RN3U5QUlrZTIyU3FCaHlxLWsxeVJoSnV1YTZwaWtzRU82Y1ZJQWJ2aHVJTlhzRXYzVkVnaWZBUjRua3g4cjRYdElBNEUtVXJlVWdEUEZZUkNPUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": "",
+      "scope": "state"
+    },
+    {
+      "id": "n:1294103968",
+      "title": "Calor extremo dispara alerta em seis estados por riscos à saúde - Correio Braziliense",
+      "source": "news.google.com",
+      "publishedAt": "Tue, 30 Dec 2025 06:55:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPbXljbEh0UHp0R3g3OUJTbkFQdXFKaEdVRTNrTm9IMUpneWFmUmxSU2d6X1c2RnVRbkMtSVZJTEpLSVJfS3Y2NlJGRVk3STNVNGV3Q0hsUzJzSkY4MHlDbkhqZVI4TkItN3JfM0Z6MFRNV1hjZXpKODlTS2FnNk5sR2JkUFBMaU5ZS0o0Y3k0bWVIRDFialpqa1VBS2VKT0FMcTNoQWRORl96ZDJlMXNhMXQzdlhqOTczZW90QzNEdWVzaFp1eThVRNIBzgFBVV95cUxOT2p4TVhscUtXanpUZFR1bUtEc1k0d0NCZTIxeDV5a05qYk9jTzlRZ2wzbVlRVVZRLWctRU9QZUpEekpZQ2xKcEdxaEd0dVcwUm00VDVNX1BDUGN5NjBEMWxfRElaSXVxNENVSU05MTJjVExUNFFEalA2aTdlQmJRaHdOM0RTQWppVFFmdnZEdVBWQXpOZGFiejB3Mmd5bk0tU0h6cnl3NUpwb1h6bG5CRjJIOGhwUzE2ZHZZS2p4aFJKOWg0SzRQQXp5NXVIQQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": "",
+      "scope": "national"
+    },
     {
       "id": "n:965129676",
       "title": "Colatina avança com obras, asfaltamento e revitalização de espaços públicos - O Ribanense",
@@ -17,20 +44,20 @@
       "scope": "local"
     },
     {
-      "id": "n:116770568",
-      "title": "Espírito Santo terá etapa da WSL pela primeira vez na história - MSN",
+      "id": "n:955314460",
+      "title": "Concurso FAPES ES: edital previsto na LOA 2026! - Estratégia Concursos",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:27:10 GMT",
-      "url": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxQaWkyN1BLV1dnUmRlejYyNUxqd1J1NWp4V2p2bDRQb2tYNDZZN3pOZ0NyT3ZpTVhiN1VtR2twMzBMb0pXU0RUeEkxWUFsUFVlMmpDNTVERHAzc3hORlNPWk1NZUNsVUE0UnQxVndaR2liMVN4Uk82a2JCUGpKeWh3c0NJV2ZCZ3pTZ3dDeFFDTE8xOFppWDZVOFFEMUkwVzIzeUdWaXgtX0FMc2txZHM2MlByTWU2Tm1CTVlsbTVLQk81dUpJSTNnUmd2Y3RRZExndHp1ZFZKcFJ2OVhxY0FTZTR1SWU0YmpZVUs4NW1jbkJ5TTh5SHFvUkhmeTVVYWZsQUJzbGVaVzgyWjZzRWs4Y1dtZE9jMDZDWndnTlMzVUUyeWxUWHZBX1ZwQ3F2MHVqTVVKTFIwVFQzWXJWRmFIencxWjFIWnZ4clB3Vkl6Y3kteTh4dkpERFJUdFZRYjBs?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 04:28:07 GMT",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1OR0JEaFFYTF9jZmwwNTdFbFg2QXVlUU5CeUN2bF9BQjZJcVowY183ZE5GQkNES2hZM1RsZ2VfeVdkeElZVU8ybjExX29mUUF5Wk1CZjFqOUZvUnhMYzZUT3pkSEFXbHdhaGp6eFVLdw?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:2009052527",
-      "title": "Ministério da Saúde amplia prazo vacinal contra o HPV até primeiro semestre de 2026 - Brasil 61",
+      "id": "n:682454985",
+      "title": "Onda de calor começa a perder força no Brasil; veja detalhes e locais - CNN Brasil",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 05:00:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMXJoUkEyTURNYkxXd1Z5WVFaNFVkZzFwRlJVejAyeHl2MmlxSWhYS1hoWXdkamx5VUhsd1NPMFY5RHB3UjhNeFd1bERDNEtqOHVram4ydG4tcGlrbjNmMlRFOFdmbzE4TVAxTmRnb0h5MzZIQVgxYnh4WWxhOFEteUpRZWF3UGhaTFNXeGtEbF9CVmxabXBMUlMxRzhYQkFkU0dGNTFNTXUwejJYRmlfSmxQcDJDZ3BUNGfSAb8BQVVfeXFMTl93dnkxbi10bHQwYjU4eFVrYlE0TGN2Q1V0ZHhhSFNKVE45dnRESTN0aHpmNkJHTzV0Z0JmN3otX2ZrUkFSeXdPclZMaG1nVU1LTHMwZ3NQSzlfVU9iM3d6dHhYOFVpQURwcm1IQnM4WHR5UTFvU2F2TUQ4NUhneEhORnlkNlVzY1VweFFDNWpqVUphMVRzc2M5Wm1Hc1hnSVRIbWJLQmstUzFrMm11UXFZWmlmQWtoQk9hZHBqeU0?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 06:33:36 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNbzdaSXUxX09XMTkzSXgwS0ZwQWFXUHZSeWFZUEJicmM1X05KQkNhTFhTcDAySG4xR280enlSOGlYeGFTWmw2N2l2LTZSdUlRRlkzelB6MHVCZXRSRm9FdXZxbF85RkJ0QnQ3OFd3VVk2VVV5RTFXZDFVYzBja1FIWGZwTWxlUHgyQVdhcTdONVFlRkVQRVd1OHFmWjM2bzJPQ0FnWUxHTl81WmhZd1FXQkdSSFBKNkdHSXc?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -44,20 +71,20 @@
       "scope": "local"
     },
     {
-      "id": "n:520056541",
-      "title": "Concursos Nível Médio 2026: vagas em diversas áreas! - Estratégia Concursos",
+      "id": "n:116770568",
+      "title": "Espírito Santo terá etapa da WSL pela primeira vez na história - MSN",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:08:14 GMT",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9YZGpMeWJWeHVVQzR0M3FudWc2WmhhNVg3bGhaUDRLUnQtUjNaM1RldTJLWlJOVEFWVmdUM0RHN25Oc2ZoUUlVVi15QUowUW54VnpLUW9BT1FYZmoyeGJyLVpFSlBWa1NOaWJGajRxRW5YUm92?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:27:10 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxQaWkyN1BLV1dnUmRlejYyNUxqd1J1NWp4V2p2bDRQb2tYNDZZN3pOZ0NyT3ZpTVhiN1VtR2twMzBMb0pXU0RUeEkxWUFsUFVlMmpDNTVERHAzc3hORlNPWk1NZUNsVUE0UnQxVndaR2liMVN4Uk82a2JCUGpKeWh3c0NJV2ZCZ3pTZ3dDeFFDTE8xOFppWDZVOFFEMUkwVzIzeUdWaXgtX0FMc2txZHM2MlByTWU2Tm1CTVlsbTVLQk81dUpJSTNnUmd2Y3RRZExndHp1ZFZKcFJ2OVhxY0FTZTR1SWU0YmpZVUs4NW1jbkJ5TTh5SHFvUkhmeTVVYWZsQUJzbGVaVzgyWjZzRWs4Y1dtZE9jMDZDWndnTlMzVUUyeWxUWHZBX1ZwQ3F2MHVqTVVKTFIwVFQzWXJWRmFIencxWjFIWnZ4clB3Vkl6Y3kteTh4dkpERFJUdFZRYjBs?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:468765587",
-      "title": "Temporada de cruzeiros acende alerta para vacinação contra o sarampo - Brasil 61",
+      "id": "n:1035955613",
+      "title": "‘Redoma de calor’: entenda os fenômenos climáticos que anteciparam o auge do verão no Sudeste do Brasil - O Globo",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 04:00:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOXzVMcEd4SWZHV1AxNTZpNVhMU090dFYtZTVmYTRVMzI0dVB6VndYT2xCQnlEaVlPNUYtVnJJa3B2am51S3FRVHV4WEFtbWJHSVkyd0dKRmI3UDdfQWl1ZkoxN1k5YjZncS0yMzRpUi1pelNyeHRZZTREY0lBTzFLZnVvNVZDYW45dU1HRDdUTW9Yd3dYcEhha0x1MlMyZXdYSk8xS2ZB0gGrAUFVX3lxTE5Mb2xoaTRJN2lXYVF0X0ItUHQyV01nWXpocUFDMWJqcEZTSXRWeTQwS0NmM29Ib0NpTXpyd0hJdVN3ckFPUlpEdVdjZDJkVlFBdkt4MExjVGNkZ1lEUkNOSDl1ZXc0SE14Mzc3R1hMRDVvd0dHcG1NTktzT3JiM3BsZGNxc0NFRFV1LXJLMjhKTE1oZDBtRGpCOXAwSTZNd1hmZWo2X1FZb2VrOA?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 06:30:30 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxORnRkbC14cHFfX3pOMXVxWmNzRm1uVHNrRlh2cUZ4dXdLQXczRk5fLU9nT1dwbnFLbzZyMjFJRVN6YTNJYlNpX0tHQ1JiWlpYd0tBYjlIZnVBdTJNcUZBNGFGZWVVeXUxYVF5bWExWTNYREgtR0ZTS0dWWmViNzB1bE96alpiSHhsRU42RXNld0FkalNvWXg4bEhQOTAwX2pUdTgzREJRNU94Ujkwb2hsbVZoVTUxTXZ6dmhfR2lSU25iazMzRXpWS0NTdHh5cnVtNmpDYk0xTHFKQ0h4OEVlMnBETlU4Ykk3NU1GaVlB0gH8AUFVX3lxTFBKTFBPeW5teGROdUxaRms1djJqb0EtY0c4RkIyTFFlMVRNYVFxRzVWWFBHUVE1Wkp6eWtpdTIzajFxMEgxcEt2VTJZN19qZnoyQno2ZGp3MnBuNklNT0luTWg3MGpMZTdqcmpkbzVLOEpON0ljTDQyWEEwVGZvalpyWHZqRm5QU3ozUnNYYzFJYlhfTjJHXzJaR0g2ekI1UFFidElncjlLX2FLeDFjX1RWcTI4dm1aLWVUSmNlZnp0blNjT0dCdWNzYWl1QVVCb0w1SlQ0b00xRWtydjB5WGtlbE5sdUo2VUFvbUFMOW9aVml3cmhkOXZnMElUdA?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -71,47 +98,47 @@
       "scope": "local"
     },
     {
-      "id": "n:214764252",
-      "title": "Espírito Santo no QS - waves.com.br",
+      "id": "n:520056541",
+      "title": "Concursos Nível Médio 2026: vagas em diversas áreas! - Estratégia Concursos",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:01:08 GMT",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFA5UnFJelJZQ1ZyQ0UyOWM5d0VUbEd6MHR4Yk5LcmljWV9CbjdwZ0pCcmdpVFlrcjJTSU9KWTBwOV9yc0lrOVdQTnJROVJPdDN2SGdiLTc4a3JtbzVMYlJacUZYTk5NZnNhc25xcVBUSy1oUdIBd0FVX3lxTE9GVDZjdE5wSWxaTzE5NWUtNkRCa25wRXB2enJkUy14UHNiV0FwTk1DdTAtdjNYRml6VUl1UExWTHUtbXRieGNRT0tucnZydVRpOGNqMWF4Yk5ieHloZEc5TU0ydVRVRW9WSmgwd3hoeHB4ZWFCMng4?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:08:14 GMT",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9YZGpMeWJWeHVVQzR0M3FudWc2WmhhNVg3bGhaUDRLUnQtUjNaM1RldTJLWlJOVEFWVmdUM0RHN25Oc2ZoUUlVVi15QUowUW54VnpLUW9BT1FYZmoyeGJyLVpFSlBWa1NOaWJGajRxRW5YUm92?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:824871257",
-      "title": "Camisa amarela do Brasil para a Copa 2026 vaza - Mantos do Futebol",
+      "id": "n:222596353",
+      "title": "Caso Master: PF colhe depoimentos nesta terça e pode rever acareação - CNN Brasil",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:33:17 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSjEyYWctVDhTUFdFMjdqal8tUHd3RExBclU2N1BLTGZ6ekl2bDVrN2M2V3dXZHZramNnbVNsTFFndlA4ZHkwOEJDVXQ3ZXFabjZEaEduSU00eV82QVZ1NTlLRXl4WGo3MHMxb3hYWWExc3IxaXB2bDYtYVFPaG1Ga1Zn?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 06:00:39 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOWTN6UUl1Y09XcnJGSmJkUklBR1ZUclZQNkxTNlVGeUQ3MkpRb3lBV0NvQUpuQTlOSVYzSF9MNUMwR1RZeTRJTHZNRDdJQzRBajI4eG9mbExWbFQ0UnpHWlROaU41VTRmcElHbkNraUtiSUVUR1liYXBGNUlLS29mRkJyRHQ5NE1vNWZQemJ2VjhKZ3ZrT29vYWJTMkFUNEMxTVIydXhxMmhTdw?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
     {
-      "id": "n:925318261",
+      "id": "n:1231976490",
       "title": "Colatina deve ter um dia com muitas nuvens nesta terça-feira (30) - O TEMPO",
       "source": "news.google.com",
       "publishedAt": "Tue, 30 Dec 2025 03:48:19 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNWVNGdk1JQ3dYVDJNMGhtODBaQU1KdlVaUlVnS1hCdG9GR0JRYVppT1hqSkVNX3NESlhyd0hMOHNLQ1pLRWNaRmRnV01IME9qRGY0SDlCaDZNcFplU1JYS1FZRkpQaDA1dFVlcHc3MGV3VTFRVHhrUmJKcHMxWlpyd0dmYUdHUHJEZERxNGcwUC1hQ1c3YVh5cjBlNk5nbTE0a3V2MWJlaEs4UQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOb2R3S3BGN2lPeEhuSXlKendpdzE5SFB1aHhSbGRfaXhSYXp4dFBvN0s1NzVySDBFd1RURUJKT29TMElyUWhBTEgzV3NfSXVpS0hZNmh2cE9STEdRQmlpWmV1XzRubG5rSTdYeEk3dzJPSEt0OHRmZ1IyMVZ0S0RMYWhZRTA2Ui02TlJUX1dLeFE1cDBIWkdzUGtYT1hBRUwxNzRHT0RBYXVZWE5odnZj?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "local"
     },
     {
-      "id": "n:357528574",
-      "title": "Governo de SP anuncia aumento nas passagens de metrô e de trens - ES 24 Horas",
+      "id": "n:316568914",
+      "title": "Espírito Santo no QS - waves.com.br",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:30:58 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMUV3d3RQUTNtdXo3WTNocm1HcTNMMHotYUwzTnpEYjEzVDdkeldTS1N3VDgzYXhyUC1VclBiSU5PaU9GWTN3dVNRdFFoWjM1RTJueVNjQ2U2LXE5SUhEUVlCWTctNDh3V2dlUEJNdlJjLTFUdnFqYm5qMmU0YWRXNzQ0NENvSlVMdDNISkQ1UjdBd2pISnZKYWlEVzBHUUttLTNVazNNTTJsZw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:01:08 GMT",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9MR2k4ZS1XQ2t4N3ZOUUU1ZFhiYXdlcVNCRkF0STlhdnFGR2pXeWZidHNVYTRmYTAyOFV0Z25RY3FNUVJESTFvMGZkWUw1clp1MlVBakZPTnIya1dPMXhEUFc1b3prMmJoNUU3ddIBckFVX3lxTFA3RXVIS0NrSHZIQXZrQmVZa1VranIzV3JZeUVMNmdwMF9ZZk1LT2ZETUNkRDhzMXAyb3poaWlUSmtvRXpaSlJJaklYbkoxZXlnX3Z2SWVmV0pXd3NoUFpLbENxeGpGbTBManVhd3dLeVFGUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:249515696",
-      "title": "Indicador do Banco Central mostra que a economia goiana é a segunda que mais cresce no Brasil - Portal 6",
+      "id": "n:2009052527",
+      "title": "Ministério da Saúde amplia prazo vacinal contra o HPV até primeiro semestre de 2026 - Brasil 61",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:24:29 GMT",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQZnZiMUZLRkhyajRkSTB5cmhiZjdGWDhwTzVsS1djcHhYVVB4MkczTExCbHNMa0xEV1pUSV9IWkhTZXZLdjR1c2FDalB6STdnM1RQbi1ER2N5Y2VZUjFHQ3J2VjRfWFlUVVdGX1p6cWRTOFQxbWN4UFJNXzNOcDJOUUU1cmFiU2cxNF80bGh6Xy05Ull4OU9GVzVMNTE0REFlUDkydXpyLTFBNmoxTzRqUmlKV3NtQUNXUUZRUnpPZVhlTmRQaGN3?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 05:00:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMXJoUkEyTURNYkxXd1Z5WVFaNFVkZzFwRlJVejAyeHl2MmlxSWhYS1hoWXdkamx5VUhsd1NPMFY5RHB3UjhNeFd1bERDNEtqOHVram4ydG4tcGlrbjNmMlRFOFdmbzE4TVAxTmRnb0h5MzZIQVgxYnh4WWxhOFEteUpRZWF3UGhaTFNXeGtEbF9CVmxabXBMUlMxRzhYQkFkU0dGNTFNTXUwejJYRmlfSmxQcDJDZ3BUNGfSAb8BQVVfeXFMTl93dnkxbi10bHQwYjU4eFVrYlE0TGN2Q1V0ZHhhSFNKVE45dnRESTN0aHpmNkJHTzV0Z0JmN3otX2ZrUkFSeXdPclZMaG1nVU1LTHMwZ3NQSzlfVU9iM3d6dHhYOFVpQURwcm1IQnM4WHR5UTFvU2F2TUQ4NUhneEhORnlkNlVzY1VweFFDNWpqVUphMVRzc2M5Wm1Hc1hnSVRIbWJLQmstUzFrMm11UXFZWmlmQWtoQk9hZHBqeU0?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -125,47 +152,20 @@
       "scope": "local"
     },
     {
-      "id": "n:45815155",
-      "title": "8ª Corrida Paletitas bate recorde de inscrições e corre por uma causa em 2026 - Jornal Espírito Santo Notícias",
-      "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:25:45 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWVRuRVU4WDZkRVp0SUpZQU5GVDFaSnJDTjJVVTNoSG91U04zbHJKVFlqU3llMEV1bEtUSjRaclBZaHhSajZtNElIX19sLXZWZ2YxRFdGY3EtSXFBLUtQZG52UFdUT1VBMXl2b3QzVTJmemN3eTlPUnpTemh6VWk0UVNnQjdwRjVDX3hOWWZBbnZWeUJMNzFueWNUZ0N6VVFZaHdUSjdmbFFTX2tzYWZLRnVDOThJU1lIMWhz?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": "",
-      "scope": "state"
-    },
-    {
-      "id": "n:1795316985",
-      "title": "Livro analisa raízes do feminicídio a partir da educação dos meninos - Folha PE",
-      "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:21:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1ZLUVuUGl2NFN0LVFMc3RhalkzeGZzZmU1TVBJR2o2NldNYWR1Z1NBcTVYYUNMSDVJYUVDNURaNEI2bDlNblJDQTNwSV83Rm5QMlJremo4WjNDTmk5aTM3M2NfcFE5NUt3Nmxv0gFrQVVfeXFMTlhLdzZBYXNRZHNIUWtrVXJKS1FtdGY5Q3kxaGVyMjd6YzFVMk02Q29Jb0ROcWlMakdidGlqQllXXzBOandrOUVtWEdnRGNWUXhycUNwZTNNSzZheHJUbzJXQV9lLVVMTFhqbVE?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": "",
-      "scope": "national"
-    },
-    {
       "id": "n:50380973",
       "title": "Concurso SESA ES: comissão formada; edital na LOA 2026 - Estratégia Concursos",
       "source": "news.google.com",
       "publishedAt": "Tue, 30 Dec 2025 02:39:31 GMT",
       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5IbHFPWnQ2Q1Y2aHM1czBsTk5nRS1yeUEtLXpwZEFIaWo3MHdaZVFhOXlzTHY1QXZsX19oUVg3dmExMGpGMHE0R2JoaUpsVVdVMmtTcl9sSUE2YnJ3NXgzaUN5OFh6MWdxNlZPS05B?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
-      "scope": "local"
-    },
-    {
-      "id": "n:1437997566",
-      "title": "Motorista envolvido em acidente que matou família no ES se apresenta e é liberado - Folha Vitória",
-      "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:00:30 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPU1BSRG5pem9ydUEzWFVNczEyZWZtVGd2N1RnbmtIYTY1d19SYmN2cmtCdGJxbVJ2c3VBTTl4cHZiV3JTWldLazZuNllWazJ1NFAzZ2tSTUhXZGdsVGo2ZUROOC14LWRRV0ZTUXY3TG5yMzRVVFpTcXVCbXZCQlJuN01HbDVlTF9QbEN2Vzc2Y09QWXRwLTlQWkwyNmlFSUFKLW1zUmg2UFp1N2VtR2NhdlVoWVQ5NWJBNEt3U1dEaHE?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:1275534134",
-      "title": "Crise da memória RAM pode deixar celulares, notebooks e até carros mais caros no Brasil; vilã é a IA - G1",
+      "id": "n:468765587",
+      "title": "Temporada de cruzeiros acende alerta para vacinação contra o sarampo - Brasil 61",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:00:38 GMT",
-      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPTENtVThzV1NkclIwa2IwbWF1aWItZS1nNVJhVmE1bWZhRzlyRllqT1VaR3pseDRXWER1WHN1czRycVNxZlNTYlByRzk3SHRTV0ZDQ3k3WFNBTXNqT21LZUp1NExoTE5OdmxHUFVOZzZMYzZ4bTVYVXNjakhTZ0FzZGpQUi1wdXk5WFdGTEVFMEEySFV5M1V0clpkTzFSSHhsd21xWG55VkJob3JBSC1UQ0pNdURCazBrR0M1WUNwMXplRkRhRGVIRFp0UEhhVmVJZVBWR2VtWHlKcXlUS0dwUkxRd3ZwaGRrTUYw0gH6AUFVX3lxTE5fcFFmN3hyZFhwZDBlcmtBOVRaZmcxc2N0ZE9iSUpLZzdZTUxNN3NYbGVCRy02aTY0OXlSRnJva1F1aGdTVFY3WFk1OWlYV1JsOGhjV2N5bDl6LVBDZ1NpRk9XWmswdG1Qczd4RWN2NXhNWEZnRExHSU9CYTJsbDZyMno1OWIzZWFnSDJYV0J6M0ZVc3c0Uzg3WHNyRS1PbDVyZVFWbVU2SUJndkV4bGh2V1E5QUpLTUlzWVVLSTRrVTgxZUZMRXpoVFBfdk9fS2pQaVo4b0Zyak80UTIteDQyZW5TWEpCZ3NrY0QwNHRIVV81bVpJY1hfeHc?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 04:00:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOXzVMcEd4SWZHV1AxNTZpNVhMU090dFYtZTVmYTRVMzI0dVB6VndYT2xCQnlEaVlPNUYtVnJJa3B2am51S3FRVHV4WEFtbWJHSVkyd0dKRmI3UDdfQWl1ZkoxN1k5YjZncS0yMzRpUi1pelNyeHRZZTREY0lBTzFLZnVvNVZDYW45dU1HRDdUTW9Yd3dYcEhha0x1MlMyZXdYSk8xS2ZB0gGrAUFVX3lxTE5Mb2xoaTRJN2lXYVF0X0ItUHQyV01nWXpocUFDMWJqcEZTSXRWeTQwS0NmM29Ib0NpTXpyd0hJdVN3ckFPUlpEdVdjZDJkVlFBdkt4MExjVGNkZ1lEUkNOSDl1ZXc0SE14Mzc3R1hMRDVvd0dHcG1NTktzT3JiM3BsZGNxc0NFRFV1LXJLMjhKTE1oZDBtRGpCOXAwSTZNd1hmZWo2X1FZb2VrOA?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -179,20 +179,20 @@
       "scope": "local"
     },
     {
-      "id": "n:1079688849",
-      "title": "PRF atende ocorrência de importunação sexual em ônibus na BR-101, em Viana (ES) — Polícia Rodoviária Federal - GOV.BR",
+      "id": "n:357528574",
+      "title": "Governo de SP anuncia aumento nas passagens de metrô e de trens - ES 24 Horas",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:42:09 GMT",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPNXVkUHRsMzd4blJlelczMzJhVGM2dU5uSzYwbHJRNXVVcUxuR3M5NlM0d01UWEhIdVBGUm9TczJ4dTdULWJTa0hHSVF0Q0diSDB5ZWRKa3ZzbFNXY3h6RnNlLWgtNE9QUDFETmE5VnFaX25RY1pNdHNBcmh4c1MwcEZael9MNnlRcERQT1Q1YllrTXB4VURqb0ZkOW9qZHFvUlNkTlhXZFpzOHZ2Ukg4RE5NQlFWZTc3LVdsTzZWX3FZdy1mcGNIOFl0MHdFeHNrT1R5czZB?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 02:30:58 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMUV3d3RQUTNtdXo3WTNocm1HcTNMMHotYUwzTnpEYjEzVDdkeldTS1N3VDgzYXhyUC1VclBiSU5PaU9GWTN3dVNRdFFoWjM1RTJueVNjQ2U2LXE5SUhEUVlCWTctNDh3V2dlUEJNdlJjLTFUdnFqYm5qMmU0YWRXNzQ0NENvSlVMdDNISkQ1UjdBd2pISnZKYWlEVzBHUUttLTNVazNNTTJsZw?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:335808059",
-      "title": "Dólar terá queda de 10% em 2025; veja como Trump, Fed e o Brasil afetaram o câmbio - G1",
+      "id": "n:824871257",
+      "title": "Camisa amarela do Brasil para a Copa 2026 vaza - Mantos do Futebol",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 03:00:32 GMT",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNbjhfYmxGc25DUXFCRDUtaHFlYy02ak5JOWFld3ZtSkpuOHlkMzM2TU1mdnZnRmlzX0JPejZYdTZWVThnWWNOYkhEb0tTazVhUWp6UGlNS2FfOVE4QjBvWHA3bXZscU9vR3ZTXy1vbXNlclNId252elQwMDZmS2tXdlBfeWFaQ1RPS0ZlbU95NWtNamNWQmgw0gGmAUFVX3lxTE9qanYzTEhNYmpzNDNacHBCWldPZ0ExUGFLZ1JWNUZ3WE5HSHBLQUhzQ3ZETVlMVk1lVnJURmJyYlZvUm90QkFhU0g3RzluZFE4OUVER3NndzA0T2NGd1RhTjJuWExtSUZkX3h5WUNnYlQ4SWlpMkRGd2sxQkpfeWtlZHU2UTdRek9LRGhPa0s5eWFleEVsZnItTUVyX3dOdWxhSmdTd3c?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:33:17 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQSjEyYWctVDhTUFdFMjdqal8tUHd3RExBclU2N1BLTGZ6ekl2bDVrN2M2V3dXZHZramNnbVNsTFFndlA4ZHkwOEJDVXQ3ZXFabjZEaEduSU00eV82QVZ1NTlLRXl4WGo3MHMxb3hYWWExc3IxaXB2bDYtYVFPaG1Ga1Zn?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -206,20 +206,20 @@
       "scope": "local"
     },
     {
-      "id": "n:1568159884",
-      "title": "Rodovida: PRF encerra Operação Natal 2025 nas rodovias federais do Espírito Santo — Polícia Rodoviária Federal - GOV.BR",
+      "id": "n:45815155",
+      "title": "8ª Corrida Paletitas bate recorde de inscrições e corre por uma causa em 2026 - Jornal Espírito Santo Notícias",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:37:44 GMT",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOUnZWUXhvTTdDR1VkQ0pWUDBPNDhYNFJuWkRyZE1TZm5GMzdjcUNCTlQwS2M2OXQwSzg1T191VjljM1k4aVotdXkzNHA2RmlBY05VMnRfNS1MVnB0S1FmdEFUZ3lHcGh0VmtWdWUzQ1RYYzRpS0VEaGRHcW5hSGFvQlduSTJwV2NhWDBwelYwUThqekd0TlgzbTVCMjFLQmFBMl9KR1BiLU9nZEZpNjlkUVRwZkJONFdaS0NCbVkzWi1udHlGTVdheU5jcm15YTlUM0duQ1dyTGJrdTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 02:25:45 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWVRuRVU4WDZkRVp0SUpZQU5GVDFaSnJDTjJVVTNoSG91U04zbHJKVFlqU3llMEV1bEtUSjRaclBZaHhSajZtNElIX19sLXZWZ2YxRFdGY3EtSXFBLUtQZG52UFdUT1VBMXl2b3QzVTJmemN3eTlPUnpTemh6VWk0UVNnQjdwRjVDX3hOWWZBbnZWeUJMNzFueWNUZ0N6VVFZaHdUSjdmbFFTX2tzYWZLRnVDOThJU1lIMWhz?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:1731352858",
-      "title": "Saiba quem ganhou o Bake Off Brasil: Celebridades nesta segunda, 29/12/2025 – Todo Canal - Portal N10",
+      "id": "n:249515696",
+      "title": "Indicador do Banco Central mostra que a economia goiana é a segunda que mais cresce no Brasil - Portal 6",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:52:52 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQcmZ3a0lmM0hvdmxBcVNZUU1mSHdCRkllalB0cXl3TmlDVk9ITEg4VDBqa2FxMW56LWZldDVheGZWWlRBQ0REYXdqWDJIQWF6M3RuR2pKckZQejlEalNBRU1kbGFtMFRuQ09aZVZpTlluR0xNWWFNWEhPZ2J3c083TEkxcXdxbldDRjk3M1FTRy10Q0l4YjluMHRXdGkzaGh3UFhlME9jeEVnTmF1a0llbUE2WmhzREhYRWRB?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:24:29 GMT",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQZnZiMUZLRkhyajRkSTB5cmhiZjdGWDhwTzVsS1djcHhYVVB4MkczTExCbHNMa0xEV1pUSV9IWkhTZXZLdjR1c2FDalB6STdnM1RQbi1ER2N5Y2VZUjFHQ3J2VjRfWFlUVVdGX1p6cWRTOFQxbWN4UFJNXzNOcDJOUUU1cmFiU2cxNF80bGh6Xy05Ull4OU9GVzVMNTE0REFlUDkydXpyLTFBNmoxTzRqUmlKV3NtQUNXUUZRUnpPZVhlTmRQaGN3?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -233,20 +233,20 @@
       "scope": "local"
     },
     {
-      "id": "n:1779411474",
-      "title": "Sejus entrega amigurumis de Jesus a recém-nascidos - ES 24 Horas",
+      "id": "n:1437997566",
+      "title": "Motorista envolvido em acidente que matou família no ES se apresenta e é liberado - Folha Vitória",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:25:13 GMT",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOQnNROVZGSkFlRlRjMUFwZFAyc2RNekxpRF9LZkNKM0VuZzZxOHdkcGZGeUk0WHd1TGlYNDJyYzFmM1VOT0JsbGtTR2NPYTZLYWNmWmJhREdDT3JCN2xaVk1jMmpiMGdEeTc5NGNLeFphLUpjNndrdTJfdEp2c1VGX0QtR1pacGFZNVdUc2ZyNnhycG1HZE53aw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 02:00:30 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPU1BSRG5pem9ydUEzWFVNczEyZWZtVGd2N1RnbmtIYTY1d19SYmN2cmtCdGJxbVJ2c3VBTTl4cHZiV3JTWldLazZuNllWazJ1NFAzZ2tSTUhXZGdsVGo2ZUROOC14LWRRV0ZTUXY3TG5yMzRVVFpTcXVCbXZCQlJuN01HbDVlTF9QbEN2Vzc2Y09QWXRwLTlQWkwyNmlFSUFKLW1zUmg2UFp1N2VtR2NhdlVoWVQ5NWJBNEt3U1dEaHE?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:870316060",
-      "title": "Saúde destina R$ 1 bilhão para santas casas e hospitais filantrópicos - MSN",
+      "id": "n:1795316985",
+      "title": "Livro analisa raízes do feminicídio a partir da educação dos meninos - Folha PE",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:49:22 GMT",
-      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNRmpCNW5hM21TU2ZiNUFKdVMzSGdtc0V4dFliX0N1Q0RVYkk2X2dIbmUtYlJQX1pvQzg4RF9tNENfeW1UT3pLNE84WVljVENXa0NVUzd0dTZtWEtoVEFRU1JQWnhDTHd5NDVYQ1FJNWZYU0dlU1UzbGt0TmFtbm1TOUJ4Y0ZPNXJ2OG4zblBKWkpqTzFxcEVqdVJyX1hmcnNSQTZLTmV4Qk1tQW16NXpBSkQtR3JFV2pVaXhKbzk2V2R2UW92c3gtcXE4VDlUdGZHWWZxR3BSVDQycXVBRHFzNjJBODNiMURsclpVcF9tenkzNlI1eUE?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:21:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1ZLUVuUGl2NFN0LVFMc3RhalkzeGZzZmU1TVBJR2o2NldNYWR1Z1NBcTVYYUNMSDVJYUVDNURaNEI2bDlNblJDQTNwSV83Rm5QMlJremo4WjNDTmk5aTM3M2NfcFE5NUt3Nmxv0gFrQVVfeXFMTlhLdzZBYXNRZHNIUWtrVXJKS1FtdGY5Q3kxaGVyMjd6YzFVMk02Q29Jb0ROcWlMakdidGlqQllXXzBOandrOUVtWEdnRGNWUXhycUNwZTNNSzZheHJUbzJXQV9lLVVMTFhqbVE?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -260,20 +260,20 @@
       "scope": "local"
     },
     {
-      "id": "n:2131605468",
-      "title": "Concurso SME Vitória ES: provas em março! Até R$ 6,9 mil - Estratégia Concursos",
+      "id": "n:1079688849",
+      "title": "PRF atende ocorrência de importunação sexual em ônibus na BR-101, em Viana (ES) — Polícia Rodoviária Federal - GOV.BR",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:08:51 GMT",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1ScUp5VzRSVVB1RGRTVkMwdHBXb1pDYm9LZi1WRjgwYmJFV3RkNlZGeUtVeEZPeVJfR0lZQVpSUDI4QlFsVVk1TGQxNkdLVWJnT1JiR1dZVnd0Zlh5VzlSQm01ZmdWSnRkZHNYeTFkTGVJZDZ5SlVj?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 01:42:09 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPNXVkUHRsMzd4blJlelczMzJhVGM2dU5uSzYwbHJRNXVVcUxuR3M5NlM0d01UWEhIdVBGUm9TczJ4dTdULWJTa0hHSVF0Q0diSDB5ZWRKa3ZzbFNXY3h6RnNlLWgtNE9QUDFETmE5VnFaX25RY1pNdHNBcmh4c1MwcEZael9MNnlRcERQT1Q1YllrTXB4VURqb0ZkOW9qZHFvUlNkTlhXZFpzOHZ2Ukg4RE5NQlFWZTc3LVdsTzZWX3FZdy1mcGNIOFl0MHdFeHNrT1R5czZB?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:1242962012",
-      "title": "Menor estado do Brasil explode no agro: Sergipe vira potência em milho, leite, laranja e camarão com alta tecnologia, drones e indústrias lotadas exportando alimentos do semiárido para o mundo - CPG Click Petróleo e Gás",
+      "id": "n:1275534134",
+      "title": "Crise da memória RAM pode deixar celulares, notebooks e até carros mais caros no Brasil; vilã é a IA - G1",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:43:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxOTzA2VDRJRGxBSy0zQ29rZC1IeHB6aVdCRGZuMFNWRFhtMjluN05pQ0szMkg0RDFzTHRNN2Q5VDhrYzNBTW9iM01JQmpROXpwdm9zN3Y1SmlpMzAxRndUZTB2cjV1XzVtUDJzTllpR1pScmpUWkY1bGNZbGRMOWJGSVdWQkdlQUUtTExHeV9ZTzNVQjVoZ3NDNG52MXZmc0hRLV9ud3VzU3ptV25INklaZnk4Q0t2enNjMmJLbG4zWVR3Y0RkYUdQZnRFOE1Rc1pYTVphY01venh2czF3b2plcVh2QmdiczlJdHFVMGN1aEs1VnRXUGxoaTNuejhHNGIteGtFMlFnZjY3WmJtT1E?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:00:38 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPTENtVThzV1NkclIwa2IwbWF1aWItZS1nNVJhVmE1bWZhRzlyRllqT1VaR3pseDRXWER1WHN1czRycVNxZlNTYlByRzk3SHRTV0ZDQ3k3WFNBTXNqT21LZUp1NExoTE5OdmxHUFVOZzZMYzZ4bTVYVXNjakhTZ0FzZGpQUi1wdXk5WFdGTEVFMEEySFV5M1V0clpkTzFSSHhsd21xWG55VkJob3JBSC1UQ0pNdURCazBrR0M1WUNwMXplRkRhRGVIRFp0UEhhVmVJZVBWR2VtWHlKcXlUS0dwUkxRd3ZwaGRrTUYw0gH6AUFVX3lxTE5fcFFmN3hyZFhwZDBlcmtBOVRaZmcxc2N0ZE9iSUpLZzdZTUxNN3NYbGVCRy02aTY0OXlSRnJva1F1aGdTVFY3WFk1OWlYV1JsOGhjV2N5bDl6LVBDZ1NpRk9XWmswdG1Qczd4RWN2NXhNWEZnRExHSU9CYTJsbDZyMno1OWIzZWFnSDJYV0J6M0ZVc3c0Uzg3WHNyRS1PbDVyZVFWbVU2SUJndkV4bGh2V1E5QUpLTUlzWVVLSTRrVTgxZUZMRXpoVFBfdk9fS2pQaVo4b0Zyak80UTIteDQyZW5TWEpCZ3NrY0QwNHRIVV81bVpJY1hfeHc?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -287,20 +287,20 @@
       "scope": "local"
     },
     {
-      "id": "n:870110364",
-      "title": "Concurso Prodest ES segue vigente até julho de 2026! - Estratégia Concursos",
+      "id": "n:1568159884",
+      "title": "Rodovida: PRF encerra Operação Natal 2025 nas rodovias federais do Espírito Santo — Polícia Rodoviária Federal - GOV.BR",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:04:38 GMT",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5LWkkzR2c3TElfdmZwOUJSQV9jVjkxbnl4V3g2UUt4NGJWblg1RWJaUDM3R2ZFREVOVzUwam9ZanVNRXZNQ2FNVnpoZDVxX0ZiLUlJckdtSmZGY0tQeTJuQVBWV2V0TWdGUzdVb2tzM0VEUQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 01:37:44 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOUnZWUXhvTTdDR1VkQ0pWUDBPNDhYNFJuWkRyZE1TZm5GMzdjcUNCTlQwS2M2OXQwSzg1T191VjljM1k4aVotdXkzNHA2RmlBY05VMnRfNS1MVnB0S1FmdEFUZ3lHcGh0VmtWdWUzQ1RYYzRpS0VEaGRHcW5hSGFvQlduSTJwV2NhWDBwelYwUThqekd0TlgzbTVCMjFLQmFBMl9KR1BiLU9nZEZpNjlkUVRwZkJONFdaS0NCbVkzWi1udHlGTVdheU5jcm15YTlUM0duQ1dyTGJrdTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:1571413966",
-      "title": "Exclusivo: CIA realizou ataque com drone contra cais na costa da Venezuela - CNN Brasil",
+      "id": "n:335808059",
+      "title": "Dólar terá queda de 10% em 2025; veja como Trump, Fed e o Brasil afetaram o câmbio - G1",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:38:26 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQM1Zma1lnS1FDU0VlYkt4NmlaMnQ2b0NuaERKWnZ2RVA0YVJQT1lCSkthZUdkX3hra0g4T2tUZWJIeVRBaTBlNlBkcG5MMVJRX2dEX3lFek41RWJRbEVVQmlBc3M0dWhTMVVLbHczdG9JckVfenJTYjBVeFU3TDQ2dEh3?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 03:00:32 GMT",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNbjhfYmxGc25DUXFCRDUtaHFlYy02ak5JOWFld3ZtSkpuOHlkMzM2TU1mdnZnRmlzX0JPejZYdTZWVThnWWNOYkhEb0tTazVhUWp6UGlNS2FfOVE4QjBvWHA3bXZscU9vR3ZTXy1vbXNlclNId252elQwMDZmS2tXdlBfeWFaQ1RPS0ZlbU95NWtNamNWQmgw0gGmAUFVX3lxTE9qanYzTEhNYmpzNDNacHBCWldPZ0ExUGFLZ1JWNUZ3WE5HSHBLQUhzQ3ZETVlMVk1lVnJURmJyYlZvUm90QkFhU0g3RzluZFE4OUVER3NndzA0T2NGd1RhTjJuWExtSUZkX3h5WUNnYlQ4SWlpMkRGd2sxQkpfeWtlZHU2UTdRek9LRGhPa0s5eWFleEVsZnItTUVyX3dOdWxhSmdTd3c?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -314,47 +314,20 @@
       "scope": "local"
     },
     {
-      "id": "n:777435640",
-      "title": "Governo do ES faz balanço de vacinação de cães e gatos em 2025: 560 mil animais imunizados - Grafitti News",
+      "id": "n:1498140780",
+      "title": "Dois homens são presos suspeitos de matar mulher encontrada com sinais de violência em rodovia do interior de SP - G1",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:04:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPT3hGV0lFVUhHTEN2bFZPV2RCNldxb2hFQTEzaXJxZHZBQ04yLXVCV3JqRE9vVGhtSFB3VE94TFpGRmhCclJLenE3MUpBSGg2SHBLTldxRjFPWklpS1ZsVlZBcTlnSExwZHNZZkhpQ0ZuNUpaSm9UcWZEWXZkbS1Xa2ZmSGVPc2lVSkRURXdzYjJFdzZIeU0ySC0wZkFDOERKdGlIYWM3elhJcG4waXFzWkJrTkt3dXQ1OWc?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 01:27:49 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxPYl9JWHR0VXlGd3A0MHUwdkQyN0VtdjdPM1hfZXNXT0xKaFIteUlkTUhnNjhDaFBnb3I1TFU3c3U3aG9CTWJjV3VKRURIcDBnRl94ZkRzQ3JLbWt0b2o3a01Pa0JrdXZoeF9WczNSd0xZdDlRQnY5NEpSLS1SRGpiYVZXSElfUWtiTmh1VWczdU5JaFdDb3hodEprUmxBVVFQekpDdjlEUUJHSVlTaXI5eVQ0NU5YTFI5eXJRa1RNQ1AxZkZDdU5kVGg0ckk4SVNwTld1bXIwWFJ3V0RJS1ItRmxYcndVRWl5VHd6ejJxanhWZWdyQ2tsTkxVbHpDRnJ3LXZuQ0VpbGHSAZcCQVVfeXFMTlBxOC1aUG9RZE1ORzVQU25LZjdydWpkZ2FIakZMMEFiWXhQbXM2RDlfOHNRRmxodFRHUFZ4bmtpejdXX0FNcFBBYm8zWkZSdXhTQWhzejRBRWg3MjFmOEwzWDBKaTZ4TWV0eXhJTE41NElDTk5QTzFndFNCRFJnR2V5T2gwSFc5djF0clBSaUdoRWlQMEZ6TFFkYmpOdjctY0tnanQwcm5FRmlPZG5YZzI1Q2tZUkVpcC1MSzhGR09iZ0lINmNVMXFGbThnZmJIWEVNQk40SmJiTGtNMXNNSmtyckdqd1NqLUVKUGxDWVhydWwxQ3J5RkRaT2I2WC1yaDJpY3VEZ1NzX3NxV2VZWHRMNlA2VjFV?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "state"
     },
     {
-      "id": "n:1025334854",
-      "title": "Saúde mental no trabalho é tema central de série do SBT Brasil sobre principais desafios de 2026 - SBT News",
+      "id": "n:870316060",
+      "title": "Saúde destina R$ 1 bilhão para santas casas e hospitais filantrópicos - MSN",
       "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 02:18:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQRTBxZGlBOG1qU3otT3JkbXRHNzU2SXZiQmZneHdmdmJ4MzVGdWx4bHFOYjdIcVExOXhndTFjQmlSTTlzbTBGNmNxM0NSN2pGWXZ0OGkwS1VUVkladVFnR1NJaUc2dVZyZFRmZ1hxZGUwNGwxWkRKbzhuM3BqVjhXcm90WVR2Ul9CQ2pFbldnOGtMTWxBSE5ZaEpadEFuaVRjeUx5SXQ0REpRX0xNWUx6QzBTbjZUU3dERkVTQTNHd2tHcktFTEdKZTZSSFFNeEJoNmxN?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": "",
-      "scope": "national"
-    },
-    {
-      "id": "n:2069943800",
-      "title": "nota fiscal eletronica colatina es - UFRPE",
-      "source": "news.google.com",
-      "publishedAt": "Mon, 29 Dec 2025 21:14:07 GMT",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPZk9TeHRRUkZuckNDVjRBNFBRdWNzVUF3NFpybnh2d1o1WjJzYTFJbVVRSkJoV0s2ZXdrdTM4Zjc4TjhFQ0ZKVFFQd2VDUlhNN2VtSjB5S2Q0LUdXdlgyb1lKWkNlZUhpTk9UWkFtM2J5c3J4Q3dzcllfZWYyZWxMdjFkQnJmTWc?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": "",
-      "scope": "local"
-    },
-    {
-      "id": "n:1228728593",
-      "title": "Santa Casas, hospitais filantrópicos e entidades beneficentes do ES recebem dinheiro da União - Grafitti News",
-      "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:02:00 GMT",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQa2IwcGEzb3hFQ3BnR2ZJS2hMam42dUZ3V3V4ZXNsNDZKYTZxOXZ0U1NoRWZvbkJ6M1JIampCWng2OGFjM0JkR2FnMFBQdTZXUDIyVmNCYW4zd0x3UFRBSV9QTFNJaVBmMTRtaTlBRlhPbl9USTNVQ0RrODFudTdOMlZEcTRtdXJBdDdTRjdabDNlU1hpd2lqODlhUDVabkNvODJsRk84TEpRWHNYdVd5cFZsQlBzTTRiNjEyN05B?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "imageUrl": "",
-      "scope": "state"
-    },
-    {
-      "id": "n:695474051",
-      "title": "Opinião | A crise de credibilidade no Brasil e os caminhos para 2026 - Informe Blumenau",
-      "source": "news.google.com",
-      "publishedAt": "Tue, 30 Dec 2025 01:59:15 GMT",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPRjVhN29zV3I2TEowazVYazljd0YxaTFibzBfTE9HYUJFV1JhU2tpZlY2Ykx1cFBweDBKNHlDNE10S2hVQllhX3B4a0Zld2pSd2djend0LVNneXN5OVN0TUpkaWFjaGw3UHoyWkJRNUl0S2o1UWdhbTAwREJUWUJUN1JPX3lEU0VtZ0JCam1ITzMyVGY0VlNuTjlsZXV6R0U2?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "publishedAt": "Tue, 30 Dec 2025 02:49:22 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNRmpCNW5hM21TU2ZiNUFKdVMzSGdtc0V4dFliX0N1Q0RVYkk2X2dIbmUtYlJQX1pvQzg4RF9tNENfeW1UT3pLNE84WVljVENXa0NVUzd0dTZtWEtoVEFRU1JQWnhDTHd5NDVYQ1FJNWZYU0dlU1UzbGt0TmFtbm1TOUJ4Y0ZPNXJ2OG4zblBKWkpqTzFxcEVqdVJyX1hmcnNSQTZLTmV4Qk1tQW16NXpBSkQtR3JFV2pVaXhKbzk2V2R2UW92c3gtcXE4VDlUdGZHWWZxR3BSVDQycXVBRHFzNjJBODNiMURsclpVcF9tenkzNlI1eUE?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "national"
     },
@@ -366,12 +339,39 @@
       "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNWlpfZU1Wd0NZQkg0TWlVOVM1S3RIQTVTc2hNVC1lVVJfank0OVpzWW5zc09fYlJBOTc5VGJFMnZmRVVMOFF3c1F1RmYyOGxNeUtZNU1ZdHZqdDBQbEpnODdmZ2NjUlFMS0o4UDdHTG1SbzcwT0pqb3lrTWw3MExOOThnRTN6YzdWTnlRTTE1cw?oc=5&hl=en-US&gl=US&ceid=US:en",
       "imageUrl": "",
       "scope": "local"
+    },
+    {
+      "id": "n:1779411474",
+      "title": "Sejus entrega amigurumis de Jesus a recém-nascidos - ES 24 Horas",
+      "source": "news.google.com",
+      "publishedAt": "Tue, 30 Dec 2025 01:25:13 GMT",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOQnNROVZGSkFlRlRjMUFwZFAyc2RNekxpRF9LZkNKM0VuZzZxOHdkcGZGeUk0WHd1TGlYNDJyYzFmM1VOT0JsbGtTR2NPYTZLYWNmWmJhREdDT3JCN2xaVk1jMmpiMGdEeTc5NGNLeFphLUpjNndrdTJfdEp2c1VGX0QtR1pacGFZNVdUc2ZyNnhycG1HZE53aw?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": "",
+      "scope": "state"
+    },
+    {
+      "id": "n:1242962012",
+      "title": "Menor estado do Brasil explode no agro: Sergipe vira potência em milho, leite, laranja e camarão com alta tecnologia, drones e indústrias lotadas exportando alimentos do semiárido para o mundo - CPG Click Petróleo e Gás",
+      "source": "news.google.com",
+      "publishedAt": "Tue, 30 Dec 2025 02:43:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxOTzA2VDRJRGxBSy0zQ29rZC1IeHB6aVdCRGZuMFNWRFhtMjluN05pQ0szMkg0RDFzTHRNN2Q5VDhrYzNBTW9iM01JQmpROXpwdm9zN3Y1SmlpMzAxRndUZTB2cjV1XzVtUDJzTllpR1pScmpUWkY1bGNZbGRMOWJGSVdWQkdlQUUtTExHeV9ZTzNVQjVoZ3NDNG52MXZmc0hRLV9ud3VzU3ptV25INklaZnk4Q0t2enNjMmJLbG4zWVR3Y0RkYUdQZnRFOE1Rc1pYTVphY01venh2czF3b2plcVh2QmdiczlJdHFVMGN1aEs1VnRXUGxoaTNuejhHNGIteGtFMlFnZjY3WmJtT1E?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": "",
+      "scope": "national"
+    },
+    {
+      "id": "n:425040864",
+      "title": "Ex-companheiro invade casa, destrói objetos e ameaça mulher em Colatina - ES Fala",
+      "source": "news.google.com",
+      "publishedAt": "Mon, 29 Dec 2025 21:01:46 GMT",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQUWJQdG9idHlZdDFMS0hIa2xCS2Y1Tk04ZzhlRWgyY2VVSFIwRmplOHo0T3RaOEt2TEp5R21mV25HQTB1YkYzdWU5WFJjam41bDZEb1F3dXU3aENYdF9Gblg5bUhJNUpBR2hqVXRjNlJtbFdkWFBKcGtaclZyTTdZMERzdGNqcldSNExFOWFXMjZiWWtkNmtmR2JPd0pmVTFvazBvaWhYa1FHZVJh?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "imageUrl": "",
+      "scope": "local"
     }
   ],
   "stats": {
-    "discovered": 469,
+    "discovered": 470,
     "produced": 40,
-    "blocked_titles": 1,
+    "blocked_titles": 0,
     "dropped_old": 0,
     "enrich_failed": 0
   }
