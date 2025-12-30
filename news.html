@@ -221,12 +221,15 @@ window.addEventListener("online",updateStatus);
 window.addEventListener("offline",updateStatus);
 updateStatus();
 
-/* ===== IMAGE PROXY (MELHORADO) ===== */
+// No script dentro do seu HTML (news.html por exemplo):
 function proxy(url) {
-  if (!url || url === "null") return ""; 
-  // Usa o wsrv.nl para redimensionar e evitar bloqueio de CORS/Hotlink
-  return "https://wsrv.nl/?url=" + encodeURIComponent(url.replace(/^https?:\/\//, "")) + "&w=1280&h=720&fit=cover&a=top";
+  if (!url || url.includes("null")) return "URL_DE_UMA_IMAGEM_PADRAO_AQUI";
+  // O wsrv.nl ajuda a contornar o bloqueio de "Hotlink"
+  return "https://wsrv.nl/?url=" + encodeURIComponent(url.replace(/^https?:\/\//, "")) + "&w=800&af";
 }
+
+// Ao renderizar:
+img.src = proxy(item.imageUrl || item.image);
 
 /* ===== LOAD NEWS ===== */
 fetch("./data/news.json?" + Date.now())
