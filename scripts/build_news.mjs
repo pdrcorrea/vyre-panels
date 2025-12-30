@@ -1,20 +1,16 @@
-// ===== scripts/build_news.mjs (SUBSTITUA INTEIRO) =====
-// Mantém seu painel atual (vyre-light.css) e agora cada item traz:
-// - sourceDomain (ex: agenciabrasil.ebc.com.br)
-// - sourceLogoUrl (favicon automático do domínio)
-// Também força a "Fonte" a ser o domínio/veículo (evita aparecer "Google Fonts" etc.)
-// Filtro: no máximo 3 dias | Intercalado: Local -> Local -> ES -> Local -> Brasil -> ES
-
 import fs from "node:fs/promises";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const OUT_DIR = "data";
 const OUT_FILE = path.join(OUT_DIR, "news.json");
+const IMG_DIR = path.join(OUT_DIR, "news-images");
 
 const MAX_AGE_DAYS = 3;
-const MAX_ITEMS_TOTAL = 36;
-const MAX_PER_SOURCE = 12;
+const MAX_ITEMS_TOTAL = 30;      // total final (com imagem salva)
+const MAX_PER_SOURCE = 12;       // coleta por fonte
 const FETCH_TIMEOUT_MS = 20000;
+const MAX_IMAGE_BYTES = 1_600_000; // ~1.6MB por imagem (seguro p/ Pages)
 
 const SOURCES = {
   local: [
@@ -35,6 +31,8 @@ const SOURCES = {
 
 function now() { return new Date(); }
 function daysAgo(n) { return new Date(now().getTime() - n * 24 * 60 * 60 * 1000); }
+function withinMaxAge(d) { return d && d >= daysAgo(MAX_AGE_DAYS); }
+
 function clampStr(s) { return (s ?? "").toString().replace(/\s+/g, " ").trim(); }
 function escapeReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 function decodeHtml(s) {
@@ -46,12 +44,28 @@ function decodeHtml(s) {
 function absUrl(base, href) { try { return new URL(href, base).toString(); } catch { return null; } }
 function uniq(arr) { return [...new Set(arr)]; }
 
+function domainOf(u) {
+  try { return new URL(u).hostname.replace(/^www\./, ""); }
+  catch { return ""; }
+}
+
+function faviconUrlForDomain(domain) {
+  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+}
+
+function hashId(input) {
+  return crypto.createHash("sha1").update(input).digest("hex").slice(0, 10);
+}
+
 async function fetchText(url) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS);
   try {
     const res = await fetch(url, {
-      headers: { "user-agent": "PontoView-VyreBot/1.2 (+github-actions)", "accept": "text/html,application/xhtml+xml" },
+      headers: {
+        "user-agent": "PontoView-VyreBot/2.0 (+github-actions)",
+        "accept": "text/html,application/xhtml+xml"
+      },
       redirect: "follow",
       signal: ctrl.signal,
     });
@@ -65,6 +79,7 @@ function pickMeta(html, keys) {
     const r1 = new RegExp(`<meta[^>]+(?:name|property)=["']${escapeReg(key)}["'][^>]+content=["']([^"']+)["']`, "i");
     const m1 = html.match(r1);
     if (m1?.[1]) return clampStr(decodeHtml(m1[1]));
+
     const r2 = new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+(?:name|property)=["']${escapeReg(key)}["']`, "i");
     const m2 = html.match(r2);
     if (m2?.[1]) return clampStr(decodeHtml(m2[1]));
@@ -96,11 +111,6 @@ function parseAnyDate(html) {
   return null;
 }
 
-function withinMaxAge(d) {
-  if (!d) return false;
-  return d >= daysAgo(MAX_AGE_DAYS);
-}
-
 function extractLinks(html, baseUrl) {
   const hrefs = [];
   const re = /<a\s+[^>]*href=["']([^"']+)["'][^>]*>/gi;
@@ -112,15 +122,12 @@ function extractLinks(html, baseUrl) {
   return uniq(hrefs);
 }
 
-function domainOf(u) {
-  try { return new URL(u).hostname.replace(/^www\./, ""); }
-  catch { return ""; }
-}
 function looksLikeArticle(url) {
   if (!url || url.includes("#")) return false;
   if (/\.(pdf|jpg|jpeg|png|webp|svg|css|js)(\?|$)/i.test(url)) return false;
   return true;
 }
+
 function scoreCandidate(url) {
   let s = 0;
   if (/noticia|noticias|imprensa|agencia|conteudo|\/Noticia\/|\/Noticias\/|\/noticia\//i.test(url)) s += 3;
@@ -128,9 +135,9 @@ function scoreCandidate(url) {
   if (url.length > 40) s += 1;
   return s;
 }
+
 function pickTopCandidates(listUrl, html) {
   const all = extractLinks(html, listUrl).filter(looksLikeArticle);
-
   const d = domainOf(listUrl);
   const same = all.filter((u) => domainOf(u) === d);
 
@@ -143,20 +150,82 @@ function pickTopCandidates(listUrl, html) {
   return cleaned.slice(0, MAX_PER_SOURCE);
 }
 
-// favicon automático (sem armazenar imagens)
-function faviconUrlForDomain(domain) {
-  // serviço do Google (favicon) — ótimo para TV
-  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+function normalizeImageUrl(img, articleUrl) {
+  if (!img) return "";
+  let u = img.trim();
+
+  // //cdn...
+  if (u.startsWith("//")) {
+    u = "https:" + u;
+  }
+
+  // relativo
+  try {
+    u = new URL(u, articleUrl).toString();
+  } catch {}
+
+  // evita mixed content no Pages
+  if (u.startsWith("http://")) u = u.replace("http://", "https://");
+
+  return u;
 }
 
-// Nome “bonito” baseado no domínio (evita "Google Fonts")
-function prettySourceFromDomain(domain) {
-  if (!domain) return "Fonte";
-  // você pode refinar aqui se quiser nomes específicos
-  if (domain.includes("agenciabrasil.ebc.com.br")) return "Agência Brasil";
-  if (domain.includes("gov.br")) return "Governo Federal";
-  if (domain.endsWith(".es.gov.br")) return "Governo do ES";
-  return domain;
+function extFromContentType(ct) {
+  const s = (ct || "").toLowerCase();
+  if (s.includes("image/jpeg")) return "jpg";
+  if (s.includes("image/png")) return "png";
+  if (s.includes("image/webp")) return "webp";
+  if (s.includes("image/gif")) return "gif";
+  return "";
+}
+
+async function downloadImageToLocal(imageUrl, id, refererUrl) {
+  if (!imageUrl) return "";
+
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS);
+
+  try {
+    const res = await fetch(imageUrl, {
+      headers: {
+        "user-agent": "PontoView-VyreBot/2.0 (+github-actions)",
+        "accept": "image/avif,image/webp,image/*,*/*",
+        "referer": refererUrl || "",
+      },
+      redirect: "follow",
+      signal: ctrl.signal,
+    });
+
+    if (!res.ok) return "";
+
+    const ct = res.headers.get("content-type") || "";
+    if (!ct.toLowerCase().startsWith("image/")) return "";
+
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (!buf.length || buf.length > MAX_IMAGE_BYTES) return "";
+
+    const ext = extFromContentType(ct) || guessExtFromUrl(imageUrl) || "jpg";
+    const file = `n_${id}.${ext}`;
+    const outPath = path.join(IMG_DIR, file);
+
+    await fs.writeFile(outPath, buf);
+    return `./${OUT_DIR}/news-images/${file}`;
+  } catch {
+    return "";
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+function guessExtFromUrl(u) {
+  try {
+    const p = new URL(u).pathname.toLowerCase();
+    if (p.endsWith(".jpg") || p.endsWith(".jpeg")) return "jpg";
+    if (p.endsWith(".png")) return "png";
+    if (p.endsWith(".webp")) return "webp";
+    if (p.endsWith(".gif")) return "gif";
+  } catch {}
+  return "";
 }
 
 async function parseArticle(url, scope, meta = {}) {
@@ -166,39 +235,37 @@ async function parseArticle(url, scope, meta = {}) {
     pickMeta(html, ["og:title", "twitter:title"]) ||
     clampStr((html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || ""));
 
-  const image =
-    pickMeta(html, ["og:image", "twitter:image", "twitter:image:src"]) || "";
-
   const published = parseAnyDate(html);
   if (!withinMaxAge(published)) return null;
-
   if (!title || title.length < 12) return null;
 
-  // evita manchetes muito vagas fora do escopo local (ajustável)
   const vague = /(veja|entenda|saiba|confira)\s+/i;
   if (vague.test(title) && scope !== "local") return null;
 
+  const rawImg =
+    pickMeta(html, ["og:image", "og:image:url", "twitter:image", "twitter:image:src"]) || "";
+
+  const normalizedImg = normalizeImageUrl(rawImg, url);
+
+  const id = hashId(url);
   const sourceDomain = domainOf(url);
-  const source = meta.sourceName || prettySourceFromDomain(sourceDomain);
+  const sourceLogoUrl = sourceDomain ? faviconUrlForDomain(sourceDomain) : "";
+
+  // ✅ baixa imagem local (se existir)
+  const localImageUrl = await downloadImageToLocal(normalizedImg, id, url);
 
   return {
-    id: `n:${Math.abs(hashString(url))}`,
+    id: `n:${id}`,
     title,
     url,
-    imageUrl: image || "",
+    imageUrl: localImageUrl || "",       // ← AGORA É LOCAL
     publishedAt: published.toISOString(),
     scope, // local | state | national
     city: meta.city || "",
-    source,                 // nome exibível
-    sourceDomain,           // domínio para favicon
-    sourceLogoUrl: sourceDomain ? faviconUrlForDomain(sourceDomain) : "",
+    source: meta.name || sourceDomain || "Fonte",
+    sourceDomain,
+    sourceLogoUrl,
   };
-}
-
-function hashString(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) h = (h << 5) - h + str.charCodeAt(i) | 0;
-  return h;
 }
 
 async function collectFromSource(src, scope) {
@@ -208,11 +275,9 @@ async function collectFromSource(src, scope) {
   const items = [];
   for (const u of candidates) {
     try {
-      const it = await parseArticle(u, scope, { sourceName: src.name, city: src.city });
+      const it = await parseArticle(u, scope, { name: src.name, city: src.city });
       if (it) items.push(it);
-    } catch {
-      // ignora
-    }
+    } catch {}
   }
   return items;
 }
@@ -247,12 +312,17 @@ function interleaveBuckets(buckets, pattern, maxTotal) {
 }
 
 async function main() {
+  // limpa imagens antigas para não crescer indefinidamente
+  await fs.mkdir(OUT_DIR, { recursive: true });
+  await fs.rm(IMG_DIR, { recursive: true, force: true });
+  await fs.mkdir(IMG_DIR, { recursive: true });
+
   const buckets = { local: [], state: [], national: [] };
 
   const tasks = [];
-  for (const src of SOURCES.local) tasks.push(collectFromSource(src, "local").then(r => buckets.local.push(...r)));
-  for (const src of SOURCES.state) tasks.push(collectFromSource(src, "state").then(r => buckets.state.push(...r)));
-  for (const src of SOURCES.national) tasks.push(collectFromSource(src, "national").then(r => buckets.national.push(...r)));
+  for (const src of SOURCES.local)   tasks.push(collectFromSource(src, "local").then(r => buckets.local.push(...r)));
+  for (const src of SOURCES.state)   tasks.push(collectFromSource(src, "state").then(r => buckets.state.push(...r)));
+  for (const src of SOURCES.national)tasks.push(collectFromSource(src, "national").then(r => buckets.national.push(...r)));
 
   await Promise.allSettled(tasks);
 
@@ -264,12 +334,15 @@ async function main() {
     items,
     stats: {
       maxAgeDays: MAX_AGE_DAYS,
-      collected: { local: buckets.local.length, state: buckets.state.length, national: buckets.national.length },
+      collected: {
+        local: buckets.local.length,
+        state: buckets.state.length,
+        national: buckets.national.length
+      },
       final: items.length
     }
   };
 
-  await fs.mkdir(OUT_DIR, { recursive: true });
   await fs.writeFile(OUT_FILE, JSON.stringify(payload, null, 2), "utf-8");
   console.log(`OK: ${OUT_FILE} (${items.length} itens)`);
 }
