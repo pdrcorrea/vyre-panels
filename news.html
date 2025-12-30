@@ -164,30 +164,27 @@
       return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
     }
 
-    function setImage(url){
-      const img = $("newsImg");
-      const empty = $("newsEmpty");
+function setImage(url){
+  const img = document.getElementById("newsImg");
+  const empty = document.getElementById("newsEmpty");
+  img.onerror = null;
 
-      // limpa listeners antigos
-      img.onerror = null;
-
-      if(url){
-        img.src = url;
-        img.style.display = "block";
-        empty.style.display = "none";
-
-        // se a imagem falhar (CORS/404), cai pro fallback
-        img.onerror = () => {
-          img.removeAttribute("src");
-          img.style.display = "none";
-          empty.style.display = "grid";
-        };
-      } else {
-        img.removeAttribute("src");
-        img.style.display = "none";
-        empty.style.display = "grid";
-      }
-    }
+  if(url){
+    // garante que ./data/... funcione mesmo com cache
+    img.src = url;
+    img.style.display = "block";
+    empty.style.display = "none";
+    img.onerror = () => {
+      img.removeAttribute("src");
+      img.style.display = "none";
+      empty.style.display = "grid";
+    };
+  } else {
+    img.removeAttribute("src");
+    img.style.display = "none";
+    empty.style.display = "grid";
+  }
+}
 
     function setSourceLogo(item){
       const chip = $("sourceChip");
