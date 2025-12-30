@@ -1,151 +1,398 @@
-<!-- ===== tips.html (SUBSTITUA INTEIRO) ===== -->
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vyre • Dicas</title>
-  <link rel="stylesheet" href="./vyre-light.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dicas de Saúde • Vyre</title>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg0:#081423;
+  --bg1:#0a2232;
+  --panel:#ffffff;
+
+  --text:#0f172a;
+  --stroke:#d8e1ee;
+  --stroke2:#e6edf7;
+
+  --shadow: 0 18px 60px rgba(2,10,23,.18);
+
+  --r: 18px;
+  --pad: clamp(14px, 2.0vw, 22px);
+
+  --header: linear-gradient(180deg, #2f6f9d 0%, #184c75 55%, #0f3b5e 100%);
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  overflow:hidden;
+
+  background:
+    radial-gradient(1200px 900px at 25% 10%, rgba(87,184,231,.22) 0%, rgba(10,46,62,0) 60%),
+    radial-gradient(900px 700px at 75% 80%, rgba(52,198,208,.14) 0%, rgba(6,18,24,0) 65%),
+    radial-gradient(1400px 1100px at 50% 55%, var(--bg1) 0%, var(--bg0) 62%, #040a0f 100%);
+
+  padding: clamp(12px, 2vw, 22px);
+  display:grid;
+  place-items:center;
+}
+
+.panel{
+  width: min(1500px, 96vw);
+  height: calc(100vh - clamp(24px, 4vw, 44px));
+  border-radius: var(--r);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+
+  opacity:0;
+  transform: translateY(12px);
+  animation: inPanel 900ms cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes inPanel{ to{ opacity:1; transform: translateY(0);} }
+
+/* ===== HEADER (EXATAMENTE DO ÔNIBUS) ===== */
+.header{
+  padding: 14px var(--pad);
+  background: var(--header);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.18);
+}
+.h-left{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  min-width: 0;
+}
+.busIcon{
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  display:grid; place-items:center;
+  background: rgba(255,255,255,.10);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
+  flex: 0 0 auto;
+}
+.busIcon .material-icons-outlined{ font-size: 24px; opacity: .95; }
+
+.titleBlock{ min-width:0; }
+.title{
+  font-size: clamp(18px, 2.2vw, 30px);
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.sub{
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .92;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width: 70vw;
+}
+
+.h-right{
+  text-align:right;
+  white-space:nowrap;
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+  align-items:flex-end;
+}
+.clock{
+  font-size: clamp(34px, 4.1vw, 56px);
+  font-weight: 900;
+  letter-spacing: .06em;
+  line-height: 1;
+}
+
+/* badge online/offline ABAIXO do relógio */
+.netBadge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .98;
+}
+.netDot{
+  width:10px;height:10px;border-radius:50%;
+  background:#22c55e;
+  animation:pulse 1.6s ease-out infinite;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.65);
+}
+.netDot.off{ background:#ef4444; animation:pulseRed 1.6s ease-out infinite; }
+@keyframes pulse{
+  0%{ box-shadow:0 0 0 0 rgba(34,197,94,.55), inset 0 0 0 2px rgba(255,255,255,.65); }
+  70%{ box-shadow:0 0 0 10px rgba(34,197,94,0), inset 0 0 0 2px rgba(255,255,255,.65); }
+  100%{ box-shadow:0 0 0 0 rgba(34,197,94,0), inset 0 0 0 2px rgba(255,255,255,.65); }
+}
+@keyframes pulseRed{
+  0%{ box-shadow:0 0 0 0 rgba(239,68,68,.55), inset 0 0 0 2px rgba(255,255,255,.65); }
+  70%{ box-shadow:0 0 0 10px rgba(239,68,68,0), inset 0 0 0 2px rgba(255,255,255,.65); }
+  100%{ box-shadow:0 0 0 0 rgba(239,68,68,0), inset 0 0 0 2px rgba(255,255,255,.65); }
+}
+
+/* ===== SUBSTRIP ===== */
+.substrip{
+  padding: 12px var(--pad);
+  background: #f3f7ff;
+  border-bottom: 1px solid var(--stroke2);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color:#0b1220;
+}
+
+/* ===== HERO ===== */
+.stage{
+  flex:1;
+  min-height:0;
+  padding: var(--pad);
+  background:#fff;
+}
+.hero{
+  height:100%;
+  border-radius: 16px;
+  background:#0b1220;
+  border: 1px solid var(--stroke);
+  box-shadow: 0 10px 26px rgba(2,10,23,.08);
+  overflow:hidden;
+  position:relative;
+}
+.heroImg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  transform: scale(1.02);
+}
+.heroOverlay{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.05) 18%, rgba(0,0,0,.72) 78%, rgba(0,0,0,.86) 100%);
+}
+.heroContent{
+  position:absolute; left:18px; right:18px; bottom:16px;
+  color:#fff;
+  text-shadow: 0 14px 32px rgba(0,0,0,.5);
+}
+.tipTitle{
+  font-size: clamp(34px, 4.2vw, 62px);
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing:.01em;
+}
+.tipText{
+  margin-top: 12px;
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 700;
+  opacity:.96;
+  max-width: 1100px;
+}
+.metaRow{
+  margin-top: 14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(255,255,255,.25);
+  color: rgba(15,27,45,.88);
+  font-size: 12px;
+  font-weight: 900;
+}
+.chip img{
+  width:18px;height:18px;border-radius:6px;
+  object-fit:contain;
+  background: rgba(255,255,255,.7);
+  border: 1px solid rgba(15,27,45,.10);
+}
+
+/* ===== FOOTER ===== */
+.panelFooter{
+  border-top: 1px solid var(--stroke2);
+  background: #fff;
+  padding: 10px var(--pad);
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  min-height: 44px;
+}
+.panelFooter img{ height: 22px; opacity:.75; }
+@media (max-width: 760px){
+  .panelFooter{ justify-content:center; }
+}
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <div class="card">
-      <div class="topbar">
-        <div class="brand">
-          <div class="brandIcon" aria-hidden="true">💡</div>
-          <div class="brandText">
-            <h1>Dicas</h1>
-            <div class="sub">EDUCATIVAS</div>
-          </div>
-        </div>
+<section class="panel" aria-label="Painel de dicas de saúde">
 
-        <div class="clockBox">
-          <div class="clockNow" id="clockNow">--:--</div>
-          <div class="clockMeta">ATUALIZADO • <span id="clockUpd">--:--</span></div>
-        </div>
+  <div class="header">
+    <div class="h-left">
+      <div class="busIcon" aria-hidden="true">
+        <span class="material-icons-outlined">health_and_safety</span>
       </div>
-
-      <div class="strip">
-        <div class="stripLeft">DICA DO MOMENTO</div>
-        <div class="stripRight">CONTEÚDO • LIVRE</div>
+      <div class="titleBlock">
+        <div class="title">DICAS</div>
+        <div class="sub" id="subStatus">SAÚDE • MINISTÉRIO DA SAÚDE</div>
       </div>
+    </div>
 
-      <div class="main">
-        <div class="grid2 fadeIn" id="content">
-          <div class="panel">
-            <div class="media">
-              <div class="mediaEmpty" style="height:100%;">
-                <div class="big">💡</div>
-                <div>Bem-estar • saúde • segurança</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="textBox">
-              <div class="headline" id="headline">Carregando…</div>
-              <div class="bodyText" id="body"></div>
-
-              <div class="metaRow">
-                <div class="chip" id="topicChip">Tema: —</div>
-                <div class="chip" id="countChip">Itens: —</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== tips.html (MESMA ALTERAÇÃO) ===== -->
-<div class="pvFooter"></div>
-<script src="./pv-footer.js"></script>
-       
+    <div class="h-right">
+      <div class="clock" id="clock">--:--</div>
+      <div class="netBadge" id="netBadge">
+        <span class="netDot" id="netDot"></span>
+        <span id="netText">ONLINE</span>
       </div>
     </div>
   </div>
 
+  <div class="substrip">
+    <span>DICA DO DIA</span>
+    <span>OFICIAL • GOV.BR</span>
+  </div>
+
+  <div class="stage">
+    <div class="hero" id="hero">
+      <img class="heroImg" id="heroImg" alt="">
+      <div class="heroOverlay"></div>
+      <div class="heroContent">
+        <div class="tipTitle" id="tipTitle">Carregando…</div>
+        <div class="tipText" id="tipText"></div>
+        <div class="metaRow">
+          <div class="chip">
+            <img id="sourceLogo" alt="">
+            <span id="sourceName">Ministério da Saúde</span>
+          </div>
+          <div class="chip" id="publishedChip">Publicado: —</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panelFooter">
+    <img src="./assets/logo-pontoview.png" alt="PontoView">
+  </div>
+
+</section>
+
 <script>
-(() => {
-  const ROTATE_SECONDS = 20;
-  const $ = (id)=>document.getElementById(id);
+function pad2(n){ return String(n).padStart(2,"0"); }
+function tickClock(){
+  const d=new Date();
+  clock.textContent = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+}
+tickClock(); setInterval(tickClock, 1000);
 
-  function hhmm(d=new Date()){
-    return d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+function setNet(ok){
+  netText.textContent = ok ? "ONLINE" : "OFFLINE";
+  netDot.classList.toggle("off", !ok);
+}
+window.addEventListener("online", ()=>setNet(true));
+window.addEventListener("offline", ()=>setNet(false));
+setNet(navigator.onLine);
+
+function proxyImage(url){
+  if(!url) return "";
+  const clean = url.replace(/^https?:\/\//i,"");
+  return "https://wsrv.nl/?url=" + encodeURIComponent(clean) + "&w=1920&h=1080&fit=cover&output=jpg&q=85";
+}
+
+function coverFallback(title){
+  const c=document.createElement("canvas"); c.width=1600; c.height=900;
+  const x=c.getContext("2d");
+  const g=x.createLinearGradient(0,0,1600,900);
+  g.addColorStop(0,"#2f6f9d"); g.addColorStop(1,"#0f3b5e");
+  x.fillStyle=g; x.fillRect(0,0,1600,900);
+  const shade=x.createLinearGradient(0,420,0,900);
+  shade.addColorStop(0,"rgba(0,0,0,0)");
+  shade.addColorStop(1,"rgba(0,0,0,.72)");
+  x.fillStyle=shade; x.fillRect(0,0,1600,900);
+  x.fillStyle="#fff"; x.font="900 70px Inter, system-ui"; x.textBaseline="top";
+  const words=(title||"Dica de saúde").split(/\s+/).filter(Boolean);
+  let line="", y=560;
+  for(const w of words){
+    const t=line?line+" "+w:w;
+    if(x.measureText(t).width>1400){ x.fillText(line,100,y); y+=82; line=w; }
+    else line=t;
   }
-  function fmtDateTime(d){
-    try{
-      const dt = new Date(d);
-      return dt.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
-    }catch{return "—";}
+  x.fillText(line,100,y);
+  return c.toDataURL("image/jpeg",.92);
+}
+
+(async function start(){
+  try{
+    const r = await fetch("./data/tips.json?v="+Date.now(), {cache:"no-store"});
+    if(!r.ok) throw new Error("tips.json");
+    const data = await r.json();
+    const items = Array.isArray(data.items)?data.items:[];
+    if(!items.length) throw new Error("empty");
+
+    const it = items[Math.floor(Math.random()*items.length)];
+
+    tipTitle.textContent = it.title || "Dica";
+    tipText.textContent  = it.summary || "";
+
+    sourceName.textContent = it.source || "Ministério da Saúde";
+    sourceLogo.src = it.sourceLogoUrl || "";
+    sourceLogo.onerror = ()=>sourceLogo.style.display="none";
+
+    publishedChip.textContent = "Publicado: " + (it.publishedAt ? new Date(it.publishedAt).toLocaleDateString("pt-BR") : "—");
+
+    const imgUrl = proxyImage(it.imageUrl || "");
+    heroImg.onerror = ()=>{ heroImg.onerror=null; heroImg.src = coverFallback(it.title); };
+    heroImg.src = imgUrl || coverFallback(it.title);
+
+    setNet(true);
+  }catch(e){
+    setNet(false);
+    tipTitle.textContent = "Sem dicas disponíveis";
+    tipText.textContent  = "Conecte à internet para carregar dicas oficiais automaticamente.";
+    heroImg.src = coverFallback("Sem dicas disponíveis");
+    sourceLogo.style.display="none";
+    publishedChip.textContent = "Publicado: —";
   }
-
-  function updateClock(){ $("clockNow").textContent = hhmm(); }
-  setInterval(updateClock, 1000); updateClock();
-
-  const STORAGE_LAST = "pv_tips_last_id_light_v1";
-  const getLastId = ()=>{ try{return localStorage.getItem(STORAGE_LAST)||""}catch{return""} };
-  const setLastId = (id)=>{ try{localStorage.setItem(STORAGE_LAST, id||"")}catch{} };
-
-  function pickNext(items){
-    if(!items || !items.length) return null;
-    const last = getLastId();
-    const shuffled = items.slice().sort(()=>Math.random()-0.5);
-    return shuffled.find(x => (x.id||"") !== last) || shuffled[0];
-  }
-
-  function renderFallback(updatedAt){
-    $("headline").textContent = "Sem dicas no momento";
-    $("body").textContent = "Atualize data/tips.json para exibir conteúdos.";
-    $("topicChip").textContent = "Tema: —";
-    $("countChip").textContent = "Itens: 0";
-    $("clockUpd").textContent = hhmm();
-  }
-
-  function renderItem(item, pack){
-    const content = $("content");
-    content.classList.remove("fadeIn"); void content.offsetWidth; content.classList.add("fadeIn");
-
-    if(!item){
-      renderFallback(pack.updatedAt);
-      return;
-    }
-
-    $("headline").textContent = item.title || "Dica";
-    $("body").textContent = item.text || item.body || "";
-    $("topicChip").textContent = "Tema: " + (item.topic || item.category || "Bem-estar");
-    $("clockUpd").textContent = hhmm();
-
-    setLastId(item.id || "");
-  }
-
-  async function fetchWithTimeout(url, ms){
-    const ctrl = new AbortController();
-    const t = setTimeout(()=>ctrl.abort(), ms);
-    try{
-      const res = await fetch(url, { cache:"no-store", signal: ctrl.signal });
-      if(!res.ok) throw new Error("HTTP " + res.status);
-      return await res.json();
-    } finally { clearTimeout(t); }
-  }
-
-  async function loadTips(){
-    const url = "./data/tips.json?v=" + Date.now();
-    const data = await fetchWithTimeout(url, 12000);
-    const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
-    const updatedAt = data?.updatedAt ? data.updatedAt : new Date().toISOString();
-    return { items, updatedAt };
-  }
-
-  async function cycle(){
-    try{
-      const pack = await loadTips();
-      renderItem(pickNext(pack.items), pack);
-    }catch{
-      renderFallback(new Date().toISOString());
-    }
-  }
-
-  cycle();
-  setInterval(cycle, ROTATE_SECONDS * 1000);
 })();
 </script>
 </body>
