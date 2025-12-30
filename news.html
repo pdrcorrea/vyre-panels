@@ -221,23 +221,44 @@ window.addEventListener("online",updateStatus);
 window.addEventListener("offline",updateStatus);
 updateStatus();
 
-/* ===== IMAGE PROXY (ESSENCIAL) ===== */
-function proxy(url){
-  if(!url) return "";
-  return "https://wsrv.nl/?url="+encodeURIComponent(url.replace(/^https?:\/\//,""))+"&w=1920&h=1080&fit=cover";
+/* ===== IMAGE PROXY (MELHORADO) ===== */
+function proxy(url) {
+  if (!url || url === "null") return ""; 
+  // Usa o wsrv.nl para redimensionar e evitar bloqueio de CORS/Hotlink
+  return "https://wsrv.nl/?url=" + encodeURIComponent(url.replace(/^https?:\/\//, "")) + "&w=1280&h=720&fit=cover&a=top";
 }
 
 /* ===== LOAD NEWS ===== */
-fetch("./data/news.json?"+Date.now())
-.then(r=>r.json())
-.then(d=>{
-  const n=d.items[Math.floor(Math.random()*d.items.length)];
-  title.textContent=n.title;
-  source.textContent=n.source;
-  logo.src=n.sourceLogoUrl||"";
-  date.textContent=new Date(n.publishedAt).toLocaleString("pt-BR");
-  image.src=proxy(n.imageUrl);
-});
+fetch("./data/news.json?" + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    const items = data.items || [];
+    if (items.length === 0) return;
+
+    let idx = 0;
+    function showNext() {
+      const item = items[idx];
+      const titleEl = document.getElementById("title");
+      const imgEl = document.getElementById("mainImage");
+
+      titleEl.textContent = item.title;
+      document.getElementById("source").textContent = item.source || "Notícias";
+      
+      const imgUrl = proxy(item.image);
+      if (imgUrl) {
+        imgEl.src = imgUrl;
+        imgEl.style.display = "block";
+      } else {
+        // Se não houver imagem, mantém a última ou usa um placeholder
+        imgEl.src = "https://images.unsplash.com/photo-1504711432869-0df30a7e04ad?q=80&w=1000&auto=format&fit=crop"; 
+      }
+
+      idx = (idx + 1) % items.length;
+    }
+
+    showNext();
+    setInterval(showNext, 15000); // 15 segundos por notícia
+  });
 </script>
 </body>
 </html>
