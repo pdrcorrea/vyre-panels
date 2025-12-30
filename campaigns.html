@@ -1,399 +1,460 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Campanhas • Vyre</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campanhas • Institucional</title>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg0:#081423;
-  --bg1:#0a2232;
-  --panel:#ffffff;
+  <style>
+    :root{
+      --bg0:#081423;
+      --bg1:#0a2232;
+      --panel:#ffffff;
 
-  --text:#0f172a;
-  --stroke:#d8e1ee;
-  --stroke2:#e6edf7;
+      --text:#0f172a;
+      --dim:#475569;
 
-  --shadow: 0 18px 60px rgba(2,10,23,.18);
+      --stroke:#d8e1ee;
+      --stroke2:#e6edf7;
 
-  --r: 18px;
-  --pad: clamp(14px, 2.0vw, 22px);
+      --shadow: 0 18px 60px rgba(2,10,23,.18);
 
-  --header: linear-gradient(180deg, #2f6f9d 0%, #184c75 55%, #0f3b5e 100%);
-}
+      --r: 18px;
+      --pad: clamp(14px, 2.0vw, 22px);
 
-*{ box-sizing:border-box; }
-html,body{ height:100%; }
-body{
-  margin:0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
-  overflow:hidden;
+      --header: linear-gradient(180deg, #2f6f9d 0%, #184c75 55%, #0f3b5e 100%);
+    }
 
-  background:
-    radial-gradient(1200px 900px at 25% 10%, rgba(87,184,231,.22) 0%, rgba(10,46,62,0) 60%),
-    radial-gradient(900px 700px at 75% 80%, rgba(52,198,208,.14) 0%, rgba(6,18,24,0) 65%),
-    radial-gradient(1400px 1100px at 50% 55%, var(--bg1) 0%, var(--bg0) 62%, #040a0f 100%);
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      overflow:hidden;
 
-  padding: clamp(12px, 2vw, 22px);
-  display:grid;
-  place-items:center;
-}
+      background:
+        radial-gradient(1200px 900px at 25% 10%, rgba(87,184,231,.22) 0%, rgba(10,46,62,0) 60%),
+        radial-gradient(900px 700px at 75% 80%, rgba(52,198,208,.14) 0%, rgba(6,18,24,0) 65%),
+        radial-gradient(1400px 1100px at 50% 55%, var(--bg1) 0%, var(--bg0) 62%, #040a0f 100%);
 
-.panel{
-  width: min(1500px, 96vw);
-  height: calc(100vh - clamp(24px, 4vw, 44px));
-  border-radius: var(--r);
-  background: var(--panel);
-  box-shadow: var(--shadow);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
+      padding: clamp(12px, 2vw, 22px);
+      display:grid;
+      place-items:center;
+    }
 
-  opacity:0;
-  transform: translateY(12px);
-  animation: inPanel 900ms cubic-bezier(.22,1,.36,1) forwards;
-}
-@keyframes inPanel{ to{ opacity:1; transform: translateY(0);} }
+    .panel{
+      width: min(1500px, 96vw);
+      height: calc(100vh - clamp(24px, 4vw, 44px));
+      border-radius: var(--r);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
 
-/* ===== HEADER (EXATAMENTE DO ÔNIBUS) ===== */
-.header{
-  padding: 14px var(--pad);
-  background: var(--header);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 14px;
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,.18);
-}
-.h-left{
-  display:flex;
-  align-items:center;
-  gap: 14px;
-  min-width: 0;
-}
-.busIcon{
-  width: 44px; height: 44px;
-  border-radius: 14px;
-  display:grid; place-items:center;
-  background: rgba(255,255,255,.10);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
-  flex: 0 0 auto;
-}
-.busIcon .material-icons-outlined{ font-size: 24px; opacity: .95; }
+      opacity:0;
+      transform: translateY(12px);
+      animation: inPanel 900ms cubic-bezier(.22,1,.36,1) forwards;
+      position:relative;
+    }
+    @keyframes inPanel{ to{ opacity:1; transform: translateY(0);} }
 
-.titleBlock{ min-width:0; }
-.title{
-  font-size: clamp(18px, 2.2vw, 30px);
-  font-weight: 900;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.sub{
-  margin-top: 6px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  opacity: .92;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  max-width: 70vw;
-}
+    .header{
+      padding: 14px var(--pad);
+      background: var(--header);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,.18);
+    }
+    .h-left{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .iconBox{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.10);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
+      flex: 0 0 auto;
+    }
+    .iconBox .material-icons-outlined{ font-size: 24px; opacity: .95; }
 
-.h-right{
-  text-align:right;
-  white-space:nowrap;
-  display:flex;
-  flex-direction:column;
-  gap: 6px;
-  align-items:flex-end;
-}
-.clock{
-  font-size: clamp(34px, 4.1vw, 56px);
-  font-weight: 900;
-  letter-spacing: .06em;
-  line-height: 1;
-}
+    .titleBlock{ min-width:0; }
+    .title{
+      font-size: clamp(18px, 2.2vw, 30px);
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .sub{
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      opacity: .92;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 70vw;
+    }
 
-/* badge online/offline ABAIXO do relógio */
-.netBadge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.14);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  opacity: .98;
-}
-.netDot{
-  width:10px;height:10px;border-radius:50%;
-  background:#22c55e;
-  animation:pulse 1.6s ease-out infinite;
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.65);
-}
-.netDot.off{ background:#ef4444; animation:pulseRed 1.6s ease-out infinite; }
-@keyframes pulse{
-  0%{ box-shadow:0 0 0 0 rgba(34,197,94,.55), inset 0 0 0 2px rgba(255,255,255,.65); }
-  70%{ box-shadow:0 0 0 10px rgba(34,197,94,0), inset 0 0 0 2px rgba(255,255,255,.65); }
-  100%{ box-shadow:0 0 0 0 rgba(34,197,94,0), inset 0 0 0 2px rgba(255,255,255,.65); }
-}
-@keyframes pulseRed{
-  0%{ box-shadow:0 0 0 0 rgba(239,68,68,.55), inset 0 0 0 2px rgba(255,255,255,.65); }
-  70%{ box-shadow:0 0 0 10px rgba(239,68,68,0), inset 0 0 0 2px rgba(255,255,255,.65); }
-  100%{ box-shadow:0 0 0 0 rgba(239,68,68,0), inset 0 0 0 2px rgba(255,255,255,.65); }
-}
+    .h-right{
+      text-align:right;
+      white-space:nowrap;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      align-items:flex-end;
+    }
+    .clock{
+      font-size: clamp(34px, 4.1vw, 56px);
+      font-weight: 900;
+      letter-spacing: .06em;
+      line-height: 1;
+    }
 
-/* ===== SUBSTRIP ===== */
-.substrip{
-  padding: 12px var(--pad);
-  background: #f3f7ff;
-  border-bottom: 1px solid var(--stroke2);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 12px;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color:#0b1220;
-}
+    .netBadge{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 26px rgba(2,10,23,.14);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      opacity: .96;
+    }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.65);
+      background: #ef4444;
+    }
+    .dot.online{
+      background:#22c55e;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(34,197,94,.45), inset 0 0 0 2px rgba(255,255,255,.65); }
+      70%{ transform: scale(1.05); box-shadow: 0 0 0 12px rgba(34,197,94,0), inset 0 0 0 2px rgba(255,255,255,.65); }
+      100%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(34,197,94,0), inset 0 0 0 2px rgba(255,255,255,.65); }
+    }
 
-/* ===== HERO ===== */
-.stage{
-  flex:1;
-  min-height:0;
-  padding: var(--pad);
-  background:#fff;
-}
-.hero{
-  height:100%;
-  border-radius: 16px;
-  background:#0b1220;
-  border: 1px solid var(--stroke);
-  box-shadow: 0 10px 26px rgba(2,10,23,.08);
-  overflow:hidden;
-  position:relative;
-}
-.heroImg{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover; object-position:center;
-  transform: scale(1.02);
-}
-.heroOverlay{
-  position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,.05) 18%, rgba(0,0,0,.72) 78%, rgba(0,0,0,.86) 100%);
-}
-.heroContent{
-  position:absolute; left:18px; right:18px; bottom:16px;
-  color:#fff;
-  text-shadow: 0 14px 32px rgba(0,0,0,.5);
-}
-.cTitle{
-  font-size: clamp(34px, 4.2vw, 62px);
-  font-weight: 900;
-  line-height: 1.06;
-  letter-spacing:.01em;
-}
-.cText{
-  margin-top: 12px;
-  font-size: clamp(16px, 1.6vw, 22px);
-  font-weight: 700;
-  opacity:.96;
-  max-width: 1100px;
-}
-.metaRow{
-  margin-top: 14px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-.chip{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.88);
-  border: 1px solid rgba(255,255,255,.25);
-  color: rgba(15,27,45,.88);
-  font-size: 12px;
-  font-weight: 900;
-}
-.chip img{
-  width:18px;height:18px;border-radius:6px;
-  object-fit:contain;
-  background: rgba(255,255,255,.7);
-  border: 1px solid rgba(15,27,45,.10);
-}
+    .panelTop{
+      padding: 12px var(--pad);
+      background: #f3f7ff;
+      border-bottom: 1px solid var(--stroke2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #0b1220;
+    }
+    .topRight{ opacity:.72; white-space:nowrap; }
 
-/* ===== FOOTER ===== */
-.panelFooter{
-  border-top: 1px solid var(--stroke2);
-  background: #fff;
-  padding: 10px var(--pad);
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  min-height: 44px;
-}
-.panelFooter img{ height: 22px; opacity:.75; }
-@media (max-width: 760px){
-  .panelFooter{ justify-content:center; }
-}
-</style>
+    .stage{
+      position:relative;
+      flex: 1;
+      min-height:0;
+      padding: var(--pad);
+      overflow:hidden;
+      background: var(--panel);
+    }
+
+    .poster{
+      height: 100%;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid var(--stroke);
+      box-shadow: 0 16px 40px rgba(2,10,23,.12);
+      position:relative;
+      background: linear-gradient(180deg, #2f6f9d 0%, #184c75 55%, #0a2232 100%);
+      transform: translateY(10px);
+      opacity: 0;
+      animation: inContent 720ms cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes inContent{ to{ transform: translateY(0); opacity: 1; } }
+
+    .poster img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center;
+      display:block;
+      filter: saturate(1.02) contrast(1.03);
+    }
+    .poster.noimg{
+      background:
+        radial-gradient(900px 600px at 20% 15%, rgba(87,184,231,.28) 0%, rgba(10,46,62,0) 60%),
+        radial-gradient(800px 500px at 80% 85%, rgba(52,198,208,.18) 0%, rgba(6,18,24,0) 65%),
+        linear-gradient(180deg, #2f6f9d 0%, #184c75 55%, #0a2232 100%);
+    }
+
+    .overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding: clamp(16px, 2.2vw, 26px);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.60) 55%, rgba(0,0,0,.82) 100%);
+      color:#fff;
+    }
+
+    .headline{
+      font-size: clamp(28px, 3.6vw, 58px);
+      font-weight: 900;
+      line-height: 1.03;
+      letter-spacing: -.01em;
+      margin: 0 0 12px 0;
+      text-shadow: 0 10px 30px rgba(0,0,0,.55);
+    }
+
+    .deck{
+      font-size: clamp(14px, 1.3vw, 18px);
+      font-weight: 700;
+      opacity: .92;
+      max-width: 1100px;
+      line-height: 1.35;
+      margin: 0 0 14px 0;
+      text-shadow: 0 10px 28px rgba(0,0,0,.45);
+    }
+
+    .metaRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 26px rgba(2,10,23,.18);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      white-space:nowrap;
+    }
+    .chip a{ color:#fff; text-decoration:none; }
+    .chip a:hover{ text-decoration:underline; }
+
+    .panelFooter{
+      border-top: 1px solid var(--stroke2);
+      background: #fff;
+      padding: 10px var(--pad);
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      min-height: 44px;
+    }
+    @media (max-width: 640px){
+      .panelFooter{ justify-content:center; }
+    }
+  </style>
 </head>
 
 <body>
-<section class="panel" aria-label="Painel de campanhas institucionais">
-
-  <div class="header">
-    <div class="h-left">
-      <div class="busIcon" aria-hidden="true">
-        <span class="material-icons-outlined">campaign</span>
+  <section class="panel" aria-label="Painel de campanhas">
+    <div class="header">
+      <div class="h-left">
+        <div class="iconBox" aria-hidden="true">
+          <span class="material-icons-outlined">campaign</span>
+        </div>
+        <div class="titleBlock">
+          <div class="title">CAMPANHAS</div>
+          <div class="sub" id="subLine">INSTITUCIONAL • OFICIAL</div>
+        </div>
       </div>
-      <div class="titleBlock">
-        <div class="title">CAMPANHAS</div>
-        <div class="sub" id="subStatus">INSTITUCIONAL • OFICIAL</div>
-      </div>
-    </div>
 
-    <div class="h-right">
-      <div class="clock" id="clock">--:--</div>
-      <div class="netBadge" id="netBadge">
-        <span class="netDot" id="netDot"></span>
-        <span id="netText">ONLINE</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="substrip">
-    <span>MENSAGEM DO DIA</span>
-    <span>GOV.BR • SAÚDE</span>
-  </div>
-
-  <div class="stage">
-    <div class="hero" id="hero">
-      <img class="heroImg" id="heroImg" alt="">
-      <div class="heroOverlay"></div>
-      <div class="heroContent">
-        <div class="cTitle" id="cTitle">Carregando…</div>
-        <div class="cText" id="cText"></div>
-        <div class="metaRow">
-          <div class="chip">
-            <img id="sourceLogo" alt="">
-            <span id="sourceName">Ministério da Saúde</span>
-          </div>
-          <div class="chip" id="publishedChip">Publicado: —</div>
+      <div class="h-right">
+        <div class="clock" id="clock">--:--</div>
+        <div class="netBadge" id="netBadge" aria-live="polite">
+          <span class="dot" id="netDot"></span>
+          <span id="netText">OFFLINE</span>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="panelFooter">
-    <img src="./assets/logo-pontoview.png" alt="PontoView">
-  </div>
+    <div class="panelTop">
+      <div id="topLeft">MENSAGEM DO DIA</div>
+      <div class="topRight" id="topRight">OFICIAL • GOV.BR</div>
+    </div>
 
-</section>
+    <div class="stage">
+      <div class="poster" id="poster">
+        <img id="img" alt="" />
+        <div class="overlay">
+          <h1 class="headline" id="headline">Carregando…</h1>
+          <p class="deck" id="deck"></p>
+          <div class="metaRow">
+            <div class="chip" id="sourceChip">Fonte: —</div>
+            <div class="chip" id="dateChip">Publicado: —</div>
+            <div class="chip" id="openChip" style="display:none;">
+              <a id="openLink" href="#" target="_blank" rel="noopener">ABRIR</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<script>
-function pad2(n){ return String(n).padStart(2,"0"); }
-function tickClock(){
-  const d=new Date();
-  clock.textContent = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
-}
-tickClock(); setInterval(tickClock, 1000);
+    <div class="panelFooter">
+      <div class="pvFooter"></div>
+    </div>
+  </section>
 
-function setNet(ok){
-  netText.textContent = ok ? "ONLINE" : "OFFLINE";
-  netDot.classList.toggle("off", !ok);
-}
-window.addEventListener("online", ()=>setNet(true));
-window.addEventListener("offline", ()=>setNet(false));
-setNet(navigator.onLine);
+  <script src="../pv-footer.js"></script>
 
-function proxyImage(url){
-  if(!url) return "";
-  const clean = url.replace(/^https?:\/\//i,"");
-  return "https://wsrv.nl/?url=" + encodeURIComponent(clean) + "&w=1920&h=1080&fit=cover&output=jpg&q=85";
-}
+  <script>
+    const $ = (id) => document.getElementById(id);
 
-function coverFallback(title){
-  const c=document.createElement("canvas"); c.width=1600; c.height=900;
-  const x=c.getContext("2d");
-  const g=x.createLinearGradient(0,0,1600,900);
-  g.addColorStop(0,"#2f6f9d"); g.addColorStop(1,"#0f3b5e");
-  x.fillStyle=g; x.fillRect(0,0,1600,900);
-  const shade=x.createLinearGradient(0,420,0,900);
-  shade.addColorStop(0,"rgba(0,0,0,0)");
-  shade.addColorStop(1,"rgba(0,0,0,.72)");
-  x.fillStyle=shade; x.fillRect(0,0,1600,900);
-  x.fillStyle="#fff"; x.font="900 70px Inter, system-ui"; x.textBaseline="top";
-  const words=(title||"Campanha").split(/\s+/).filter(Boolean);
-  let line="", y=560;
-  for(const w of words){
-    const t=line?line+" "+w:w;
-    if(x.measureText(t).width>1400){ x.fillText(line,100,y); y+=82; line=w; }
-    else line=t;
-  }
-  x.fillText(line,100,y);
-  return c.toDataURL("image/jpeg",.92);
-}
+    function pad2(n){ return String(n).padStart(2,"0"); }
+    function tickClock(){
+      const d = new Date();
+      $("clock").textContent = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+    }
+    tickClock();
+    setInterval(tickClock, 1000);
 
-(async function start(){
-  try{
-    const r = await fetch("./data/campaigns.json?v="+Date.now(), {cache:"no-store"});
-    if(!r.ok) throw new Error("campaigns.json");
-    const data = await r.json();
-    const items = Array.isArray(data.items)?data.items:[];
-    if(!items.length) throw new Error("empty");
+    function setNet(isOnline){
+      $("netText").textContent = isOnline ? "ONLINE" : "OFFLINE";
+      const dot = $("netDot");
+      dot.classList.toggle("online", !!isOnline);
+      dot.style.background = isOnline ? "#22c55e" : "#ef4444";
+    }
+    function refreshNet(){ setNet(navigator.onLine); }
+    window.addEventListener("online", refreshNet);
+    window.addEventListener("offline", refreshNet);
+    refreshNet();
 
-    const it = items[Math.floor(Math.random()*items.length)];
+    function safeText(x){ return (x == null ? "" : String(x)).trim(); }
+    function fmtDate(iso){
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) return "—";
+      return `${pad2(d.getDate())}/${pad2(d.getMonth()+1)}/${d.getFullYear()}, ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+    }
 
-    cTitle.textContent = it.title || "Campanha";
-    cText.textContent  = it.summary || "";
+    // fallback (institucional leve, humano, sem “texto publicitário”)
+    const FALLBACK = [
+      {
+        title: "Respeito e acolhimento",
+        deck: "Trate todas as pessoas com gentileza. Um atendimento humano faz diferença no dia de alguém.",
+        source: { name: "Mensagem institucional" },
+        publishedAt: new Date().toISOString(),
+        url: ""
+      },
+      {
+        title: "Diversidade importa",
+        deck: "Este é um espaço de respeito. Discriminação e preconceito não têm lugar aqui.",
+        source: { name: "Mensagem institucional" },
+        publishedAt: new Date().toISOString(),
+        url: ""
+      },
+      {
+        title: "Cuide do outro",
+        deck: "Se precisar de ajuda, informe a equipe. Se vir alguém precisando, avise também.",
+        source: { name: "Mensagem institucional" },
+        publishedAt: new Date().toISOString(),
+        url: ""
+      }
+    ];
 
-    sourceName.textContent = it.source || "Ministério da Saúde";
-    sourceLogo.src = it.sourceLogoUrl || "";
-    sourceLogo.onerror = ()=>sourceLogo.style.display="none";
+    async function loadJSON(path){
+      const r = await fetch(path, { cache: "no-store" });
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      return await r.json();
+    }
 
-    publishedChip.textContent = "Publicado: " + (it.publishedAt ? new Date(it.publishedAt).toLocaleDateString("pt-BR") : "—");
+    function pickItem(items){
+      const list = (items || []).filter(Boolean);
+      if(!list.length) return null;
+      const seed = Math.floor(Date.now() / 86400000);
+      return list[seed % list.length];
+    }
 
-    const imgUrl = proxyImage(it.imageUrl || "");
-    heroImg.onerror = ()=>{ heroImg.onerror=null; heroImg.src = coverFallback(it.title); };
-    heroImg.src = imgUrl || coverFallback(it.title);
+    function render(item){
+      const poster = $("poster");
+      const img = $("img");
 
-    setNet(true);
-  }catch(e){
-    setNet(false);
-    cTitle.textContent = "Sem campanhas disponíveis";
-    cText.textContent  = "Conecte à internet para carregar campanhas oficiais automaticamente.";
-    heroImg.src = coverFallback("Sem campanhas disponíveis");
-    sourceLogo.style.display="none";
-    publishedChip.textContent = "Publicado: —";
-  }
-})();
-</script>
+      $("headline").textContent = safeText(item?.title) || "Mensagem do dia";
+      $("deck").textContent = safeText(item?.deck || item?.summary || item?.description) || "";
+
+      const srcName = safeText(item?.source?.name) || "Fonte oficial";
+      $("sourceChip").textContent = srcName;
+
+      const pub = item?.publishedAt || item?.published || "";
+      $("dateChip").textContent = "Publicado: " + fmtDate(pub);
+
+      const url = safeText(item?.url);
+      $("openChip").style.display = url ? "" : "none";
+      $("openLink").href = url || "#";
+
+      const local = safeText(item?.image?.local || item?.imageLocal);
+      const remote = safeText(item?.image?.url || item?.imageUrl);
+      const chosen = local ? ("../" + local.replace(/^\//,"")) : remote;
+
+      if (chosen){
+        poster.classList.remove("noimg");
+        img.style.display = "block";
+        img.src = chosen;
+        img.onerror = () => {
+          img.removeAttribute("src");
+          img.style.display = "none";
+          poster.classList.add("noimg");
+        };
+      } else {
+        img.removeAttribute("src");
+        img.style.display = "none";
+        poster.classList.add("noimg");
+      }
+    }
+
+    (async function boot(){
+      try{
+        const data = await loadJSON("../data/campaigns.json");
+        const item = pickItem(data?.items) || pickItem(FALLBACK);
+        render(item || pickItem(FALLBACK));
+        $("subLine").textContent = "INSTITUCIONAL • OFICIAL";
+        $("topRight").textContent = "OFICIAL • GOV.BR";
+      }catch(e){
+        render(pickItem(FALLBACK));
+        $("subLine").textContent = "INSTITUCIONAL • OFFLINE";
+        $("topRight").textContent = "OFFLINE • LOCAL";
+      }
+    })();
+  </script>
 </body>
 </html>
