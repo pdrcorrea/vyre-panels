@@ -43,11 +43,8 @@ def dt_to_iso(entry) -> str:
                 return datetime(*v[:6], tzinfo=timezone.utc).isoformat()
             except Exception:
                 pass
-    for k in ("published", "updated"):
-        v = entry.get(k)
-        if v:
-            return str(v)
     return ""
+
 
 def parse_feed(content: str, source_name: str):
     fp = feedparser.parse(content)
