@@ -257,6 +257,7 @@ fetch("./data/news.json?" + Date.now())
         title: typeof it.title === "string" ? it.title : (it.title?.title || it.title?.text || "Notícia"),
         source: typeof it.source === "string" ? it.source : (it.source?.name || it.source?.title || "Notícias"),
         image: typeof it.image === "string" ? it.image : (it.image?.url || it.image?.image || null),
+        publishedAt: it.publishedAt || it.published || it.date || null,
         url: it.url || null,
         scope: it.scope || "national",
         city: it.city || null
@@ -280,7 +281,20 @@ fetch("./data/news.json?" + Date.now())
     const sourceEl = document.getElementById("source");
     const imgEl = document.getElementById("image");
     const logoEl = document.getElementById("logo");
+    const dateEl = document.getElementById("date");
     const scopeLabelEl = document.getElementById("scopeLabel");
+
+    function fmtPublished(iso) {
+      if (!iso) return "";
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return "";
+      const dd = String(d.getDate()).padStart(2, "0");
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const yyyy = d.getFullYear();
+      const hh = String(d.getHours()).padStart(2, "0");
+      const mi = String(d.getMinutes()).padStart(2, "0");
+      return `${dd}/${mm}/${yyyy} • ${hh}:${mi}`;
+    }
 
     function prettyScopeLabel(scope, city) {
       if (scope === "local") return city ? `LOCAL • ${city}` : "LOCAL";
@@ -292,15 +306,15 @@ fetch("./data/news.json?" + Date.now())
     function setHeroImage(url) {
       const finalUrl = proxy(url) || FALLBACK_IMG;
 
-      // Preload para evitar "piscadas"
+      // evita ícone de imagem quebrada: aplica uma imagem imediatamente
+      imgEl.src = finalUrl;
+      imgEl.style.display = "block";
+
+      // preload + fallback (caso o host bloqueie hotlink)
       const pre = new Image();
-      pre.onload = () => {
-        imgEl.src = finalUrl;
-        imgEl.style.display = "block";
-      };
+      pre.onload = () => { /* ok */ };
       pre.onerror = () => {
-        imgEl.src = FALLBACK_IMG;
-        imgEl.style.display = "block";
+        if (imgEl.src !== FALLBACK_IMG) imgEl.src = FALLBACK_IMG;
       };
       pre.src = finalUrl;
     }
@@ -318,6 +332,15 @@ fetch("./data/news.json?" + Date.now())
 
       titleEl.textContent = item.title;
       sourceEl.textContent = item.source || "Notícias";
+
+      const pub = fmtPublished(item.publishedAt);
+      if (pub) {
+        dateEl.textContent = pub;
+        dateEl.style.display = "flex";
+      } else {
+        dateEl.textContent = "";
+        dateEl.style.display = "none";
+      }
 
       // "logo" (mantém layout: se não existir, apenas oculta)
       if (item.logo) {
