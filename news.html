@@ -12,327 +12,337 @@
 /* ===== VARIÁVEIS (IGUAIS ÔNIBUS) ===== */
 :root{
   --header: linear-gradient(180deg,#2f6f9d 0%,#184c75 55%,#0f3b5e 100%);
-  --bg: radial-gradient(1200px 900px at 25% 10%, rgba(87,184,231,.22), rgba(10,46,62,0) 65%),
-        radial-gradient(1100px 800px at 90% 80%, rgba(255,255,255,.08), rgba(10,46,62,0) 60%),
-        #0a2e3e;
-  --card: rgba(255,255,255,.14);
-  --card2: rgba(255,255,255,.10);
-  --line: rgba(255,255,255,.18);
-  --txt: rgba(255,255,255,.92);
-  --muted: rgba(255,255,255,.75);
-  --shadow: 0 18px 50px rgba(0,0,0,.35);
-  --radius: 22px;
-  --radiusSm: 18px;
+  --bg: radial-gradient(1200px 900px at 25% 10%, rgba(87,184,231,.22), rgba(10,46,62,0) 60%),
+        radial-gradient(900px 700px at 75% 80%, rgba(52,198,208,.14), rgba(6,18,24,0) 65%),
+        radial-gradient(1400px 1100px at 50% 55%, #0a2232 0%, #081423 62%, #040a0f 100%);
 }
+
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-  color:var(--txt);
-  background: var(--bg);
-  overflow:hidden;
+  font-family:Inter,system-ui;
+  background:var(--bg);
+  display:grid;
+  place-items:center;
+  padding:20px;
 }
-.wrap{
-  height:100%;
+
+/* ===== PANEL ===== */
+.panel{
+  width:min(1500px,96vw);
+  height:calc(100vh - 40px);
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 18px 60px rgba(2,10,23,.18);
   display:flex;
   flex-direction:column;
+  animation:fade .7s ease forwards;
 }
-header{
-  height:82px;
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ===== HEADER (COPIADO DO ÔNIBUS) ===== */
+.header{
+  padding:14px 22px;
+  background:var(--header);
+  color:#fff;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding: 0 22px;
-  background: var(--header);
-  box-shadow: 0 10px 30px rgba(0,0,0,.28);
+  align-items:center;
 }
-.hleft{display:flex;align-items:center;gap:12px}
-.badge{
+.h-left{display:flex;gap:14px;align-items:center}
+.busIcon{
   width:44px;height:44px;border-radius:14px;
-  background: rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.25);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.1);
 }
-.badge .material-icons-outlined{font-size:24px}
-.htitle{display:flex;flex-direction:column;line-height:1.05}
-.htitle b{font-size:18px;letter-spacing:.2px}
-.htitle span{font-size:12px;color:var(--muted)}
-.hright{
-  display:flex;align-items:center;gap:16px;
-  font-weight:600;
+.title{font-size:28px;font-weight:900;letter-spacing:.06em}
+.sub{font-size:12px;font-weight:800;letter-spacing:.14em;opacity:.9}
+
+.h-right{text-align:right}
+.clock{font-size:52px;font-weight:900}
+.status{
+  margin-top:6px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  font-size:12px;
+  font-weight:900;
 }
-.pill{
-  display:flex;align-items:center;gap:8px;
-  padding:10px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.22);
-  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+.dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#22c55e;
+  animation:pulse 1.5s infinite;
 }
-.dot{width:9px;height:9px;border-radius:99px;background:#49d17e;box-shadow:0 0 0 4px rgba(73,209,126,.18)}
-.dot.off{background:#ff6b6b;box-shadow:0 0 0 4px rgba(255,107,107,.18)}
-main{
-  flex:1;
-  padding: 18px 22px 22px;
-  display:grid;
-  grid-template-columns: 1fr 460px;
-  gap:18px;
+.off{background:#ef4444}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}
+  70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}
 }
-.card{
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, var(--card), var(--card2));
-  border:1px solid var(--line);
-  box-shadow: var(--shadow);
-  overflow:hidden;
+
+/* ===== SUBSTRIP ===== */
+.substrip{
+  background:#f3f7ff;
+  padding:10px 22px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.14em;
+  display:flex;
+  justify-content:space-between;
 }
+
+/* ===== HERO ===== */
 .hero{
   position:relative;
-  display:flex;
-  flex-direction:column;
-  min-height: 520px;
+  flex:1;
+  overflow:hidden;
 }
 .hero img{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
+}
+.overlay{
   position:absolute;
   inset:0;
-  filter: saturate(1.05) contrast(1.05);
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85));
 }
-.hero::after{
-  content:"";
+.content{
   position:absolute;
-  inset:0;
-  background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,.05) 62%);
+  bottom:20px;
+  left:22px;
+  right:22px;
+  color:#fff;
 }
-.heroContent{
-  position:relative;
-  z-index:2;
-  padding: 26px 26px 22px;
-  display:flex;
-  flex-direction:column;
-  height:100%;
-  justify-content:flex-end;
-}
-.heroTitle{
-  font-size:44px;
+.headline{
+  font-size:52px;
   font-weight:900;
-  line-height:1.05;
-  letter-spacing:-.5px;
-  text-shadow: 0 14px 30px rgba(0,0,0,.45);
+  line-height:1.08;
 }
-.heroMeta{
+.meta{
   margin-top:14px;
   display:flex;
   gap:10px;
   flex-wrap:wrap;
 }
-.tag{
+.chip{
+  background:rgba(255,255,255,.88);
+  color:#0f172a;
   padding:8px 12px;
-  border-radius: 999px;
-  font-weight:700;
+  border-radius:999px;
   font-size:12px;
-  background: rgba(255,255,255,.14);
-  border: 1px solid rgba(255,255,255,.24);
-  color: rgba(255,255,255,.9);
-}
-.side{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-.side .card{
-  padding: 18px;
-}
-.side h3{
-  margin:0 0 10px;
-  font-size:16px;
-  letter-spacing:.2px;
-}
-.kv{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 0;
-  border-bottom:1px solid rgba(255,255,255,.14);
-  color: rgba(255,255,255,.86);
-}
-.kv:last-child{border-bottom:0}
-.small{
-  font-size:12px;color:var(--muted)
-}
-footer{
-  height:58px;
+  font-weight:900;
   display:flex;
   align-items:center;
+  gap:8px;
+}
+.chip img{
+  width:18px;height:18px;object-fit:contain;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:10px 22px;
+  display:flex;
   justify-content:flex-end;
-  padding: 0 22px;
-  color: rgba(255,255,255,.65);
-  font-weight:600;
 }
-@media (max-width: 1100px){
-  main{grid-template-columns:1fr}
-}
+.footer img{height:22px;opacity:.75}
 </style>
 </head>
+
 <body>
-<div class="wrap">
-  <header>
-    <div class="hleft">
-      <div class="badge"><span class="material-icons-outlined">newspaper</span></div>
-      <div class="htitle">
-        <b>Notícias</b>
-        <span>Atualizações oficiais • Saúde e Institucional</span>
+<section class="panel">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="h-left">
+      <div class="busIcon"><span class="material-icons-outlined">newspaper</span></div>
+      <div>
+        <div class="title">NOTÍCIAS</div>
+        <div class="sub">ESPÍRITO SANTO</div>
       </div>
     </div>
-    <div class="hright">
-      <div class="pill"><span id="clock">--:--</span></div>
-      <div class="pill"><span class="dot" id="dot"></span><span id="statusText">--</span></div>
+    <div class="h-right">
+      <div class="clock" id="clock">--:--</div>
+      <div class="status">
+        <span class="dot" id="dot"></span>
+        <span id="statusText">Online</span>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section class="card hero">
-      <img id="image"/>
-      <div class="heroContent">
-        <div class="heroTitle" id="title">Carregando…</div>
-        <div class="heroMeta">
-          <span class="tag" id="source">Fonte</span>
-          <span class="tag" id="date"></span>
+  <div class="substrip">
+    <span>MANCHETE ATUAL</span>
+    <span><span id="scopeLabel">LOCAL • ES • BR</span>
+  </div>
+
+  <div class="hero">
+    <img id="image"/>
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="headline" id="title">Carregando…</div>
+      <div class="meta">
+        <div class="chip">
+          <img id="logo"/>
+          <span id="source">Fonte</span>
         </div>
+        <div class="chip" id="date"></div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <aside class="side">
-      <div class="card">
-        <h3>Resumo</h3>
-        <div class="kv"><span>Última atualização</span><span class="small" id="updatedAt">—</span></div>
-        <div class="kv"><span>Itens no feed</span><span class="small" id="count">—</span></div>
-        <div class="kv"><span>Escopos</span><span class="small" id="scopes">—</span></div>
-      </div>
-      <div class="card">
-        <h3>Dicas</h3>
-        <div class="small">
-          Conteúdos puxados automaticamente de fontes oficiais configuradas no pipeline.
-        </div>
-      </div>
-    </aside>
-  </main>
+  <div class="footer">
+    <img src="./assets/logo-pontoview.png"/>
+  </div>
 
-  <footer>
-    <span class="small">Pontoview • Vyre</span>
-    <img id="logo" src="./assets/logo-pontoview.png" alt="" style="height:22px;margin-left:10px;opacity:.65"/>
-  </footer>
-</div>
+</section>
 
 <script>
-/* ===== DOM ===== */
-const clock = document.getElementById("clock");
-const dot = document.getElementById("dot");
-const statusText = document.getElementById("statusText");
-
-const imgEl = document.getElementById("image");
-const titleEl = document.getElementById("title");
-const sourceEl = document.getElementById("source");
-const dateEl = document.getElementById("date");
-
 /* ===== CLOCK ===== */
-function tickClock(){
-  if (!clock) return;
-  clock.textContent = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
-}
-tickClock();
-setInterval(tickClock, 1000);
+const clock = document.getElementById("clock");
+setInterval(() => {
+  clock.textContent = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}, 1000);
 
 /* ===== ONLINE / OFFLINE ===== */
-function updateStatus(){
-  if(!statusText || !dot) return;
-  if(navigator.onLine){
-    statusText.textContent="Online";
+const statusText = document.getElementById("statusText");
+const dot = document.getElementById("dot");
+function updateStatus() {
+  if (navigator.onLine) {
+    statusText.textContent = "Online";
     dot.classList.remove("off");
-  }else{
-    statusText.textContent="Offline";
+  } else {
+    statusText.textContent = "Offline";
     dot.classList.add("off");
   }
 }
-window.addEventListener("online",updateStatus);
-window.addEventListener("offline",updateStatus);
+window.addEventListener("online", updateStatus);
+window.addEventListener("offline", updateStatus);
 updateStatus();
 
-/* ===== IMAGE PROXY (hotlink-safe) ===== */
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1504711432869-0df30a7e04ad?q=80&w=1000&auto=format&fit=crop";
-
+/* ===== IMAGE PROXY (HOTLINK/CORS) =====
+   wsrv.nl re-hospeda a imagem e evita a maioria dos bloqueios de hotlink.
+*/
 function proxy(url) {
-  if (!url || String(url).includes("null")) return FALLBACK_IMAGE;
+  if (!url) return null;
+  const clean = String(url).trim();
+  if (!clean || clean === "null" || clean === "undefined") return null;
 
-  // WSRV ajuda a contornar bloqueios de hotlink/referrer
-  // Aceita sem protocolo (ex: example.com/img.jpg)
-  const clean = String(url).trim().replace(/^https?:\/\//i, "");
-  return "https://wsrv.nl/?url=" + encodeURIComponent(clean) + "&w=1100&af";
+  // Se já for wsrv, não duplica
+  if (clean.includes("wsrv.nl/?url=")) return clean;
+
+  // wsrv.nl prefere sem o protocolo em alguns casos
+  const noProto = clean.replace(/^https?:\/\//i, "");
+  return "https://wsrv.nl/?url=" + encodeURIComponent(noProto) + "&w=1200&fit=cover&output=webp";
 }
+
+const FALLBACK_IMG = "https://images.unsplash.com/photo-1504711432869-0df30a7e04ad?auto=format&fit=crop&w=1200&q=70";
 
 /* ===== LOAD NEWS ===== */
 fetch("./data/news.json?" + Date.now())
   .then(r => r.json())
   .then(data => {
-    const items = data.items || [];
-    if (!items.length) return;
+    const rawItems = Array.isArray(data.items) ? data.items : [];
+    if (!rawItems.length) return;
 
-    // Resumo lateral (se existir no JSON)
-    const updatedAtEl = document.getElementById("updatedAt");
-    const countEl = document.getElementById("count");
-    const scopesEl = document.getElementById("scopes");
+    // Normaliza (suporta formatos antigos caso existam)
+    const items = rawItems
+      .map(it => ({
+        title: typeof it.title === "string" ? it.title : (it.title?.title || it.title?.text || "Notícia"),
+        source: typeof it.source === "string" ? it.source : (it.source?.name || it.source?.title || "Notícias"),
+        image: typeof it.image === "string" ? it.image : (it.image?.url || it.image?.image || null),
+        url: it.url || null,
+        scope: it.scope || "national",
+        city: it.city || null
+      }))
+      .filter(it => it.title);
 
-    if (updatedAtEl && data.generatedAt) {
-      const d = new Date(data.generatedAt);
-      updatedAtEl.textContent = !isNaN(d) ? d.toLocaleString("pt-BR") : String(data.generatedAt);
+    // Agrupa por escopo para alternar sem mudar o layout
+    const byScope = items.reduce((acc, it) => {
+      const k = it.scope || "national";
+      (acc[k] ||= []).push(it);
+      return acc;
+    }, {});
+
+    const scopeOrder = ["local", "state", "national", "health"].filter(s => (byScope[s] || []).length);
+    if (!scopeOrder.length) scopeOrder.push("national");
+
+    let scopeIdx = 0;
+    const perScopeIdx = Object.fromEntries(scopeOrder.map(s => [s, 0]));
+
+    const titleEl = document.getElementById("title");
+    const sourceEl = document.getElementById("source");
+    const imgEl = document.getElementById("image");
+    const logoEl = document.getElementById("logo");
+    const scopeLabelEl = document.getElementById("scopeLabel");
+
+    function prettyScopeLabel(scope, city) {
+      if (scope === "local") return city ? `LOCAL • ${city}` : "LOCAL";
+      if (scope === "state") return "ES";
+      if (scope === "health") return "SAÚDE";
+      return "BR";
     }
-    if (countEl) countEl.textContent = String(items.length);
 
-    const scopes = [...new Set(items.map(i => i.scope).filter(Boolean))];
-    if (scopesEl) scopesEl.textContent = scopes.length ? scopes.join(" • ") : "—";
+    function setHeroImage(url) {
+      const finalUrl = proxy(url) || FALLBACK_IMG;
 
-    // configurações do <img> sem mexer no layout
-    if (imgEl) {
-      imgEl.loading = "eager";
-      imgEl.decoding = "async";
-      imgEl.referrerPolicy = "no-referrer";
-      imgEl.alt = "Imagem da notícia";
+      // Preload para evitar "piscadas"
+      const pre = new Image();
+      pre.onload = () => {
+        imgEl.src = finalUrl;
+        imgEl.style.display = "block";
+      };
+      pre.onerror = () => {
+        imgEl.src = FALLBACK_IMG;
+        imgEl.style.display = "block";
+      };
+      pre.src = finalUrl;
     }
 
-    let idx = 0;
-
-    function setImage(url){
-      if(!imgEl) return;
-      const finalUrl = proxy(url);
-
-      // fallback robusto caso o proxy não consiga carregar
-      imgEl.onerror = () => { imgEl.src = FALLBACK_IMAGE; };
-      imgEl.src = finalUrl;
-    }
+    imgEl.addEventListener("error", () => {
+      // fallback extra caso a imagem quebre depois
+      if (imgEl.src !== FALLBACK_IMG) imgEl.src = FALLBACK_IMG;
+    });
 
     function showNext() {
-      const item = items[idx];
+      const currentScope = scopeOrder[scopeIdx];
+      const list = byScope[currentScope] || [];
+      const i = perScopeIdx[currentScope] % list.length;
+      const item = list[i];
 
-      if (titleEl) titleEl.textContent = item.title || "Notícias";
-      if (sourceEl) sourceEl.textContent = item.source || "Notícias";
+      titleEl.textContent = item.title;
+      sourceEl.textContent = item.source || "Notícias";
 
-      if (dateEl) {
-        const d = item.publishedAt ? new Date(item.publishedAt) : null;
-        dateEl.textContent = d && !isNaN(d) ? d.toLocaleDateString("pt-BR", { day:"2-digit", month:"2-digit", year:"numeric" }) : "";
+      // "logo" (mantém layout: se não existir, apenas oculta)
+      if (item.logo) {
+        logoEl.src = item.logo;
+        logoEl.style.display = "block";
+      } else {
+        logoEl.style.display = "none";
       }
 
-      setImage(item.image);
+      scopeLabelEl.textContent = prettyScopeLabel(item.scope, item.city);
 
-      idx = (idx + 1) % items.length;
+      setHeroImage(item.image);
+
+      perScopeIdx[currentScope] = i + 1;
+      scopeIdx = (scopeIdx + 1) % scopeOrder.length;
     }
 
     showNext();
-    setInterval(showNext, 15000); // 15s por notícia
+    setInterval(showNext, 15000); // 15s por manchete
   })
   .catch(() => {
-    updateStatus();
+    // Se falhar, ao menos mantém o painel "vivo"
+    document.getElementById("title").textContent = "Sem notícias no momento";
+    const imgEl = document.getElementById("image");
+    if (imgEl) imgEl.src = FALLBACK_IMG;
   });
 </script>
 </body>
