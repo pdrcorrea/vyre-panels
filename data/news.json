@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-31T09:46:57.318Z",
+  "generatedAt": "2025-12-31T10:45:53.120Z",
   "items": [
     {
       "title": {
@@ -75,19 +75,19 @@
     },
     {
       "title": {
-        "title": "Passagem dos ônibus urbanos do Rio vai subir para R$ 5 no domingo | Agência Brasil",
+        "title": "Retrospectiva: 2025, ano mágico de João Fonseca no tênis profissional | Agência Brasil",
         "image": "og:title,twitter:title"
       },
-      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/passagem-dos-onibus-urbanos-do-rio-vai-subir-para-r-5-no-domingo",
+      "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2025-12/retrospectiva-2025-ano-magico-de-joao-fonseca-no-tenis-profissional",
       "image": {
-        "title": "Passagem dos ônibus urbanos do Rio vai subir para R$ 5 no domingo | Agência Brasil",
+        "title": "Retrospectiva: 2025, ano mágico de João Fonseca no tênis profissional | Agência Brasil",
         "image": "og:image,twitter:image,twitter:image:src"
       },
       "source": {
-        "title": "Passagem dos ônibus urbanos do Rio vai subir para R$ 5 no domingo | Agência Brasil",
+        "title": "Retrospectiva: 2025, ano mágico de João Fonseca no tênis profissional | Agência Brasil",
         "image": "og:site_name"
       },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "publishedAt": "2025-12-31T12:00:00.000Z",
       "scope": "national",
       "city": null
     },
@@ -129,16 +129,16 @@
     },
     {
       "title": {
-        "title": "Moraes pede que Filipe Martins explique uso de rede social | Agência Brasil",
+        "title": "Passagem dos ônibus urbanos do Rio vai subir para R$ 5 no domingo | Agência Brasil",
         "image": "og:title,twitter:title"
       },
-      "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2025-12/moraes-pede-que-filipe-martins-explique-uso-de-rede-social",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-12/passagem-dos-onibus-urbanos-do-rio-vai-subir-para-r-5-no-domingo",
       "image": {
-        "title": "Moraes pede que Filipe Martins explique uso de rede social | Agência Brasil",
+        "title": "Passagem dos ônibus urbanos do Rio vai subir para R$ 5 no domingo | Agência Brasil",
         "image": "og:image,twitter:image,twitter:image:src"
       },
       "source": {
-        "title": "Moraes pede que Filipe Martins explique uso de rede social | Agência Brasil",
+        "title": "Passagem dos ônibus urbanos do Rio vai subir para R$ 5 no domingo | Agência Brasil",
         "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
@@ -165,17 +165,71 @@
     },
     {
       "title": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado divulga expediente no período de Ano Novo",
+        "image": "og:title,twitter:title"
       },
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=2",
+      "url": "https://www.es.gov.br/Noticia/governo-do-estado-divulga-expediente-no-periodo-de-ano-novo",
       "image": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado divulga expediente no período de Ano Novo",
+        "image": "og:image,twitter:image,twitter:image:src"
       },
       "source": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado divulga expediente no período de Ano Novo",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Moraes pede que Filipe Martins explique uso de rede social | Agência Brasil",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2025-12/moraes-pede-que-filipe-martins-explique-uso-de-rede-social",
+      "image": {
+        "title": "Moraes pede que Filipe Martins explique uso de rede social | Agência Brasil",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Moraes pede que Filipe Martins explique uso de rede social | Agência Brasil",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "national",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Governo ES - SEDH divulga resultado final do Edital Juventudes",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/sedh-divulga-resultado-final-do-edital-juventudes",
+      "image": {
+        "title": "Governo ES - SEDH divulga resultado final do Edital Juventudes",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - SEDH divulga resultado final do Edital Juventudes",
+        "image": "og:site_name"
+      },
+      "publishedAt": "2025-12-30T12:00:00.000Z",
+      "scope": "state",
+      "city": null
+    },
+    {
+      "title": {
+        "title": "Governo ES - Transcol terá programação especial de ônibus para Réveillon",
+        "image": "og:title,twitter:title"
+      },
+      "url": "https://www.es.gov.br/Noticia/transcol-tera-programacao-especial-de-onibus-para-reveillon",
+      "image": {
+        "title": "Governo ES - Transcol terá programação especial de ônibus para Réveillon",
+        "image": "og:image,twitter:image,twitter:image:src"
+      },
+      "source": {
+        "title": "Governo ES - Transcol terá programação especial de ônibus para Réveillon",
+        "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
@@ -201,17 +255,17 @@
     },
     {
       "title": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:title,twitter:title"
       },
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=3",
+      "url": "https://www.es.gov.br/Noticia/governo-do-estado-segue-investindo-para-tornar-cidades-resistentes-aos-efeitos-do-clima",
       "image": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:image,twitter:image,twitter:image:src"
       },
       "source": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado segue investindo para tornar cidades resistentes aos efeitos do clima",
+        "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
@@ -219,17 +273,17 @@
     },
     {
       "title": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
+        "image": "og:title,twitter:title"
       },
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=4",
+      "url": "https://www.es.gov.br/Noticia/governo-do-estado-lanca-edital-para-implantacao-do-aeroporto-das-montanhas-capixabas",
       "image": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
+        "image": "og:image,twitter:image,twitter:image:src"
       },
       "source": {
-        "title": "Governo ES - Notícias",
-        "image": null
+        "title": "Governo ES - Governo do Estado lança edital para implantação do Aeroporto das Montanhas Capixabas",
+        "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "state",
@@ -251,42 +305,6 @@
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
       "scope": "national",
-      "city": null
-    },
-    {
-      "title": {
-        "title": "Governo ES - Notícias",
-        "image": null
-      },
-      "url": "https://www.es.gov.br/Noticias?noticiaId=99669657&amp;page=3500",
-      "image": {
-        "title": "Governo ES - Notícias",
-        "image": null
-      },
-      "source": {
-        "title": "Governo ES - Notícias",
-        "image": null
-      },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
-      "city": null
-    },
-    {
-      "title": {
-        "title": "Governo ES - Governo do Estado divulga expediente no período de Ano Novo",
-        "image": "og:title,twitter:title"
-      },
-      "url": "https://www.es.gov.br/Noticia/governo-do-estado-divulga-expediente-no-periodo-de-ano-novo",
-      "image": {
-        "title": "Governo ES - Governo do Estado divulga expediente no período de Ano Novo",
-        "image": "og:image,twitter:image,twitter:image:src"
-      },
-      "source": {
-        "title": "Governo ES - Governo do Estado divulga expediente no período de Ano Novo",
-        "image": "og:site_name"
-      },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "state",
       "city": null
     },
     {
@@ -373,24 +391,6 @@
       },
       "source": {
         "title": "Número de homicídios, estupros e latrocínios diminui em São Paulo | Agência Brasil",
-        "image": "og:site_name"
-      },
-      "publishedAt": "2025-12-30T12:00:00.000Z",
-      "scope": "national",
-      "city": null
-    },
-    {
-      "title": {
-        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
-        "image": "og:title,twitter:title"
-      },
-      "url": "https://agenciabrasil.ebc.com.br/concursos/noticia/2025-12/camara-publica-edital-de-concurso-publico-com-inscricoes-em-janeiro",
-      "image": {
-        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
-        "image": "og:image,twitter:image,twitter:image:src"
-      },
-      "source": {
-        "title": "Câmara publica edital de concurso público com inscrições em janeiro | Agência Brasil",
         "image": "og:site_name"
       },
       "publishedAt": "2025-12-30T12:00:00.000Z",
