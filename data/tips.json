@@ -1,14 +1,14 @@
-[
-  { 
-    "id":"t1", 
-    "title":"Hidratação", 
-    "text":"Beba água ao longo do dia.",
-    "imageUrl": "https://images.unsplash.com/photo-1548839140-29a749e1cf3d?w=800"
-  },
-  { 
-    "id":"t2", 
-    "title":"Postura", 
-    "text":"Apoie os pés no chão.",
-    "imageUrl": "https://images.unsplash.com/photo-1552699611-e2c2a4701711?w=800"
-  }
-]
+{
+  "generatedAt": "2025-12-31T03:57:45.102Z",
+  "items": [
+    {
+      "id": "aHR0cHM6Ly93d3cu",
+      "title": "Notícias",
+      "text": "...",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-brasil/eu-quero-me-alimentar-melhor/noticias",
+      "publishedAt": null,
+      "imageUrl": null,
+      "source": "Ministério da Saúde (gov.br)"
+    }
+  ]
+}
