@@ -1,16 +1,67 @@
 {
   "sources": [
     {
-      "name": "Google Notícias • Colatina ES",
-      "rss": "https://news.google.com/rss/search?q=Colatina%20ES&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+      "name": "Ministério da Saúde",
+      "rss": "https://www.gov.br/saude/pt-br/assuntos/noticias/RSS",
+      "scope": "nacional",
+      "city": null,
+      "state": "BR"
     },
     {
-      "name": "Google Notícias • Utilidade pública",
-      "rss": "https://news.google.com/rss/search?q=Colatina%20(obra%20OR%20tr%C3%A2nsito%20OR%20vacina%C3%A7%C3%A3o%20OR%20mutir%C3%A3o%20OR%20evento%20OR%20servi%C3%A7o)&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+      "name": "Agência Brasil • Saúde",
+      "rss": "https://agenciabrasil.ebc.com.br/rss/saude/feed.xml",
+      "scope": "nacional",
+      "city": null,
+      "state": "BR"
     },
     {
-      "name": "Prefeitura de Colatina (teste /feed)",
-      "rss": "https://colatina.es.gov.br/feed/"
+      "name": "Agência Brasil • Geral",
+      "rss": "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml",
+      "scope": "nacional",
+      "city": null,
+      "state": "BR"
+    },
+    {
+      "name": "ANVISA",
+      "rss": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/RSS",
+      "scope": "nacional",
+      "city": null,
+      "state": "BR"
+    },
+    {
+      "name": "Fiocruz",
+      "rss": "https://portal.fiocruz.br/rss",
+      "scope": "nacional",
+      "city": null,
+      "state": "BR"
+    },
+    {
+      "name": "Organização Mundial da Saúde (OMS)",
+      "rss": "https://www.who.int/feeds/entity/csr/rss.xml",
+      "scope": "internacional",
+      "city": null,
+      "state": null
+    },
+    {
+      "name": "OPAS Brasil",
+      "rss": "https://www.paho.org/pt/rss",
+      "scope": "internacional",
+      "city": null,
+      "state": "BR"
+    },
+    {
+      "name": "Google News • Saúde Pública",
+      "rss": "https://news.google.com/rss/search?q=sa%C3%BAde+p%C3%BAblica+site:gov.br&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+      "scope": "nacional",
+      "city": null,
+      "state": "BR"
+    },
+    {
+      "name": "Google News • Campanhas Institucionais",
+      "rss": "https://news.google.com/rss/search?q=campanha+institucional+site:gov.br&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+      "scope": "nacional",
+      "city": null,
+      "state": "BR"
     }
   ]
 }
