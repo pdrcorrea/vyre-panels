@@ -1,317 +1,359 @@
-// build_news.mjs — PLUG & PLAY
-// Gera ./data/news.json com notícias por ESCOPO (local/state/national/health) e já alternadas.
-// - Fontes: oficiais (prefeituras, governo, órgãos federais) + Agência Brasil
-// - Captura imagem via OG/Twitter meta (melhor compatibilidade com o painel)
-// - Filtra por idade (MAX_AGE_DAYS) e limita volume (MAX_ITEMS_TOTAL)
-//
-// Como usar (GitHub Actions / Node):
-//   node build_news.mjs
-// Opcional:
-//   NEWS_SOURCES_FILE=news_sources_local.json node build_news.mjs
+/* build_news.mjs — PontoView News builder (RSS + Google News)
+   - Supports:
+     1) Traditional RSS/Atom feeds
+     2) Google News via its official RSS endpoints (search + topics) with optional
+        "indirect scraping": follow redirect to the original article and extract OG image + publish date.
+   - Output: data/news.json (same shape used by news.html)
+   - Node: 18+ (global fetch). Recommended: Node 20 on GitHub Actions.
 
-import fs from "node:fs/promises";
+   Config file: data/news_sources_web.json (or any path passed as argv[2])
+*/
+
+import fs from "node:fs";
 import path from "node:path";
-import { setTimeout as sleep } from "node:timers/promises";
+import { fileURLToPath } from "node:url";
 
-const OUT_DIR = "data";
-const OUT_FILE = path.join(OUT_DIR, "news.json");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const MAX_AGE_DAYS = Number(process.env.MAX_AGE_DAYS || 3);
-const MAX_ITEMS_TOTAL = Number(process.env.MAX_ITEMS_TOTAL || 36);
-const MAX_PER_SOURCE = Number(process.env.MAX_PER_SOURCE || 12);
-const FETCH_TIMEOUT_MS = Number(process.env.FETCH_TIMEOUT_MS || 20000);
-const SOURCES_FILE = process.env.NEWS_SOURCES_FILE || "news_sources_local.json";
+// Repo root = parent of /scripts
+const ROOT = path.resolve(__dirname, "..");
+const DEFAULT_SOURCES = path.join(ROOT, "data", "news_sources_web.json");
+const OUT_PATH = path.join(ROOT, "data", "news.json");
 
-const DEFAULT_SOURCES = {
-  local: [
-    { name: "Prefeitura de Vitória", city: "Vitória", url: "https://www.vitoria.es.gov.br/imprensa/todas_noticias" },
-    { name: "Prefeitura de Linhares", city: "Linhares", url: "https://linhares.es.gov.br/category/noticias/" },
-    { name: "Prefeitura de Colatina", city: "Colatina", url: "https://colatina.es.gov.br/agencia-de-noticias/" },
-    { name: "Prefeitura de Cachoeiro", city: "Cachoeiro de Itapemirim", url: "https://www.cachoeiro.es.gov.br/noticias/" },
-  ],
-  state: [
-    { name: "Governo do ES (ES.GOV)", url: "https://www.es.gov.br/Noticias" },
-    { name: "Portal ES.GOV (Catálogo)", url: "https://portal.es.gov.br/app/catalog/noticias" },
-  ],
-  national: [
-    { name: "Agência Brasil", url: "https://agenciabrasil.ebc.com.br/ultimas" },
-    { name: "Governo Federal (gov.br Notícias)", url: "https://www.gov.br/pt-br/noticias" },
-  ],
-  health: [
-    { name: "Ministério da Saúde", url: "https://www.gov.br/saude/pt-br/assuntos/noticias" },
-    { name: "Fiocruz", url: "https://portal.fiocruz.br/noticias" },
-  ],
-};
+const UA =
+  "PontoViewBot/1.0 (+https://pontoview.com.br) NodeFetch (GitHub Actions)";
 
-async function readSources() {
+const BLOCKLIST = [
+  "morte","morto","assassin","homic","crime","violên","tirote","trág","trag",
+  "estupro","roubo","furto","sequestro","corpo",
+  "política","eleição","partido","corrup","escând",
+  "acidente grave","desastre","catástro","explos"
+];
+
+function nowIso() {
+  return new Date().toISOString();
+}
+
+function stripHtml(s = "") {
+  return String(s)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isBlocked(title = "", summary = "") {
+  const hay = (title + " " + summary).toLowerCase();
+  return BLOCKLIST.some((w) => hay.includes(w));
+}
+
+function stableId(input) {
+  // deterministic-ish id without crypto dependency
+  let h = 0;
+  for (let i = 0; i < input.length; i++) h = (h * 31 + input.charCodeAt(i)) >>> 0;
+  return String(h);
+}
+
+async function fetchText(url, timeoutMs = 20000) {
+  const controller = new AbortController();
+  const t = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const raw = await fs.readFile(SOURCES_FILE, "utf-8");
-    const parsed = JSON.parse(raw);
-    return {
-      local: Array.isArray(parsed.local) ? parsed.local : DEFAULT_SOURCES.local,
-      state: Array.isArray(parsed.state) ? parsed.state : DEFAULT_SOURCES.state,
-      national: Array.isArray(parsed.national) ? parsed.national : DEFAULT_SOURCES.national,
-      health: Array.isArray(parsed.health) ? parsed.health : DEFAULT_SOURCES.health,
-    };
-  } catch {
-    return DEFAULT_SOURCES;
-  }
-}
-
-function clampStr(s, max = 160) {
-  return String(s || "").trim().replace(/\s+/g, " ").slice(0, max);
-}
-
-function domainOf(url) {
-  try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return "fonte"; }
-}
-
-function absUrl(maybe, baseUrl) {
-  try {
-    return new URL(maybe, baseUrl).toString();
-  } catch {
-    return null;
-  }
-}
-
-function pickMeta(html, keys) {
-  for (const k of keys) {
-    // <meta property="og:image" content="...">
-    let m = html.match(new RegExp(`<meta[^>]+(?:property|name)=["']${k}["'][^>]+content=["']([^"']+)["']`, "i"));
-    if (m?.[1]) return clampStr(m[1], 600);
-    // <meta content="..." property="...">
-    m = html.match(new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+(?:property|name)=["']${k}["']`, "i"));
-    if (m?.[1]) return clampStr(m[1], 600);
-  }
-  return "";
-}
-
-function pickFirstImg(html, baseUrl) {
-  // fallback: primeira <img> útil quando OG/Twitter image não existe.
-  // Evita logos/ícones comuns.
-  const re = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
-  let m;
-  while ((m = re.exec(html))) {
-    const src = String(m[1] || "").trim();
-    if (!src) continue;
-    if (src.startsWith("data:")) continue;
-    if (/\b(sprite|icon|logo|favicon)\b/i.test(src)) continue;
-    if (/\.(svg)(\?|$)/i.test(src)) continue;
-    const abs = absUrl(src, baseUrl);
-    if (!abs) continue;
-    return abs;
-  }
-  return "";
-}
-
-function cleanTitle(title, sourceName) {
-  let t = clampStr(title, 220);
-  const sn = String(sourceName || "").trim();
-  if (!sn) return t;
-  // 1) remove prefixo exato do tipo "Fonte - Título" / "Fonte — Título" / "Fonte: Título"
-  const reExact = new RegExp(`^${sn.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}\\s*(?:[-—–:]\\s*)`, "i");
-  t = t.replace(reExact, "");
-
-  // 2) remove prefixo "parecido" quando a notícia já vem como "<algo> - Título"
-  //    e esse <algo> tem forte relação com o nome da fonte (ex.: "Governo ES - ...").
-  const m = t.match(/^(.{2,40}?)(?:\s*[-—–:]\s+)(.+)$/);
-  if (m && m[2]) {
-    const prefix = m[1].toLowerCase();
-    const src = sn.toLowerCase();
-    // se o prefixo compartilha pelo menos uma palavra "forte" com a fonte, considera duplicado.
-    const strong = prefix.split(/\s+/).filter(w => w.length >= 3);
-    if (strong.some(w => src.includes(w))) {
-      t = m[2];
-    }
-  }
-
-  return t.trim() || clampStr(title, 220);
-}
-
-function pickDate(html) {
-  const candidates = [
-    pickMeta(html, ["article:published_time", "og:updated_time"]),
-    (html.match(/datetime=["']([^"']+)["']/i)?.[1] || ""),
-    (html.match(/data-(?:published|publication|date)=["']([^"']+)["']/i)?.[1] || ""),
-  ].map(s => String(s || "").trim()).filter(Boolean);
-
-  for (const c of candidates) {
-    const d = new Date(c);
-    if (!Number.isNaN(d.getTime())) return d;
-  }
-  // fallback: now
-  return new Date();
-}
-
-async function fetchText(url) {
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(), FETCH_TIMEOUT_MS);
-  try {
-    const r = await fetch(url, {
-      signal: ac.signal,
-      headers: {
-        "user-agent": "Mozilla/5.0 (compatible; PontoViewBot/1.0; +https://pontoview.com.br)",
-        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      },
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA, "Accept": "*/*" },
+      redirect: "follow",
+      signal: controller.signal,
     });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return await r.text();
+    const text = await res.text();
+    return { res, text };
   } finally {
     clearTimeout(t);
   }
 }
 
-function pickLinks(listHtml, baseUrl) {
-  // Pega links "parecidos" com notícia (heurística genérica)
-  const links = new Set();
-  const re = /<a[^>]+href=["']([^"']+)["'][^>]*>/gi;
-  let m;
-  while ((m = re.exec(listHtml))) {
-    const href = m[1];
-    if (!href || href.startsWith("#") || href.startsWith("javascript:")) continue;
-    const abs = absUrl(href, baseUrl);
-    if (!abs) continue;
+/**
+ * Minimal RSS/Atom parsing without external deps:
+ * - Extracts items/entries
+ * - Reads common fields: title, link, pubDate/published/updated, description/summary/content
+ * - Extracts image via enclosure/media:content/media:thumbnail where possible
+ *
+ * This is not a fully compliant XML parser, but works for the majority of feeds.
+ */
+function parseRss(xml) {
+  const cleaned = xml.replace(/\r/g, "");
+  const isAtom = /<feed[\s>]/i.test(cleaned) && /<entry[\s>]/i.test(cleaned);
 
-    // evita arquivos
-    if (abs.match(/\.(pdf|jpg|jpeg|png|webp)(\?|$)/i)) continue;
+  const itemTag = isAtom ? "entry" : "item";
+  const itemRegex = new RegExp(`<${itemTag}[\\s\\S]*?<\\/${itemTag}>`, "gi");
+  const items = cleaned.match(itemRegex) || [];
 
-    // tenta focar em rotas típicas de notícia
-    const ok =
-      /noticia|noticias|imprensa|news|\/\d{4}\//i.test(abs) ||
-      abs.includes(domainOf(baseUrl)); // garante que não fuja do domínio
-
-    if (ok) links.add(abs);
-    if (links.size >= MAX_PER_SOURCE * 2) break;
-  }
-  return [...links].slice(0, MAX_PER_SOURCE);
-}
-
-async function parseArticle(url, scope, meta = {}) {
-  const html = await fetchText(url);
-
-  const title =
-    pickMeta(html, ["og:title", "twitter:title"]) ||
-    clampStr((html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || ""));
-
-  const image =
-    pickMeta(html, ["og:image", "twitter:image", "twitter:image:src"]) ||
-    pickFirstImg(html, url) ||
-    "";
-
-  const site =
-    pickMeta(html, ["og:site_name"]) ||
-    meta.sourceName ||
-    domainOf(url);
-
-  const published = pickDate(html);
-
-  return {
-    title: cleanTitle(title, meta.sourceName || site),
-    url,
-    image: absUrl(image, url) || null,
-    source: site,
-    publishedAt: published.toISOString(),
-    scope,                    // local | state | national | health
-    city: meta.city || null,  // só local
+  const pick = (chunk, patterns) => {
+    for (const p of patterns) {
+      const m = chunk.match(p);
+      if (m) return (m[1] ?? "").trim();
+    }
+    return "";
   };
+
+  const unescapeCdata = (s) => s
+    .replace(/^<!\\[CDATA\\[/, "")
+    .replace(/\\]\\]>$/,"")
+    .trim();
+
+  const decodeEntities = (s) => s
+    .replace(/&amp;/g,"&")
+    .replace(/&lt;/g,"<")
+    .replace(/&gt;/g,">")
+    .replace(/&quot;/g,'"')
+    .replace(/&#39;/g,"'");
+
+  const getLink = (chunk) => {
+    if (isAtom) {
+      // <link href="..."/>
+      const m1 = chunk.match(/<link[^>]+href="([^"]+)"[^>]*\\/?>/i);
+      if (m1) return m1[1].trim();
+      // <link>url</link>
+      const m2 = chunk.match(/<link[^>]*>([\\s\\S]*?)<\\/link>/i);
+      if (m2) return stripHtml(decodeEntities(unescapeCdata(m2[1])));
+    }
+    const m3 = chunk.match(/<link[^>]*>([\\s\\S]*?)<\\/link>/i);
+    if (m3) return stripHtml(decodeEntities(unescapeCdata(m3[1])));
+    return "";
+  };
+
+  const getImage = (chunk) => {
+    // RSS enclosure
+    const enc = chunk.match(/<enclosure[^>]+url="([^"]+)"[^>]*>/i);
+    if (enc) return enc[1].trim();
+
+    // media:content url
+    const mc = chunk.match(/<media:content[^>]+url="([^"]+)"[^>]*>/i);
+    if (mc) return mc[1].trim();
+
+    // media:thumbnail url
+    const mt = chunk.match(/<media:thumbnail[^>]+url="([^"]+)"[^>]*>/i);
+    if (mt) return mt[1].trim();
+
+    // content:encoded may contain an <img src=...>
+    const ce = chunk.match(/<content:encoded[^>]*>([\\s\\S]*?)<\\/content:encoded>/i);
+    if (ce) {
+      const img = ce[1].match(/<img[^>]+src="([^"]+)"[^>]*>/i);
+      if (img) return img[1].trim();
+    }
+    // description may contain <img>
+    const desc = chunk.match(/<description[^>]*>([\\s\\S]*?)<\\/description>/i);
+    if (desc) {
+      const img = desc[1].match(/<img[^>]+src="([^"]+)"[^>]*>/i);
+      if (img) return img[1].trim();
+    }
+    return "";
+  };
+
+  const getDate = (chunk) => pick(chunk, [
+    /<pubDate[^>]*>([\\s\\S]*?)<\\/pubDate>/i,
+    /<published[^>]*>([\\s\\S]*?)<\\/published>/i,
+    /<updated[^>]*>([\\s\\S]*?)<\\/updated>/i,
+    /<dc:date[^>]*>([\\s\\S]*?)<\\/dc:date>/i,
+  ]);
+
+  const getTitle = (chunk) => pick(chunk, [
+    /<title[^>]*>([\\s\\S]*?)<\\/title>/i
+  ]);
+
+  const getSummary = (chunk) => pick(chunk, [
+    /<description[^>]*>([\\s\\S]*?)<\\/description>/i,
+    /<summary[^>]*>([\\s\\S]*?)<\\/summary>/i,
+    /<content[^>]*>([\\s\\S]*?)<\\/content>/i,
+    /<content:encoded[^>]*>([\\s\\S]*?)<\\/content:encoded>/i,
+  ]);
+
+  const parsed = [];
+  for (const chunk of items) {
+    const rawTitle = decodeEntities(unescapeCdata(getTitle(chunk)));
+    const title = stripHtml(rawTitle);
+    if (!title) continue;
+
+    const link = getLink(chunk);
+    const rawSummary = decodeEntities(unescapeCdata(getSummary(chunk)));
+    const summaryFull = stripHtml(rawSummary);
+    const summary = summaryFull.length > 220 ? summaryFull.slice(0, 220).trimEnd() + "…" : summaryFull;
+
+    const publishedAt = stripHtml(decodeEntities(unescapeCdata(getDate(chunk))));
+    const image = getImage(chunk);
+
+    parsed.push({ title, url: link, summary, publishedAt, image });
+  }
+  return parsed;
 }
 
-function ageDays(iso) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return 9999;
-  const diffMs = Date.now() - d.getTime();
-  return diffMs / (1000 * 60 * 60 * 24);
+function buildGoogleNewsRssUrl({
+  query,
+  hl = "pt-BR",
+  gl = "BR",
+  ceid = "BR:pt-419",
+}) {
+  const q = encodeURIComponent(query);
+  return `https://news.google.com/rss/search?q=${q}&hl=${encodeURIComponent(hl)}&gl=${encodeURIComponent(gl)}&ceid=${encodeURIComponent(ceid)}`;
 }
 
-async function collectFromSource(src, scope) {
+function extractOg(html, prop) {
+  // prop: og:image, article:published_time
+  const re = new RegExp(
+    `<meta\\s+[^>]*(?:property|name)="${prop.replace(/[-/\\^$*+?.()|[\]{}]/g,"\\$&")}"[^>]*content="([^"]+)"[^>]*>`,
+    "i"
+  );
+  const m = html.match(re);
+  return m ? m[1].trim() : "";
+}
+
+function extractTimeDatetime(html) {
+  // try <time datetime="...">
+  const m = html.match(/<time[^>]+datetime="([^"]+)"[^>]*>/i);
+  return m ? m[1].trim() : "";
+}
+
+async function enrichFromArticle(url) {
   try {
-    const listHtml = await fetchText(src.url);
-    const links = pickLinks(listHtml, src.url);
+    const { res, text: html } = await fetchText(url, 20000);
 
-    const out = [];
-    for (const link of links) {
-      try {
-        const item = await parseArticle(link, scope, { sourceName: src.name, city: src.city || null });
-        if (!item.title) continue;
-        if (ageDays(item.publishedAt) > MAX_AGE_DAYS) continue;
-        out.push(item);
-      } catch {
-        // ignora item
-      }
-      // pequena pausa para não estressar fontes
-      await sleep(250);
-    }
+    // If the publisher blocks, this may be the Google News redirect page.
+    // We still try OG tags; if missing, we return empty.
+    const ogImage = extractOg(html, "og:image") || extractOg(html, "twitter:image");
+    const pub =
+      extractOg(html, "article:published_time") ||
+      extractOg(html, "og:updated_time") ||
+      extractTimeDatetime(html);
 
-    // ordena por data desc
-    out.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-    return out;
+    return { finalUrl: res.url || url, ogImage, publishedAt: pub };
   } catch {
-    return [];
+    return { finalUrl: url, ogImage: "", publishedAt: "" };
   }
 }
 
-function dedupe(items) {
-  const seen = new Set();
-  const out = [];
-  for (const it of items) {
-    const key = (it.url || it.title || "").toLowerCase();
-    if (!key || seen.has(key)) continue;
-    seen.add(key);
-    out.push(it);
-  }
-  return out;
-}
+async function collectFromSource(src) {
+  const name = src.name || "Fonte";
+  const type = (src.type || "rss").toLowerCase();
 
-function interleaveByScope(groups, order) {
-  const idx = Object.fromEntries(order.map(s => [s, 0]));
-  const out = [];
-  while (out.length < MAX_ITEMS_TOTAL) {
-    let pushed = false;
-    for (const s of order) {
-      const g = groups[s] || [];
-      if (!g.length) continue;
-      const i = idx[s];
-      if (i < g.length) {
-        out.push(g[i]);
-        idx[s] = i + 1;
-        pushed = true;
-        if (out.length >= MAX_ITEMS_TOTAL) break;
-      }
+  let feedUrl = src.rss;
+  let allowArticleEnrich = true;
+
+  if (type === "google_news") {
+    // You can provide either "query" OR "rss" directly.
+    if (!feedUrl) {
+      feedUrl = buildGoogleNewsRssUrl({
+        query: src.query || "",
+        hl: src.hl || "pt-BR",
+        gl: src.gl || "BR",
+        ceid: src.ceid || "BR:pt-419",
+      });
     }
-    if (!pushed) break;
+    allowArticleEnrich = src.enrich !== false; // default true
   }
-  return out;
+
+  if (!feedUrl) {
+    return { items: [], error: "missing rss/query url" };
+  }
+
+  const { text: xml } = await fetchText(feedUrl, 20000);
+  const entries = parseRss(xml);
+
+  const out = [];
+  for (const e of entries) {
+    const title = e.title || "";
+    const summary = e.summary || "";
+    if (!title) continue;
+    if (isBlocked(title, summary)) continue;
+
+    let url = (e.url || "").trim();
+    let image = (e.image || "").trim();
+    let publishedAt = (e.publishedAt || "").trim();
+
+    // Optional: follow to publisher and extract OG image + publish date
+    if ((!image || !publishedAt) && allowArticleEnrich && url) {
+      const enriched = await enrichFromArticle(url);
+      url = enriched.finalUrl || url;
+      if (!image) image = enriched.ogImage || "";
+      if (!publishedAt) publishedAt = enriched.publishedAt || "";
+    }
+
+    const id = `${name}:${stableId(url || title)}`;
+
+    out.push({
+      id,
+      title,
+      summary: summary || "",
+      source: name,
+      publishedAt: publishedAt || "",
+      url: url || "",
+      image: image || ""
+    });
+  }
+
+  return { items: out, error: "" };
 }
 
 async function main() {
-  const sources = await readSources();
+  const sourcesPath = process.argv[2]
+    ? path.resolve(process.cwd(), process.argv[2])
+    : DEFAULT_SOURCES;
 
-  const scopes = /** @type {const} */ (["local", "state", "national", "health"]);
-  const collected = {};
-  for (const scope of scopes) {
-    collected[scope] = [];
-    for (const src of sources[scope] || []) {
-      const items = await collectFromSource(src, scope);
-      collected[scope].push(...items);
-    }
-    collected[scope] = dedupe(collected[scope]);
+  if (!fs.existsSync(sourcesPath)) {
+    const payload = {
+      generatedAt: nowIso(),
+      items: [],
+      stats: { error: `missing ${path.relative(ROOT, sourcesPath)}` },
+    };
+    fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
+    fs.writeFileSync(OUT_PATH, JSON.stringify(payload, null, 2), "utf-8");
+    process.exit(0);
   }
 
-  // Se não tiver nada em um escopo, ele é removido do round-robin
-  const order = scopes.filter(s => (collected[s] || []).length);
+  const cfg = JSON.parse(fs.readFileSync(sourcesPath, "utf-8"));
+  const sources = Array.isArray(cfg.sources) ? cfg.sources : [];
 
-  // Intercala
-  const finalItems = interleaveByScope(collected, order.length ? order : ["national"]);
+  const allItems = [];
+  const perSource = [];
+  const failures = [];
 
-  await fs.mkdir(OUT_DIR, { recursive: true });
-  await fs.writeFile(OUT_FILE, JSON.stringify({ generatedAt: new Date().toISOString(), items: finalItems }, null, 2), "utf-8");
+  for (const s of sources) {
+    const name = s.name || "Fonte";
+    try {
+      const { items, error } = await collectFromSource(s);
+      if (error) failures.push({ source: name, error });
+      perSource.push({ source: name, count: items.length });
+      allItems.push(...items);
+    } catch (e) {
+      failures.push({ source: name, error: String(e?.message || e) });
+    }
+  }
 
-  console.log(`OK: ${OUT_FILE} (${finalItems.length} itens)`);
-  const counts = Object.fromEntries(scopes.map(s => [s, (collected[s] || []).length]));
-  console.log({ ...counts, final: finalItems.length, maxAgeDays: MAX_AGE_DAYS, sourceFile: SOURCES_FILE });
+  // Basic shuffle to avoid same-source clustering (optional)
+  const shuffled = allItems
+    .map((x) => ({ x, r: Math.random() }))
+    .sort((a, b) => a.r - b.r)
+    .map((o) => o.x);
+
+  const payload = {
+    generatedAt: nowIso(),
+    items: shuffled.slice(0, cfg.limit ?? 80),
+    stats: {
+      sources: sources.length,
+      items_before_limit: allItems.length,
+      per_source: perSource,
+      failures,
+      notes: {
+        sources_path: path.relative(ROOT, sourcesPath),
+        supports: ["rss", "google_news"],
+        enrich: "Follows redirects and tries og:image + published_time when missing",
+      }
+    },
+  };
+
+  fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
+  fs.writeFileSync(OUT_PATH, JSON.stringify(payload, null, 2), "utf-8");
+  console.log(`Wrote ${path.relative(process.cwd(), OUT_PATH)} with ${payload.items.length} items`);
 }
 
 main().catch((e) => {
-  console.error("ERRO build_news:", e);
-  process.exitCode = 1;
+  console.error(e);
+  process.exit(1);
 });
