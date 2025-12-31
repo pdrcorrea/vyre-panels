@@ -78,6 +78,26 @@ def parse_feed(content: str, source_name: str):
         })
     return items
 
+def extract_image(entry):
+    # media_content (RSS)
+    media = entry.get("media_content")
+    if media and isinstance(media, list):
+        return media[0].get("url")
+
+    # media_thumbnail
+    thumb = entry.get("media_thumbnail")
+    if thumb and isinstance(thumb, list):
+        return thumb[0].get("url")
+
+    # imagem dentro do summary (Google News)
+    summary = entry.get("summary", "") or entry.get("description", "")
+    m = re.search(r'<img[^>]+src="([^">]+)"', summary)
+    if m:
+        return m.group(1)
+
+    return None
+
+
 def main():
     if not SOURCES_PATH.exists():
         OUT_PATH.write_text(json.dumps({"generatedAt": now_iso(), "items": [], "stats": {"error":"missing data/news_sources.json"}}, ensure_ascii=False, indent=2), encoding="utf-8")
