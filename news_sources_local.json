@@ -1,0 +1,54 @@
+{
+  "local": [
+    {
+      "name": "Prefeitura de Colatina",
+      "city": "Colatina",
+      "url": "https://colatina.es.gov.br/agencia-de-noticias/"
+    },
+    {
+      "name": "Prefeitura de Vitória",
+      "city": "Vitória",
+      "url": "https://www.vitoria.es.gov.br/imprensa/todas_noticias"
+    },
+    {
+      "name": "Prefeitura de Linhares",
+      "city": "Linhares",
+      "url": "https://linhares.es.gov.br/category/noticias/"
+    },
+    {
+      "name": "Prefeitura de Cachoeiro de Itapemirim",
+      "city": "Cachoeiro de Itapemirim",
+      "url": "https://www.cachoeiro.es.gov.br/noticias/"
+    }
+  ],
+  "state": [
+    {
+      "name": "Governo do ES (ES.GOV)",
+      "url": "https://www.es.gov.br/Noticias"
+    },
+    {
+      "name": "Portal ES.GOV (Catálogo)",
+      "url": "https://portal.es.gov.br/app/catalog/noticias"
+    }
+  ],
+  "national": [
+    {
+      "name": "Agência Brasil",
+      "url": "https://agenciabrasil.ebc.com.br/ultimas"
+    },
+    {
+      "name": "Governo Federal (gov.br Notícias)",
+      "url": "https://www.gov.br/pt-br/noticias"
+    }
+  ],
+  "health": [
+    {
+      "name": "Ministério da Saúde",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/noticias"
+    },
+    {
+      "name": "Fiocruz",
+      "url": "https://portal.fiocruz.br/noticias"
+    }
+  ]
+}
