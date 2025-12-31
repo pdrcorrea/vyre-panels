@@ -68,14 +68,18 @@ def parse_feed(content: str, source_name: str):
         stable = (link or title).encode("utf-8", errors="ignore")
         _id = f"{abs(hash(stable))}"
 
-        items.append({
-            "id": f"{source_name}:{_id}",
-            "title": title,
-            "summary": short,
-            "source": source_name,
-            "publishedAt": published_at,
-            "url": link
-        })
+image = extract_image(e)
+
+items.append({
+    "id": f"{source_name}:{_id}",
+    "title": title,
+    "summary": short,
+    "source": source_name,
+    "publishedAt": published_at,
+    "image": image,
+    "url": link
+})
+
     return items
 
 def extract_image(entry):
