@@ -86,6 +86,48 @@ function pickMeta(html, keys) {
   return "";
 }
 
+function pickFirstImg(html, baseUrl) {
+  // fallback: primeira <img> útil quando OG/Twitter image não existe.
+  // Evita logos/ícones comuns.
+  const re = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+  let m;
+  while ((m = re.exec(html))) {
+    const src = String(m[1] || "").trim();
+    if (!src) continue;
+    if (src.startsWith("data:")) continue;
+    if (/\b(sprite|icon|logo|favicon)\b/i.test(src)) continue;
+    if (/\.(svg)(\?|$)/i.test(src)) continue;
+    const abs = absUrl(src, baseUrl);
+    if (!abs) continue;
+    return abs;
+  }
+  return "";
+}
+
+function cleanTitle(title, sourceName) {
+  let t = clampStr(title, 220);
+  const sn = String(sourceName || "").trim();
+  if (!sn) return t;
+  // 1) remove prefixo exato do tipo "Fonte - Título" / "Fonte — Título" / "Fonte: Título"
+  const reExact = new RegExp(`^${sn.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}\\s*(?:[-—–:]\\s*)`, "i");
+  t = t.replace(reExact, "");
+
+  // 2) remove prefixo "parecido" quando a notícia já vem como "<algo> - Título"
+  //    e esse <algo> tem forte relação com o nome da fonte (ex.: "Governo ES - ...").
+  const m = t.match(/^(.{2,40}?)(?:\s*[-—–:]\s+)(.+)$/);
+  if (m && m[2]) {
+    const prefix = m[1].toLowerCase();
+    const src = sn.toLowerCase();
+    // se o prefixo compartilha pelo menos uma palavra "forte" com a fonte, considera duplicado.
+    const strong = prefix.split(/\s+/).filter(w => w.length >= 3);
+    if (strong.some(w => src.includes(w))) {
+      t = m[2];
+    }
+  }
+
+  return t.trim() || clampStr(title, 220);
+}
+
 function pickDate(html) {
   const candidates = [
     pickMeta(html, ["article:published_time", "og:updated_time"]),
@@ -152,7 +194,9 @@ async function parseArticle(url, scope, meta = {}) {
     clampStr((html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || ""));
 
   const image =
-    pickMeta(html, ["og:image", "twitter:image", "twitter:image:src"]) || "";
+    pickMeta(html, ["og:image", "twitter:image", "twitter:image:src"]) ||
+    pickFirstImg(html, url) ||
+    "";
 
   const site =
     pickMeta(html, ["og:site_name"]) ||
@@ -162,7 +206,7 @@ async function parseArticle(url, scope, meta = {}) {
   const published = pickDate(html);
 
   return {
-    title,
+    title: cleanTitle(title, meta.sourceName || site),
     url,
     image: absUrl(image, url) || null,
     source: site,
