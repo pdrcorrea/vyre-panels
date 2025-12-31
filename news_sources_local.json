@@ -1,54 +1,64 @@
 {
-  "local": [
+  "limit": 80,
+  "sources": [
     {
-      "name": "Prefeitura de Colatina",
-      "city": "Colatina",
-      "url": "https://colatina.es.gov.br/agencia-de-noticias/"
+      "name": "Notícias ES (Google News)",
+      "type": "google_news",
+      "query": "Espírito Santo notícias",
+      "hl": "pt-BR",
+      "gl": "BR",
+      "ceid": "BR:pt-419",
+      "enrich": true
     },
     {
-      "name": "Prefeitura de Vitória",
-      "city": "Vitória",
-      "url": "https://www.vitoria.es.gov.br/imprensa/todas_noticias"
+      "name": "Governo do ES (site:es.gov.br)",
+      "type": "google_news",
+      "query": "site:es.gov.br (governo OR estado OR governador OR secretaria) Espírito Santo",
+      "hl": "pt-BR",
+      "gl": "BR",
+      "ceid": "BR:pt-419",
+      "enrich": true
     },
     {
-      "name": "Prefeitura de Linhares",
-      "city": "Linhares",
-      "url": "https://linhares.es.gov.br/category/noticias/"
+      "name": "Prefeituras ES (sites municipais)",
+      "type": "google_news",
+      "query": "(site:*.es.gov.br OR site:prefeitura.*.gov.br OR site:*.es.gov.br.br OR site:*.gov.br) (prefeitura OR município) \"Espírito Santo\"",
+      "hl": "pt-BR",
+      "gl": "BR",
+      "ceid": "BR:pt-419",
+      "enrich": true
     },
     {
-      "name": "Prefeitura de Cachoeiro de Itapemirim",
-      "city": "Cachoeiro de Itapemirim",
-      "url": "https://www.cachoeiro.es.gov.br/noticias/"
-    }
-  ],
-  "state": [
-    {
-      "name": "Governo do ES (ES.GOV)",
-      "url": "https://www.es.gov.br/Noticias"
+      "name": "Saúde Pública ES (site + temas)",
+      "type": "google_news",
+      "query": "(site:es.gov.br OR site:saude.es.gov.br OR site:gov.br) (saúde OR \"saúde pública\" OR vacinação OR hospital OR \"atenção básica\") \"Espírito Santo\"",
+      "hl": "pt-BR",
+      "gl": "BR",
+      "ceid": "BR:pt-419",
+      "enrich": true
     },
     {
-      "name": "Portal ES.GOV (Catálogo)",
-      "url": "https://portal.es.gov.br/app/catalog/noticias"
-    }
-  ],
-  "national": [
-    {
-      "name": "Agência Brasil",
-      "url": "https://agenciabrasil.ebc.com.br/ultimas"
+      "name": "Ministério da Saúde (gov.br)",
+      "type": "google_news",
+      "query": "site:gov.br \"Ministério da Saúde\" (vacinação OR campanha OR SUS OR \"saúde pública\")",
+      "hl": "pt-BR",
+      "gl": "BR",
+      "ceid": "BR:pt-419",
+      "enrich": true
     },
     {
-      "name": "Governo Federal (gov.br Notícias)",
-      "url": "https://www.gov.br/pt-br/noticias"
-    }
-  ],
-  "health": [
-    {
-      "name": "Ministério da Saúde",
-      "url": "https://www.gov.br/saude/pt-br/assuntos/noticias"
+      "name": "Campanhas Institucionais (gov.br)",
+      "type": "google_news",
+      "query": "site:gov.br (campanha OR \"comunicado\" OR \"aviso\" OR \"serviço\")",
+      "hl": "pt-BR",
+      "gl": "BR",
+      "ceid": "BR:pt-419",
+      "enrich": true
     },
     {
-      "name": "Fiocruz",
-      "url": "https://portal.fiocruz.br/noticias"
+      "name": "RSS — Agência Brasil",
+      "type": "rss",
+      "rss": "https://agenciabrasil.ebc.com.br/rss/saude/feed.xml"
     }
   ]
 }
